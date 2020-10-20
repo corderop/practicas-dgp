@@ -13,3 +13,11 @@
 * Nombre de la BD: `u681824297_dgp`
 * Usuario de la BD: `u681824297_dgp`
 * Contraseña: `dgp.7.host.DB`
+
+**Para acceder desde linea de comandos:**
+```
+mysql --host sql40.main-hosting.eu --user u681824297_dgp -p
+password: dgp.7.host.DB
+
+mysql> use u681824297_dgp;
+```

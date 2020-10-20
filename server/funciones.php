@@ -8,11 +8,10 @@
         else {
             echo("funciona");
         }
+
         return $mysqli;
     }
 
-    function 
-
-
+    
 
 ?>

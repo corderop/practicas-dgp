@@ -7,7 +7,15 @@
     //Conexion a la base de datos
     $mysqli=conectar_bd();
 
-    echo $twig->render('prueba.html');
+    session_start();
+    if(isset($_SESSION['usuario'])){
+        $usuario=$_SESSION['usuario'];
+        echo $twig->render('index.html', ['usuario'=>$usuario]);
+    }
+    else{
+        echo $twig->render('login.html');
+    }
+   
 
 
 ?>

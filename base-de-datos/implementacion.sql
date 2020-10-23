@@ -17,6 +17,7 @@ CREATE TABLE TAREA(
     multimedia varchar(200),
     crea int,
     realiza int,
+    realizada boolean default false,
     FOREIGN KEY (crea) REFERENCES USUARIO(cod_usuario),
     FOREIGN KEY (realiza) REFERENCES USUARIO(cod_usuario)
 );

@@ -18,6 +18,7 @@ CREATE TABLE TAREA(
     crea int,
     realiza int,
     realizada boolean default false,
+    calificacion int,
     FOREIGN KEY (crea) REFERENCES USUARIO(cod_usuario),
     FOREIGN KEY (realiza) REFERENCES USUARIO(cod_usuario)
 );

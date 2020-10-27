@@ -25,7 +25,5 @@
         echo $twig->render('login.html',['msg'=>$msg]);
     }
 
-    
-
 
 ?>

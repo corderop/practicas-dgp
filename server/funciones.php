@@ -302,5 +302,5 @@
         $mysqli->query("DELETE FROM INTEGRADO where cod_grupo='$cod_grupo' and cod_usuario = '$cod_usuario'"); 
     }
     
-   
+//TODO añadir campo mensaje leido/no leido a laBD
 ?>

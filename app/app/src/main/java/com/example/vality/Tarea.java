@@ -1,5 +1,18 @@
 package com.example.vality;
 
+// Librerías para las peticiones HTTP
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Tarea {
@@ -16,6 +29,55 @@ public class Tarea {
     private int calificacion;
 
     // Constructor
+    public Tarea(String url, RequestQueue queue, TextView tv){
+
+        JSONObject respuesta;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            cod_tarea = response.getInt("cod_tarea");
+                            titulo = response.getString("titulo");
+                            descripcion = response.getString("descripcion");
+                            fecha_limite = new SimpleDateFormat("dd/MM/yyyy").parse(response.getString("fecha_limite"));
+                            objetivo = response.getString("objetivo");
+                            multimedia = response.getString("multimedia");
+                            crea = response.getInt("crea");
+                            realiza = response.getInt("realiza");
+                            realizada = response.getBoolean("realizada");
+                            calificacion = response.getInt("calificacion");
+
+                            tv.setText(cod_tarea + "\n" +
+                                    titulo + "\n" +
+                                    descripcion + "\n" +
+                                    fecha_limite.toString() + "\n" +
+                                    objetivo + "\n" +
+                                    multimedia + "\n" +
+                                    crea + "\n" +
+                                    realiza + "\n" +
+                                    realizada + "\n" +
+                                    calificacion + "\n"
+                            );
+                        } catch (JSONException | ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        System.out.println("ERROR");
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        queue.add(jsonObjectRequest);
+    }
+
     public Tarea(int cod_tarea, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, int crea, int realiza, boolean realizada, int calificacion) {
         this.cod_tarea = cod_tarea;
         this.titulo = titulo;

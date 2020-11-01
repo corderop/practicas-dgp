@@ -17,7 +17,9 @@
 
     if(checkLogin($mysqli,$usuario,$pass)){
         session_start();
-        $_SESSION['usuario'] = $usuario;
+        $usuario = getUsuario($mysqli, $usuario);
+        $cod_usuario = $usuario['cod_usuario'];
+        $_SESSION['cod_usuario'] = $cod_usuario;
         header("Location: index.php");
     }
     else{

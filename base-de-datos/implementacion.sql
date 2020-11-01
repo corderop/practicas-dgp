@@ -45,6 +45,7 @@ CREATE TABLE MENSAJE(
     multimedia varchar(200),
     contiene int,
     envia int,
+    leido bool DEFAULT false,
     FOREIGN KEY (contiene) REFERENCES TAREA(cod_tarea),
     FOREIGN KEY (envia) REFERENCES USUARIO(cod_usuario)
 );

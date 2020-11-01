@@ -34,17 +34,35 @@
      */
     function getUsuario($mysqli,$usuario) {
        
-        $stmt = $mysqli->prepare("SELECT * from USUARIO where nombre=? OR cod_usuario=?");
-        $stmt->bind_param("s", $usuario);
-        $stmt->bind_param("s", $usuario);
-        $stmt->execute();
-    
-        $resultado = $stmt->get_result();
+        $sql = "SELECT * from USUARIO where nombre='$usuario' OR cod_usuario='$usuario'";
+        
+        $resultado = $mysqli->query($sql);
     
         while($res = $resultado->fetch_assoc()) {
           $usuario = $res;
         }
         return $usuario;
+    }
+
+    /**
+     * Funcion para devolver todos los usuarios del sistema
+     * @param mysqli $mysqli Base de datos sobre la que se actua
+     * @return mixed[] $resultado conjunto de usuarios del sistema
+     */
+    function getUsuarios($mysqli){
+        $sql = "SELECT * from USUARIO";
+        
+        $res = $mysqli->query($sql);
+
+        $resultado = array();
+
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
+        }
+
+        return $resultado;
     }
 
     /**
@@ -109,7 +127,9 @@
     function getTareas($mysqli,$usuario,$estado_tarea){ //Sin comprobar
         $usuario=getUsuario($mysqli,$usuario);
 
-        $sql="SELECT * FROM TAREA WHERE(crea='$usuario['cod_usuario']' OR realiza='$usuario['cod_usuario']') AND WHERE realizada='$estado_tarea'";
+        $cod_usuario = $usuario['cod_usuario'];
+
+        $sql="SELECT * FROM TAREA WHERE(crea='$cod_usuario' OR realiza='$cod_usuario') AND WHERE realizada='$estado_tarea'";
         
         $res = $mysqli->query($sql);
 
@@ -230,8 +250,9 @@
             $grupo = $res;
         }
 
+        $cod_grupo = $grupo['cod_grupo'];
         foreach ($usuarios as $usuario){
-            $mysqli->query("INSERT into INTEGRADO (cod_grupo, cod_usuario) values ('$grupo["cod_grupo"]', '$usuario')");
+            $mysqli->query("INSERT into INTEGRADO (cod_grupo, cod_usuario) values ('$cod_grupo', '$usuario')");
         }
     }
 
@@ -302,5 +323,5 @@
         $mysqli->query("DELETE FROM INTEGRADO where cod_grupo='$cod_grupo' and cod_usuario = '$cod_usuario'"); 
     }
     
-//TODO añadir campo mensaje leido/no leido a laBD
+
 ?>

@@ -1,0 +1,58 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <!-- Fotografía -->
+
+    <!-- Formulario -->
+    <form method="POST" action="registro.php">
+        <div class="row">
+            <label id="foto-usuario-label" for="foto-usuario-input">
+                <img src="img/image.jpg" />
+            </label>
+            <input id="foto-usuario-input" type="file" name="avatar" required>
+        </div>
+
+        <div class="row">
+            
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="usuario">Nombre</label>
+                    <input type="text" class="form-control" name="usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Contraseña</label>
+                    <input type="password" class="form-control" name="pass" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="rol-usuario">Rol</label>
+                    <select id="rol-usuario" name="tipo" class="form-control">
+                      <option selected>Usuario</option>
+                      <option>Tutor</option>
+                      <option>Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="repetirPass">Repetir contraseña</label>
+                    <input type="password" class="form-control" name="repetirPass" required>
+                </div>
+            </div>
+        </div>
+        
+        <div class="edicion-submit">
+            <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
+                Guardar
+            </button>
+        </div>
+    </form>
+    
+  </div>
+
+{% endblock %}

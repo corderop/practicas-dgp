@@ -1,0 +1,55 @@
+nav{
+    margin-bottom: 40px;
+}
+
+footer{
+    margin-top: 40px;
+}
+
+.navbar-brand img{
+    width: 100px;
+}
+
+.action-button{
+    margin: 0 10px;
+    border-radius: 25px;
+}
+
+.nav-item{
+    padding: 0 15px;
+}
+
+footer{
+    color: black;
+}
+
+/* Imagen del admin */
+#imagen-cambiar-pass-padre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagen-cambiar-pass{
+    width: 50%;
+}
+
+/* Barra de búsqueda para el admin */
+#busqueda-admin{
+    margin-bottom: 30px;
+}
+
+/* Añadir un usuario */
+#foto-usuario-label{
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+#foto-usuario-input{
+    display: none;
+}
+
+.edicion-submit{
+    margin-top: 30px;
+    text-align: center;
+}

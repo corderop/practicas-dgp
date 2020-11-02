@@ -1,0 +1,52 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+{% endblock %}
+
+{% block body %}
+
+    {% if usuario['tipo'] == "ADMIN" %}
+    <!-- Foto y cambiar contraseña -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" id="imagen-cambiar-pass-padre">
+                <!-- Aquí foto -->
+                <img id="imagen-cambiar-pass" src="img/admin.png" />
+            </div>
+            <div class="col-md-6">
+                <!-- Aquí cambiar contraseña -->
+                <form method="POST" action="cambiarPass.php">
+                    <div class="form-group">
+                      <label for="passAntigua">Contraseña actual</label>
+                      <input type="password" class="form-control" name="passAntigua" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="passNueva">Nueva contraseña</label>
+                      <input type="password" class="form-control" name="passNueva" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passNuevaConf">Repetir nueva contraseña</label>
+                        <input type="password" class="form-control" name="passNuevaConf" required>
+                      </div>
+                      {% if msg %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ msg }}
+                        </div>
+                      {% endif %}
+                      
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if usuario['tipo'] == "TUTOR" %}
+    
+    {% endif %}
+
+    {% if usuario['tipo'] == "USUARIO" %}
+    
+    {% endif %}
+
+{% endblock %}

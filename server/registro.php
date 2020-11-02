@@ -6,21 +6,52 @@
     $twig = new \Twig\Environment($loader);
     //Conexion a la base de datos
     $mysqli=conectar_bd();
+    session_start();
 
-    //Captura de variables
-    if(isset($_POST['usuario'])){
-        $usuario = mysqli_real_escape_string($mysqli,$_REQUEST['usuario']);
+    $_usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
+
+    if( $_usuario['tipo'] == "ADMIN" ){
+        $usuario="";
+        $pass="";
+        $repetirPass="";
+        $tipo="";
+        $avatar="";
+        
+        //Captura de variables
+        if(isset($_POST['usuario'])){
+            $usuario = mysqli_real_escape_string($mysqli,$_REQUEST['usuario']);
+        }
+        if(isset($_POST['pass'])){
+            $pass = $_REQUEST['pass'];
+        }
+        if(isset($_POST['repetirPass'])){
+            $repetirPass = $_REQUEST['repetirPass'];
+        }
+        if(isset($_POST['tipo'])){
+            $tipo = strtoupper($_POST['tipo']);
+            $tipo = mysqli_real_escape_string($mysqli, $tipo);
+        }
+        if(isset($_POST['avatar'])){
+            $avatar = mysqli_real_escape_string($mysqli,$_REQUEST['avatar']);
+        }
+
+        //TODO: subir una imagen
+
+        if($pass == $repetirPass){
+            echo("Nombre: " . $usuario . "\n");
+            echo("Pass: " . $pass . "\n");
+            echo("Repetir pass: " . $repetirPass . "\n");
+            echo("Tipo: " . $tipo . "\n");
+            echo("Avatar: " . $avatar . "\n");
+            //aniadirUsuario($mysqli,$usuario,$pass,$tipo, $avatar); 
+            //header("Location: index.php");
+        }
+        else{
+            $msg="Error: las contraseñas no coinciden";
+            echo $twig->render('aniadirUsuario.html', ['usuario'=> $usuario, 'titulo'=>"Añadir usuario", 'msg'=> $msg]);
+        }
+    }else {
+        header("Location: index.php");
     }
-    if(isset($_POST['pass'])){
-        $pass = $_REQUEST['pass'];
-    }
-    if(isset($_POST['tipo'])){
-        $tipo = mysqli_real_escape_string($mysqli,$_REQUEST['tipo']);
-    }
 
-    aniadirUsuario($mysqli,$usuario,$pass,$tipo);
-
-    echo $twig->render('prueba.html');
-
-
-?>
+    ?>

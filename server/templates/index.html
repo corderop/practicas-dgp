@@ -20,8 +20,7 @@
             <!-- Aqui van las tarjetas -->
             <!-- Añadir usuario -->
             <div class="ui card">
-                <a class="image" href="aniadirUsuario.php" data-bcup-haslogintext="no">
-                    <img src="img/aniadir.jpg">
+                <a class="image imagen-tarjeta" style="background-image: url('img/aniadir.jpg');" href="aniadirUsuario.php" data-bcup-haslogintext="no">
                 </a>
                 <div class="content">
                     <a class="center aligned header" data-bcup-haslogintext="no">Añadir un nuevo usuario</a>
@@ -32,8 +31,7 @@
             {% if user['cod_usuario'] != usuario['cod_usuario'] %}
                 <!-- Card -->
                 <div class="ui card">
-                    <div class="image">
-                        <img src={{ user['avatar'] }}>
+                    <div class="image imagen-tarjeta" style="background-image: url({{ user['avatar'] }});">
                     </div>
                     <div class="content">
                         <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>

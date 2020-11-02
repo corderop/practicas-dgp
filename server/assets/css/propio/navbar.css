@@ -53,3 +53,7 @@ footer{
     margin-top: 30px;
     text-align: center;
 }
+
+.etiqueta-foto-usuario p{
+    margin: 0 auto;
+}

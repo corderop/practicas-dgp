@@ -17,17 +17,17 @@
 
     if($usuario['tipo'] == "ADMIN"){
         //Perfil del administrador
-        echo $twig->render('perfilAdminResponsive.html', ['usuario'=> $usuario]);
+        echo $twig->render('perfil.html', ['usuario'=> $usuario, 'titulo'=> "Perfil"]);
     }
 
     if($usuario['tipo'] == "TUTOR"){
         //Perfil del tutor
-        echo $twig->render('perfil.html', ['usuario'=>$usuario]);
+        echo $twig->render('perfil.html', ['usuario'=>$usuario, 'titulo'=> "Perfil"]);
     }
 
     if($usuario['tipo'] == "USUARIO"){
         //Perfil del usuario
-        echo $twig->render('perfil.html', ['usuario'=>$usuario]);
+        echo $twig->render('perfil.html', ['usuario'=>$usuario, 'titulo'=> "Perfil"]);
     }
 
 

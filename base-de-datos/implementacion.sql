@@ -3,7 +3,8 @@ CREATE TABLE USUARIO(
     cod_usuario int AUTO_INCREMENT primary key,
     nombre varchar(200) not null,
     pass varchar(200) not null,
-    tipo varchar(200) not null
+    tipo varchar(200) not null,
+    avatar varchar(200) default "img/user.jpg"
 );
 
 --tipo puede tomar valores [USER, TUTOR, ADMIN]

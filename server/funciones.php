@@ -19,10 +19,16 @@
      * @param string $pass contraseña que vamos a cifrar
      * @param string $tipo tipo de usuario{ADMIN,TUTOR,USER}
      */
-    function aniadirUsuario($mysqli, $usuario, $pass, $tipo){
+    function aniadirUsuario($mysqli, $usuario, $pass, $tipo, $avatar){
         $pass = password_hash($pass, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO USUARIO(nombre,pass,tipo) VALUES('$usuario','$pass','$tipo')";
+        if($avatar == ""){
+            $sql = "INSERT INTO USUARIO(nombre,pass,tipo) VALUES('$usuario','$pass','$tipo')";
+        }
+        else{
+            $sql = "INSERT INTO USUARIO(nombre,pass,tipo, avatar) VALUES('$usuario','$pass','$tipo', '$avatar')";
+        }
+        
         $mysqli->query($sql);
     }
 

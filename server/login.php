@@ -24,7 +24,7 @@
     }
     else{
         $msg="Error de login";
-        echo $twig->render('login.html',['msg'=>$msg]);
+        echo $twig->render('login.html',['msg'=>$msg, 'titulo'=> "Home"]);
     }
 
 

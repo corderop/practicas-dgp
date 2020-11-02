@@ -9,9 +9,9 @@ El servidor tiene dos vistas:
 
 Ejecutar el script, para subir los archivos de la carpeta `server` al servidor:
 
-`./subir.sh demo` para subir los archivos a demo.dgp.esy.es
+`./subir.sh demo todo` para subir los archivos a demo.dgp.esy.es
 
-`./subir.sh test` para subir los archivos a test.dgp.esy.es
+`./subir.sh test todo` para subir los archivos a test.dgp.esy.es
 
 ## Uso de GitHub
 

@@ -1,4 +1,11 @@
 #!/bin/bash
+if [ -v $1 ]
+then
+
+echo "No has indicado si test o demo"
+
+else
+
 HOST=dgp.esy.es
 USER=u681824297.$1_ftp
 PASSWD_FTP=dgp.7.host.FTP
@@ -11,3 +18,5 @@ put -R server/*
 EOF
 
 exit 0
+
+fi

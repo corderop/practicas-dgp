@@ -34,6 +34,13 @@ footer{
     width: 50%;
 }
 
+/* Tarjetas */
+.imagen-tarjeta{
+    height: 300px;
+    width: auto;
+    background-color: white !important;
+}
+
 /* Barra de búsqueda para el admin */
 #busqueda-admin{
     margin-bottom: 30px;

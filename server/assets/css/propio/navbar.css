@@ -68,3 +68,14 @@ footer{
 .etiqueta-foto-usuario p{
     margin: 0 auto;
 }
+
+/* Añadir/editar grupo */
+.nombre-grupo{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.nombre-grupo label{
+    font-size: large !important;
+    margin-bottom: 10px !important;
+}

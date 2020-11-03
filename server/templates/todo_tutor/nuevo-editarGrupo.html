@@ -1,0 +1,49 @@
+
+<!-- Lista con los usuarios, añadir usuario nuevo-->
+<div class="container">
+    <form class="ui form nombre-grupo">
+      <div class="field">
+        <label>Nombre del grupo</label>
+        <input type="text" name="first-name" placeholder="Introduce aquí el nombre del grupo">
+      </div>
+  
+    <!-- TODO: hacer busqueda -->
+    <!-- Barra de búsqueda -->
+    <div class="field">
+      <label>Usuarios del grupo</label>
+      <div class="ui fluid icon input" id="busqueda-admin">
+          <input type="text" placeholder="Busqueda...">
+          <i class="search icon"></i>
+      </div>
+    </div>
+    </form>
+  
+    <!-- TODO: Añadir fotos de grupo a las tarjetas -->
+    <!-- TODO: Cambiar de añadido a añadir con javascript
+               Para cambiar el tipo de boton solo hay que quitar y poner la clase basic del boton-->
+    <div class="ui three stackable cards cards-grid">
+        <!-- Aqui van las tarjetas -->
+        <!-- Card -->
+        <div class="ui card">
+            <div class="image imagen-tarjeta" style="background-image: url('');">
+            </div>
+            <div class="content">
+                <a class="header" data-bcup-haslogintext="no">Nombre de usuario 1</a>
+            </div>
+            <div class="extra content">
+                <div class="ui fluid basic blue button">Añadir</div>
+            </div>
+        </div>
+  
+        <div class="ui card">
+          <div class="image imagen-tarjeta" style="background-image: url('');">
+          </div>
+          <div class="content">
+              <a class="header" data-bcup-haslogintext="no">Nombre de usuario 2</a>
+          </div>
+          <div class="extra content">
+              <div class="ui fluid blue button">Añadido</div>
+          </div>
+        </div>
+    </div>
+  </div>

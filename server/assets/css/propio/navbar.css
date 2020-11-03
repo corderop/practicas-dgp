@@ -44,10 +44,11 @@ footer{
     background-repeat: no-repeat !important;
 }
 
-/* Barra de búsqueda para el admin */
-#busqueda-admin{
-    margin-bottom: 30px;
+/* Añado padding a las tarjetas arriba */
+.cards-grid{
+    margin-top: 30px !important;
 }
+
 
 /* Añadir un usuario */
 #foto-usuario-label{

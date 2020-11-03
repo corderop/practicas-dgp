@@ -1,0 +1,53 @@
+
+<!-- Lista con las tareas y añadir un usuario nuevo-->
+<div class="container">
+  <!-- TODO: hacer busqueda -->
+  
+  <div class="ui form row">
+    <!-- Barra de búsqueda -->
+    <div class="col-md-6">
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Busqueda...">
+        <i class="search icon"></i>
+      </div>
+    </div>
+    <!-- Selector corregidas y no corregidas -->
+    <div class="col-md-6">
+      <select class="ui fluid dropdown">
+        <option value="T">Todas</option>
+        <option value="C">Corregidas</option>
+        <option value="NC">No corregidas</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Grid con las cartas -->
+  <div class="ui three stackable cards cards-grid">
+    <!-- Añadir tarea -->
+    <div class="ui card">
+      <a class="image imagen-tarjeta" style="background-image: url('../img/aniadir-tarea.png');" href="" data-bcup-haslogintext="no">
+      </a>
+      <div class="content">
+        <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
+      </div>
+    </div>
+
+    <!-- Ejemplo de tarea -->
+    <div class="ui card">
+      <div class="image imagen-tarjeta" style="background-image: url('../img/tarea.png');">
+      </div>
+      <div class="content">
+        <a class="header" data-bcup-haslogintext="no">Título de la tarea</a>
+        <div class="meta">
+            <span class="date">Usuario de la tarea</span>
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui two buttons">
+        <div class="ui basic blue button">Editar</div>
+        <div class="ui basic red button">Eliminar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -150,6 +150,32 @@
         return $resultado;
     }
 
+    /**
+     * Se obtienen las tareas de un tutor con los nombres de los usuarios que la realizan
+     * @param mysql $mysqli Base de datos sobre la que se actua
+     * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas
+     * @return mixed[] Array con las tareas que hemos pedido.
+     */
+    function getTareasTutor($mysqli,$tutor){ //Sin comprobar
+        // $usuario=getUsuario($mysqli,$tutor);
+
+        // $cod_usuario = $usuario['cod_usuario'];
+
+        $sql="SELECT * FROM TAREA T inner join USUARIO U on (T.realiza=U.cod_usuario) WHERE T.crea='$tutor'";
+        
+        $res = $mysqli->query($sql);
+
+        $resultado = array();
+
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
+        }
+
+        return $resultado;
+    }
+
 
     /**
      * Funcion para tomar una tarea de una base de datos

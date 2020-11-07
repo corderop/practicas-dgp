@@ -17,7 +17,4 @@
     else{
         echo $twig->render('login.html');
     }
-   
-
-
 ?>

@@ -18,6 +18,12 @@
     {% if usuario['tipo'] == "TUTOR" %}
     <!-- Grupos confeccionados por el tutor -->
     <div class="container">
+        <!-- Si ha sido redireccionado desde la creación de grupos -->
+        {% if msg %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
         <!-- TODO: hacer busqueda -->
         <!-- Barra de búsqueda -->
         <div class="ui fluid icon input" id="busqueda-admin">
@@ -30,7 +36,7 @@
             <!-- Aqui van las tarjetas -->
             <!-- Añadir usuario -->
             <div class="ui card">
-                <a class="image imagen-tarjeta" style="background-image: url('');" data-bcup-haslogintext="no">
+                <a class="image imagen-tarjeta" style="background-image: url('');" href="creargrupo.php" data-bcup-haslogintext="no">
                 </a>
                 <div class="content">
                     <a class="center aligned header" data-bcup-haslogintext="no">Crear un grupo</a>

@@ -11,7 +11,15 @@
     if(isset($_SESSION['cod_usuario'])){
         $usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
         $grupos = getGrupos($mysqli, $_SESSION['cod_usuario']);
-        echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);
+
+        // Si viene de crear un grupo se especifica que se ha creado correctamente
+        if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'aniadirgrupo') {
+            echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos", 'msg'=>"Grupo creado correctamente"]);
+            $_SESSION['previous_location'] = '';
+        } else {
+            echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);
+        }
+        // echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);
 
     }
     else{

@@ -19,16 +19,28 @@
     
     <!-- Lista con los usuarios, añadir usuario nuevo-->
     <div class="container">
-        <form class="ui form nombre-grupo">
+        <form class="ui form nombre-grupo" id="modificar-grupo" method="POST" action="aniadirgrupo.php" onsubmit="return hacerSubmit();">
         <div class=" field edicion-submit">
             <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">
                 Pulsa aquí para guardar todos los cambios
             </button>
         </div>
 
+        {% if msg %}
+            <div class="alert alert-danger" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
+
+        <div class="ui warning message" id="warning-mensaje" style="display: none;">
+            <div class="header">Error al enviar los datos. Falta:</div>
+            <ul class="list" id="lista-errores">
+            </ul>
+        </div>
+
         <div class="field">
             <label>Nombre del grupo</label>
-            <input type="text" name="first-name" placeholder="Introduce aquí el nombre del grupo">
+            <input type="text" id="nombre-grupo" name="nombre-grupo" placeholder="Introduce aquí el nombre del grupo">
         </div>
     
         <!-- TODO: hacer busqueda -->

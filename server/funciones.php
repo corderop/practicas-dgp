@@ -265,6 +265,28 @@
     ///////////////////////////////////////
 
     /**
+     * Funcion para devolver obtener todos los grupos de un tutor
+     * @param mysql $msqli Base de datos sobre la que actuar
+     * @param int $cod_tutor Tutor que confecciona el grupo
+     * @return mixed[] $grupo Todos los grupos del tutor especificado
+     */
+    function getGrupos($mysqli, $cod_tutor) {
+        $sql="SELECT * from GRUPO_TRABAJO where confecciona='$cod_tutor'";
+        
+        $res = $mysqli->query($sql);
+
+        $resultado = array();
+
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
+        }
+
+        return $resultado;
+    }
+
+    /**
      * Funcion que crea un nuevo grupo en la base de datos
      * @param mysql $msqli Base de datos sobre la que actuar
      * @param string $nombre Nombre del grupo de trabajo

@@ -1,0 +1,71 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% if usuario['tipo'] == "ADMIN" %}
+    <!-- Lista con los usuarios, añadir usuario nuevo-->
+    <div class="container">
+        
+        <h1>No puedes acceder a este recurso</h1>
+
+    </div>
+    {% endif %}
+
+    {% if usuario['tipo'] == "TUTOR" %}
+    <!-- Grupos confeccionados por el tutor -->
+    <div class="container">
+        <!-- TODO: hacer busqueda -->
+        <!-- Barra de búsqueda -->
+        <div class="ui fluid icon input" id="busqueda-admin">
+            <input type="text" placeholder="Busqueda...">
+            <i class="search icon"></i>
+        </div>
+    
+        <!-- TODO: Añadir fotos de grupo a las tarjetas -->
+        <div class="ui three stackable cards cards-grid">
+            <!-- Aqui van las tarjetas -->
+            <!-- Añadir usuario -->
+            <div class="ui card">
+                <a class="image imagen-tarjeta" style="background-image: url('');" data-bcup-haslogintext="no">
+                </a>
+                <div class="content">
+                    <a class="center aligned header" data-bcup-haslogintext="no">Crear un grupo</a>
+                </div>
+            </div>
+            {% for grupo in grupos %}
+            <!-- Resto de las tarjetas-->
+            <!-- Card -->
+            <div class="ui card">
+                <div class="image imagen-tarjeta" style="background-image: url('');">
+                </div>
+                <div class="content">
+                    <a class="header" data-bcup-haslogintext="no">{{ grupo['nombre'] }}</a>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                    <div class="ui basic blue button">Editar</div>
+                    <div class="ui basic red button">Eliminar</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    {% endif %}
+
+    {% if usuario['tipo'] == "USUARIO" %}
+    
+    <div class="container">
+        
+        <h1>No puedes acceder a este recurso</h1>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}

@@ -16,7 +16,8 @@
             echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Home" ]);
         }
         if($usuario['tipo'] == "TUTOR"){
-            echo $twig->render('index.html', ['usuario'=>$usuario, 'titulo'=> "Home"]);
+            $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+            echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home"]);
         }
         if($usuario['tipo'] == "USUARIO"){
             echo $twig->render('index.html', ['usuario'=>$usuario, 'titulo'=> "Home"]);

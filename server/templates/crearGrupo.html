@@ -56,7 +56,7 @@
                     <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
                 </div>
                 <div class="extra content">
-                    <div class="ui fluid basic blue button">Añadir</div>
+                    <div class="ui fluid basic blue button" onclick="aniadirUsuarioGrupo(this, {{ user['cod_usuario'] }})">Añadir</div>
                 </div>
             </div>
             {% endfor %}
@@ -73,5 +73,7 @@
     </div>
 
     {% endif %}
+
+    <script src="assets/js/gestionGrupos.js"></script>
 
 {% endblock %}

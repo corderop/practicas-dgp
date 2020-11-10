@@ -1,12 +1,12 @@
 function buscar(busq){
     // Toma el valor introducido en la barra
-    let valor = busq.value;
+    let valor = busq.value.toLowerCase();
     // Toma las tarjetas
     let tarjetas = document.querySelectorAll('.ui .card');
 
     if(valor.length > 3){
         for(i=1; i<tarjetas.length; i++){
-            if(tarjetas[i].textContent.trim().includes(valor))
+            if(tarjetas[i].textContent.trim().toLowerCase().includes(valor))
                 tarjetas[i].style.display = "";
             else
                 tarjetas[i].style.display = "none";

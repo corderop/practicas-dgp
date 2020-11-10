@@ -1,0 +1,81 @@
+nav{
+    margin-bottom: 40px;
+}
+
+footer{
+    margin-top: 40px;
+}
+
+.navbar-brand img{
+    width: 100px;
+}
+
+.action-button{
+    margin: 0 10px;
+    border-radius: 25px;
+}
+
+.nav-item{
+    padding: 0 15px;
+}
+
+footer{
+    color: black;
+}
+
+/* Imagen del admin */
+#imagen-cambiar-pass-padre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagen-cambiar-pass{
+    width: 50%;
+}
+
+/* Tarjetas */
+.imagen-tarjeta{
+    height: 300px;
+    width: auto;
+    background-color: white !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Añado padding a las tarjetas arriba */
+.cards-grid{
+    margin-top: 30px !important;
+}
+
+
+/* Añadir un usuario */
+#foto-usuario-label{
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+#foto-usuario-input{
+    display: none;
+}
+
+.edicion-submit{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.etiqueta-foto-usuario p{
+    margin: 0 auto;
+}
+
+/* Añadir/editar grupo */
+.nombre-grupo{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.nombre-grupo label{
+    font-size: large !important;
+    margin-bottom: 10px !important;
+}

@@ -12,7 +12,7 @@
         <!-- TODO: hacer busqueda -->
         <!-- Barra de búsqueda -->
         <div class="ui fluid icon input" id="busqueda-admin">
-            <input type="text" placeholder="Busqueda..." name="busqueda" onkeyup="buscar(event)" id="busqueda">
+            <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this)" id="busqueda">
             <i class="search icon"></i>
         </div>
 
@@ -63,7 +63,7 @@
             <!-- Barra de búsqueda -->
             <div class="col-md-6">
                 <div class="ui fluid icon input">
-                    <input type="text" placeholder="Busqueda...">
+                    <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this)" id="busqueda">
                     <i class="search icon"></i>
                 </div>
             </div>

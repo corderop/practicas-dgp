@@ -1,0 +1,108 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+
+{% endblock %}
+
+{% block body %}
+
+<script src="assets/js/gestionGrupos.js"></script>
+
+    {% if usuario['tipo'] == "ADMIN" %}
+    <!-- Lista con los usuarios, añadir usuario nuevo-->
+    <div class="container">
+        
+        <h1>No puedes acceder a este recurso</h1>
+
+    </div>
+    {% endif %}
+
+    {% if usuario['tipo'] == "TUTOR" %}
+    
+    <!-- Lista con los usuarios, añadir usuario nuevo-->
+    <div class="container">
+        <form class="ui form nombre-grupo" id="modificar-grupo" method="POST" action="" onsubmit="return hacerSubmit();">
+        <div class=" field edicion-submit">
+            <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">
+                Pulsa aquí para guardar todos los cambios
+            </button>
+        </div>
+
+        {% if msg %}
+            <div class="alert alert-danger" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
+
+        <div class="ui warning message" id="warning-mensaje" style="display: none;">
+            <div class="header">Error al enviar los datos. Falta:</div>
+            <ul class="list" id="lista-errores">
+            </ul>
+        </div>
+
+        <div class="field">
+            <label>Nombre del grupo</label>
+            <input type="text" id="nombre-grupo" name="nombre-grupo" placeholder="Introduce aquí el nombre del grupo" value="{{ grupo['nombre'] }}">
+        </div>
+    
+        <!-- TODO: hacer busqueda -->
+        <!-- Barra de búsqueda -->
+        <div class="field">
+        <label>Usuarios del grupo</label>
+        <div class="ui fluid icon input" id="busqueda-admin">
+            <input type="text" placeholder="Busqueda..." oninput="buscar(this,0);">
+            <i class="search icon"></i>
+        </div>
+        </div>
+        </form>
+    
+        <!-- TODO: Añadir fotos de grupo a las tarjetas -->
+        <!-- TODO: Cambiar de añadido a añadir con javascript
+                Para cambiar el tipo de boton solo hay que quitar y poner la clase basic del boton-->
+        <div class="ui three stackable cards cards-grid">
+            <!-- Aqui van las tarjetas -->
+            <!-- Card -->
+            {% for user in integrantes %}
+            <div class="ui card">
+                <div class="image imagen-tarjeta" style="background-image: url('');">
+                </div>
+                <div class="content">
+                    <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
+                </div>
+                <div class="extra content">
+                    <div class="extra content">
+                        <div class="ui fluid blue button" onclick="quitarUsuarioGrupo(this, {{ user['cod_usuario'] }})">Añadido</div>
+                        <script>usuariosGrupos.push({{ user['cod_usuario'] }});</script>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% for user in no_integrantes %}
+            <div class="ui card">
+                <div class="image imagen-tarjeta" style="background-image: url('');">
+                </div>
+                <div class="content">
+                    <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
+                </div>
+                <div class="extra content">
+                    <div class="extra content">
+                        <div class="ui fluid basic blue button" onclick="aniadirUsuarioGrupo(this, {{ user['cod_usuario'] }})">Añadir</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if usuario['tipo'] == "USUARIO" %}
+    
+    <div class="container">
+        
+        <h1>No puedes acceder a este recurso</h1>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}

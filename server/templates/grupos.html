@@ -53,7 +53,10 @@
                 </div>
                 <div class="extra content">
                     <div class="ui two buttons">
-                    <div class="ui basic blue button">Editar</div>
+                    <form id="editar-grupo-{{ grupo['cod_grupo'] }}" method="post" action="editarGrupo.php" style="display: none;">
+                        <input type="hidden" name="cod_grupo" value="{{ grupo['cod_grupo'] }}">
+                    </form>
+                    <div class="ui basic blue button" onclick="document.getElementById('editar-grupo-{{ grupo['cod_grupo'] }}').submit();">Editar</div>
                     <div class="ui basic red button">Eliminar</div>
                     </div>
                 </div>

@@ -334,13 +334,32 @@
      * @return mixed[] $grupo Lista de integrantes del grupo
      */
     function getIntegrantesGrupo($mysqli, $cod_grupo){
-        $resultado = $mysqli->query("SELECT * from INTEGRADO where cod_grupo='$cod_grupo'");
+        $resultado = $mysqli->query("SELECT U.* from INTEGRADO I inner join USUARIO U on I.cod_usuario=U.cod_usuario where cod_grupo=5;");
 
         $integrantes = array();
 
         while($res = $resultado->fetch_assoc()) {
             $grupo[] = $res;
         }
+
+        return $grupo;
+    }
+
+    /**
+     * Funcion para devolver los usuarios que no pertenecen a un grupo de trabajo
+     * @param mysql $msqli Base de datos sobre la que actuar
+     * @param int $cod_grupo Codigo del grupo
+     * @return mixed[] $grupo Lista de no integrantes del grupo
+     */
+    function getNoIntegrantesGrupo($mysqli, $cod_grupo){
+        $resultado = $mysqli->query("select * from USUARIO U where not exists (select * from INTEGRADO I where I.cod_grupo=5 and U.cod_usuario=I.cod_usuario );");
+
+        $integrantes = array();
+
+        while($res = $resultado->fetch_assoc()) {
+            $grupo[] = $res;
+        }
+
         return $grupo;
     }
 
@@ -363,7 +382,7 @@
      * @param int $cod_grupo Codigo del grupo al que queremos añadir un integrante
      * @param int $cod_usuario Codigo del usuario que queremos añadir al grupo
      */
-    function addIntegranteGrpo($mysqli, $cod_grupo, $cod_usuario) {
+    function addIntegranteGrupo($mysqli, $cod_grupo, $cod_usuario) {
         $mysqli->query("INSERT into INTEGRADO (cod_grupo, cod_usuario) values ('$cod_grupo', '$cod_usuario')");
     }
 

@@ -29,19 +29,33 @@ function buscar(busq, num){
 
 function filtroCorregidas(element) {
     let estado = element.value;
-    //Mostrar o no mostrar las tareas
-    let tarjetas = document.querySelectorAll('.ui .card');
-    for(i=num; i<tarjetas.length; i++){
-        switch(estado){
-            case "T":
-                //Poner todos los display a ""
-                break;
-            case "C":
-                //Poner los display de las NC a "none"
-                break:
-            case "NC":
-                //Poner los display de las C a "none"
-                break
+
+    if(estado == "T"){
+        let tarjetas = document.querySelectorAll('.ui .card');
+        for(i=0; i<tarjetas.length; i++){
+            tarjetas[i].style.display = '';
+        }
+    }
+    else if(estado == "C"){
+        let tarjetas_corregidas = document.querySelectorAll('.realizada');
+        let tarjetas_no_corregidas = document.querySelectorAll('.no-realizada');
+
+        for(i=0; i<tarjetas_corregidas.length; i++){
+            tarjetas_corregidas[i].style.display = '';
+        }
+        for(i=0; i<tarjetas_no_corregidas.length; i++){
+            tarjetas_no_corregidas[i].style.display = 'none';
+        }
+    }
+    else if(estado == "NC"){
+        let tarjetas_corregidas = document.querySelectorAll('.realizada');
+        let tarjetas_no_corregidas = document.querySelectorAll('.no-realizada');
+        
+        for(i=0; i<tarjetas_corregidas.length; i++){
+            tarjetas_corregidas[i].style.display = 'none';
+        }
+        for(i=0; i<tarjetas_no_corregidas.length; i++){
+            tarjetas_no_corregidas[i].style.display = '';
         }
     }
 }

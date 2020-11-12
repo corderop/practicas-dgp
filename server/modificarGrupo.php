@@ -27,7 +27,7 @@
 
         if($nombre && $usuarios){
             editarGrupo($mysqli, $cod_grupo, $nombre, $usuarios);
-            $_SESSION['previous_location'] = 'aniadirgrupo';
+            $_SESSION['previous_location'] = 'modificargrupo';
             header("Location: grupos.php");
         }
         // No añado else ya que los datos introducidos son comprobados por javascript

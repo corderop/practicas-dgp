@@ -421,6 +421,7 @@
 
         $integrantes = array();
 
+        $grupo = [];
         while($res = $resultado->fetch_assoc()) {
             $grupo[] = $res;
         }

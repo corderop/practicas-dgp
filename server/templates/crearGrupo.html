@@ -62,7 +62,7 @@
             <!-- Card -->
             {% for user in usuarios %}
             <div class="ui card">
-                <div class="image imagen-tarjeta" style="background-image: url('');">
+                <div class="image imagen-tarjeta" style="background-image: url('{{ user['avatar'] }}');">
                 </div>
                 <div class="content">
                     <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>

@@ -22,6 +22,9 @@
     function aniadirUsuario($mysqli, $usuario, $pass, $tipo, $avatar){
         $pass = password_hash($pass, PASSWORD_DEFAULT);
 
+        $avatar = cargarFoto();
+        
+
         if($avatar == ""){
             $sql = "INSERT INTO USUARIO(nombre,pass,tipo) VALUES('$usuario','$pass','$tipo')";
         }
@@ -30,6 +33,32 @@
         }
         
         $mysqli->query($sql);
+    }
+
+    /**
+     * Funcion para obtener la ruta de la imagen cargada
+     * @return string $targetFilePath ruta de la imagen final
+     */
+    function cargarFoto(){
+        $targetDir = "img/";
+        $fileName = date("Y-m-d-H-i-s") . basename($_FILES['avatar']['name']);
+        $targetFilePath = $targetDir . $fileName;
+
+        if(basename($_FILES['avatar']['name']) == ""){
+            return "img/user.jpg";
+        }
+
+        $allowTypes = array('jpg','png','jpeg');
+        $imageFileType = strtolower(pathinfo($targetFilePath,PATHINFO_EXTENSION));
+        if(in_array($imageFileType, $allowTypes)){
+            if(move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)){
+                //echo "Bien";
+              }
+              else{
+                echo "Hay algun error";
+              }
+        }
+        return $targetFilePath;
     }
 
     /**
@@ -48,6 +77,20 @@
           $usuario = $res;
         }
         return $usuario;
+    }
+    
+    /**
+     * Funcion para actualizar los datos de un usuario
+     * @param mysql $mysqli Base de datos sobre la que se actua
+     * @param string $usuario Nombre nuevo
+     * @param string $pass nueva contraseña
+     * @param string $avatar Nuevo avatar
+     */
+    function actualizarUsuario($mysqli, $usuario, $nombre, $pass, $tipo, $avatar){
+        $pass = password_hash($pass, PASSWORD_DEFAULT);
+        
+        $sql = "UPDATE USUARIO set nombre='$nombre', pass='$pass', tipo='$tipo', avatar='$avatar' where cod_usuario=".$usuario['cod_usuario'];
+        $mysqli->query($sql);
     }
 
     /**
@@ -70,6 +113,26 @@
 
         return $resultado;
     }
+
+    /**
+     * Funcion para eliminar un usuario por completo de la base de datos
+     * @param mysql $msqli Base de datos sobre la que actuar
+     * @param int $cod_usuario Codigo del usuario que queremos eliminar
+     */
+    function deleteUsuario($mysqli, $cod_usuario) {
+        //Eliminamos la foto del servidor
+        $usuario = getUsuario($mysqli, $cod_usuario);
+        if (file_exists($usuario['avatar'])) {
+            unlink($usuario['avatar']);
+            echo 'File '.$usuario['avatar'].' has been deleted';
+          } else {
+            echo 'Could not delete '.$usuario['avatar'].', file does not exist';
+          }
+
+        //Eliminar a un usuario
+        $mysqli->query("DELETE FROM USUARIO where cod_usuario='$cod_usuario'");
+    }
+
 
     /**
      * Funcion para cambiar la contraseña de un usuario. Puede hacerlo un administrador o el propio usuario

@@ -9,7 +9,6 @@
     {% if usuario['tipo'] == "ADMIN" %}
     <!-- Lista con los usuarios, añadir usuario nuevo-->
     <div class="container">
-        <!-- TODO: hacer busqueda -->
         <!-- Barra de búsqueda -->
         <div class="ui fluid icon input" id="busqueda-admin">
             <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this,1)" id="busqueda">
@@ -41,8 +40,10 @@
                     </div>
                     <div class="extra content">
                         <div class="ui two buttons">
-                        <div class="ui basic blue button">Editar</div>
-                        <div class="ui basic red button">Eliminar</div>
+                            <a class="ui basic blue button" href="editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Editar</a>
+                        
+                            <a class="ui basic red button" href="eliminarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Eliminar</a>
+
                         </div>
                     </div>
                 </div>
@@ -69,7 +70,7 @@
             </div>
             <!-- Selector corregidas y no corregidas -->
             <div class="col-md-6">
-                <select class="ui fluid dropdown">
+                <select class="ui fluid dropdown" onchange="filtroCorregidas(this)">
                     <option value="T">Todas</option>
                     <option value="C">Corregidas</option>
                     <option value="NC">No corregidas</option>

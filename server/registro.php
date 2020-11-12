@@ -32,19 +32,15 @@
             $tipo = mysqli_real_escape_string($mysqli, $tipo);
         }
         if(isset($_POST['avatar'])){
-            $avatar = mysqli_real_escape_string($mysqli,$_REQUEST['avatar']);
+            $avatar = mysqli_real_escape_string($mysqli,$_FILES['avatar']['name']);
         }
 
         //TODO: subir una imagen
+        
 
         if($pass == $repetirPass){
-            echo("Nombre: " . $usuario . "\n");
-            echo("Pass: " . $pass . "\n");
-            echo("Repetir pass: " . $repetirPass . "\n");
-            echo("Tipo: " . $tipo . "\n");
-            echo("Avatar: " . $avatar . "\n");
-            //aniadirUsuario($mysqli,$usuario,$pass,$tipo, $avatar); 
-            //header("Location: index.php");
+            aniadirUsuario($mysqli,$usuario,$pass,$tipo, $avatar); 
+            header("Location: index.php");
         }
         else{
             $msg="Error: las contraseñas no coinciden";

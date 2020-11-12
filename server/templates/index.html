@@ -93,7 +93,11 @@
             <!-- Ejemplo de tarea -->
             {% for tarea in tareas %}
                 <!-- Card -->
-                <div class="ui card">
+                {% if tarea['realizada'] %}
+                <div class="ui card realizada">
+                {% else %}
+                <div class="ui card no-realizada">
+                {% endif %}
                     <div class="image imagen-tarjeta" style="background-image: url('img/tarea.png');"></div>
                     <div class="content">
                         <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>

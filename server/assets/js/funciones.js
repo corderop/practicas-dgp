@@ -26,3 +26,22 @@ function buscar(busq, num){
     }
 
 }
+
+function filtroCorregidas(element) {
+    let estado = element.value;
+    //Mostrar o no mostrar las tareas
+    let tarjetas = document.querySelectorAll('.ui .card');
+    for(i=num; i<tarjetas.length; i++){
+        switch(estado){
+            case "T":
+                //Poner todos los display a ""
+                break;
+            case "C":
+                //Poner los display de las NC a "none"
+                break:
+            case "NC":
+                //Poner los display de las C a "none"
+                break
+        }
+    }
+}

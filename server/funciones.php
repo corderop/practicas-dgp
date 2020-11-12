@@ -374,6 +374,26 @@
     }
 
     /**
+     * Funcion que edita un grupo
+     * @param mysql $msqli Base de datos sobre la que actuar
+     * @param int $cod_grupo Codigo del grupo a editar
+     * @param string $nombre Nombre del grupo de trabajo
+     * @param int[] $usuarios Codigos de usuario de cada uno de los integrantes del grupo
+     */
+    function editarGrupo($mysqli, $cod_grupo, $nombre, $usuarios){
+        $sql = "UPDATE GRUPO_TRABAJO set nombre='$nombre' where cod_grupo='$cod_grupo'";
+        $mysqli->query($sql);
+
+        $del = "DELETE FROM INTEGRADO WHERE cod_grupo='$cod_grupo' ";
+        foreach ($usuarios as $usuario){
+            $mysqli->query("INSERT IGNORE INTO INTEGRADO VALUES ('$cod_grupo', '$usuario')");
+            $del = $del . "AND cod_usuario!='$usuario' ";
+        }
+        echo $del;
+        $mysqli->query($del);
+    }
+
+    /**
      * Funcion para devolver un grupo concreto
      * @param mysql $msqli Base de datos sobre la que actuar
      * @param int $cod_grupo Codigo del grupo del que queremos obtener datos
@@ -397,7 +417,7 @@
      * @return mixed[] $grupo Lista de integrantes del grupo
      */
     function getIntegrantesGrupo($mysqli, $cod_grupo){
-        $resultado = $mysqli->query("SELECT U.* from INTEGRADO I inner join USUARIO U on I.cod_usuario=U.cod_usuario where cod_grupo=5;");
+        $resultado = $mysqli->query("SELECT U.* from INTEGRADO I inner join USUARIO U on I.cod_usuario=U.cod_usuario where cod_grupo=$cod_grupo;");
 
         $integrantes = array();
 
@@ -415,7 +435,7 @@
      * @return mixed[] $grupo Lista de no integrantes del grupo
      */
     function getNoIntegrantesGrupo($mysqli, $cod_grupo){
-        $resultado = $mysqli->query("select * from USUARIO U where not exists (select * from INTEGRADO I where I.cod_grupo=5 and U.cod_usuario=I.cod_usuario );");
+        $resultado = $mysqli->query("SELECT * from USUARIO U where not exists (select * from INTEGRADO I where I.cod_grupo=$cod_grupo and U.cod_usuario=I.cod_usuario );");
 
         $integrantes = array();
 

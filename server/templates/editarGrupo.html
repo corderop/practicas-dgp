@@ -21,12 +21,14 @@
     
     <!-- Lista con los usuarios, añadir usuario nuevo-->
     <div class="container">
-        <form class="ui form nombre-grupo" id="modificar-grupo" method="POST" action="" onsubmit="return hacerSubmit();">
+        <form class="ui form nombre-grupo" id="modificar-grupo" method="POST" action="modificarGrupo.php" onsubmit="return hacerSubmit();">
         <div class=" field edicion-submit">
             <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">
                 Pulsa aquí para guardar todos los cambios
             </button>
         </div>
+
+        <input type="text" name="cod_grupo" value="{{ cod_grupo }}" style="display: none;">
 
         {% if msg %}
             <div class="alert alert-danger" role="alert">

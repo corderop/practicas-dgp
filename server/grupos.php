@@ -14,7 +14,7 @@
 
         // Si viene de crear un grupo se especifica que se ha creado correctamente
         if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'aniadirgrupo') {
-            echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos", 'msg'=>"Grupo creado correctamente"]);
+            echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos", 'msg'=>"Grupo creado/modificado correctamente"]);
             $_SESSION['previous_location'] = '';
         } else {
             echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);

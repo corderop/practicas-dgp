@@ -16,8 +16,7 @@
     if(isset($_SESSION['cod_usuario'])){
         $usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
         $no_integrantes = getNoIntegrantesGrupo($mysqli, $cod_grupo);
-        echo $twig->render('editarGrupo.html', ['usuario'=>$usuario, 'integrantes'=>$grupo_users['integrantes'], 'no_integrantes'=>$no_integrantes, 'titulo'=> "Crear un nuevo grupo", 'grupo'=>$grupo_users]);
-
+        echo $twig->render('editarGrupo.html', ['usuario'=>$usuario, 'integrantes'=>$grupo_users['integrantes'], 'no_integrantes'=>$no_integrantes, 'titulo'=> "Crear un nuevo grupo", 'grupo'=>$grupo_users, 'cod_grupo'=>$cod_grupo]);
     }
     else{
         echo $twig->render('login.html');

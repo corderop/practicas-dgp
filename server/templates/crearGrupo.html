@@ -61,6 +61,7 @@
             <!-- Aqui van las tarjetas -->
             <!-- Card -->
             {% for user in usuarios %}
+            {% if user['tipo'] == "USUARIO" %}
             <div class="ui card">
                 <div class="image imagen-tarjeta" style="background-image: url('{{ user['avatar'] }}');">
                 </div>
@@ -71,6 +72,7 @@
                     <div class="ui fluid basic blue button" onclick="aniadirUsuarioGrupo(this, {{ user['cod_usuario'] }})">Añadir</div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -440,9 +440,11 @@
      * @return mixed[] $grupo Lista de no integrantes del grupo
      */
     function getNoIntegrantesGrupo($mysqli, $cod_grupo){
-        $resultado = $mysqli->query("SELECT * from USUARIO U where not exists (select * from INTEGRADO I where I.cod_grupo=$cod_grupo and U.cod_usuario=I.cod_usuario );");
+        $resultado = $mysqli->query("SELECT * from USUARIO U where not exists (select * from INTEGRADO I where I.cod_grupo=$cod_grupo and U.cod_usuario=I.cod_usuario ) AND U.tipo='USUARIO';");
 
         $integrantes = array();
+
+        $grupo = [];
 
         while($res = $resultado->fetch_assoc()) {
             $grupo[] = $res;

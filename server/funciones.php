@@ -122,14 +122,18 @@
     function deleteUsuario($mysqli, $cod_usuario) {
         //Eliminamos la foto del servidor
         $usuario = getUsuario($mysqli, $cod_usuario);
-        if (file_exists($usuario['avatar'])) {
-            unlink($usuario['avatar']);
-            echo 'File '.$usuario['avatar'].' has been deleted';
-          } else {
-            echo 'Could not delete '.$usuario['avatar'].', file does not exist';
-          }
+        if($usuario['avatar'] != 'img/user.jpg'){
+            if (file_exists($usuario['avatar'])) {
+                unlink($usuario['avatar']);
+                echo 'File '.$usuario['avatar'].' has been deleted';
+            } else {
+                echo 'Could not delete '.$usuario['avatar'].', file does not exist';
+            }
+        }
 
-        //Eliminar a un usuario
+        // Eliminar de la tabla intregrado 
+        $mysqli->query("DELETE FROM INTEGRADO WHERE cod_usuario='$cod_usuario'");
+        //Eliminar al usario
         $mysqli->query("DELETE FROM USUARIO where cod_usuario='$cod_usuario'");
     }
 

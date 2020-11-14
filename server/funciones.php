@@ -177,13 +177,15 @@
      * @param int $tutor Codigo numerico del tutor en la base de datos
      * @param int $alumno Codigo numerico del alumno en la base de datos
      */
-    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $fecha_limite, $tutor, $alumno){ //Sin comprobar
-        $tutor=getUsuario($mysqli,$tutor);
-        $alumno=getUsuario($mysqli,$alumno);
+    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $fecha_limite, $tutor, $alumno){
 
         $titulo = mysqli_real_escape_string($mysqli,$titulo);
         $objetivo = mysqli_real_escape_string($mysqli,$objetivo);
         $descripcion = mysqli_real_escape_string($mysqli,$descripcion);
+
+        if($multimedia == ""){
+            $multimedia = "multimedia/tarea.png";
+        }
 
         $sql = "INSERT INTO TAREA(titulo,descripcion,fecha_limite,objetivo,multimedia,crea,realiza) VALUES('$titulo','$descripcion','$fecha_limite','$objetivo','$multimedia','$tutor','$alumno')";
     

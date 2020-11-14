@@ -19,7 +19,7 @@
 <!-- Lista con los usuarios, añadir usuario nuevo-->
 <div class="container">
 
-  <form class="ui form nombre-grupo" id="aniadir-tarea" method="POST" action="" onsubmit="return hacerSubmit();">
+  <form class="ui form nombre-grupo" id="aniadir-tarea" method="POST" enctype="multipart/form-data" action="nuevaTarea.php" onsubmit="return hacerSubmit();">
     <div class=" field edicion-submit">
       <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">
         Pulsa aquí para guardar todos los cambios
@@ -37,10 +37,10 @@
         <div class="field">
           <label>Pulsa en la imagen para añadir un archivo</label>
           <div class="row">
-            <label class="foto-input-label" for="archivo-tarea">
+            <label class="foto-input-label" for="multimedia">
               <img src="img/image.jpg" />
             </label>
-            <input class="foto-input" id="archivo-tarea" type="file" name="avatar">
+            <input class="foto-input" id="multimedia" type="file" name="multimedia">
           </div>
         </div>
 
@@ -117,19 +117,6 @@
         </div>
       </div>
       {% endfor %}
-
-      <div class="ui card">
-        <div class="image imagen-tarjeta" style="background-image: url('');">
-        </div>
-        <div class="content">
-          <a class="header" data-bcup-haslogintext="no">Nombre de grupo</a>
-        </div>
-        <div class="extra content">
-          <div class="ui fluid blue button">Añadido</div>
-        </div>
-      </div>
-    </div>
-
   </form>
 </div>
 

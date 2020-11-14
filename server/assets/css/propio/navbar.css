@@ -51,12 +51,12 @@ footer{
 
 
 /* Añadir un usuario */
-#foto-usuario-label{
+.foto-input-label{
     cursor: pointer;
     margin: 20px auto;
 }
 
-#foto-usuario-input{
+.foto-input{
     display: none;
 }
 

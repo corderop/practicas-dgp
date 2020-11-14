@@ -14,6 +14,7 @@
         $nombre = null;
         $multimedia = null;
         $descripcion = null;
+        $fecha = "";
         $usuarios = [];
         $grupos = [];
         
@@ -32,6 +33,9 @@
         }
         if(isset($_POST['usuarios'])){
             $usuarios = $_REQUEST['usuarios'];
+        }
+        if(isset($_POST['fecha'])){
+            $fecha = $_REQUEST['fecha'];
         }
 
         if($nombre && $descripcion && ( $usuarios || $grupos ) ){
@@ -56,7 +60,7 @@
 
             if($usuarios){
                 foreach ($usuarios as &$user){
-                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, NULL, $_SESSION['cod_usuario'], $user);
+                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, $fecha, $_SESSION['cod_usuario'], $user);
                 }
             }
             if($grupos){
@@ -65,7 +69,7 @@
                     if($g['integrantes']){
                         foreach ($g['integrantes'] as &$user){
                             if(array_search($user['cod_usuario'], $usuarios) === FALSE)
-                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, null, $_SESSION['cod_usuario'], $user['cod_usuario']);
+                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $fecha, $_SESSION['cod_usuario'], $user['cod_usuario']);
                         }
                     }
                 }

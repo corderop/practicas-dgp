@@ -63,7 +63,7 @@
           <div class="ui calendar" id="fecha-fin-aniadir">
             <div class="ui input left icon">
               <i class="calendar icon"></i>
-              <input type="text" placeholder="Date/Time">
+              <input id="fecha-nombre" name="fecha" type="text" placeholder="Fecha">
             </div>
           </div>
         </div>
@@ -123,7 +123,17 @@
 
 <script>
   $('#fecha-fin-aniadir').calendar({
-    type: 'date'
+    type: 'date',
+    monthFirst: false,
+    formatter: {
+      date: function (date, settings) {
+        if (!date) return '';
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return day + '/' + month + '/' + year;
+      }
+    }
   });
 </script>
 

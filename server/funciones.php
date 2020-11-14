@@ -173,11 +173,11 @@
      * @param string $objetivo Objetivo hacia el que va dirigido la tarea
      * @param string $descripcion Descripcion de la tarea a realizar [Optativo]
      * @param string $multimedia Ruta del archivo multimedia relacionado con la tarea [Opcional]
-     * @param Date $fecha_limite Fecha en la que la tarea debe quedar finalizada
+     * @param string $fecha Fecha en la que la tarea debe quedar finalizada en formato (DD/MM/AAAA)
      * @param int $tutor Codigo numerico del tutor en la base de datos
      * @param int $alumno Codigo numerico del alumno en la base de datos
      */
-    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $fecha_limite, $tutor, $alumno){
+    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $fecha, $tutor, $alumno){
 
         $titulo = mysqli_real_escape_string($mysqli,$titulo);
         $objetivo = mysqli_real_escape_string($mysqli,$objetivo);
@@ -186,8 +186,11 @@
         if($multimedia == ""){
             $multimedia = "multimedia/tarea.png";
         }
+        if($fecha == ""){
+            $fecha = "00/00/0000";
+        }
 
-        $sql = "INSERT INTO TAREA(titulo,descripcion,fecha_limite,objetivo,multimedia,crea,realiza) VALUES('$titulo','$descripcion','$fecha_limite','$objetivo','$multimedia','$tutor','$alumno')";
+        $sql = "INSERT INTO TAREA(titulo,descripcion,fecha_limite,objetivo,multimedia,crea,realiza) VALUES('$titulo','$descripcion',STR_TO_DATE('$fecha', '%d/%m/%Y'),'$objetivo','$multimedia','$tutor','$alumno')";
     
         $mysqli->query($sql);
     }

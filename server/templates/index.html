@@ -57,6 +57,12 @@
     <!-- Lista con las tareas, ¿ver tareas completadas tambien?-->
     <!-- Lista con las tareas y añadir un usuario nuevo-->
     <div class="container">
+        <!-- Si ha sido redireccionado desde la creación de grupos -->
+        {% if msg %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
         <!-- TODO: hacer busqueda -->
         <!-- TODO: Hacer el filtro de seleccionadas y no seleccionadas -->
 
@@ -98,7 +104,7 @@
                 {% else %}
                 <div class="ui card no-realizada">
                 {% endif %}
-                    <div class="image imagen-tarjeta" style="background-image: url('img/tarea.png');"></div>
+                    <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
                     <div class="content">
                         <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                         <div class="meta">

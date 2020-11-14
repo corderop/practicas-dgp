@@ -1,0 +1,157 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+{% endblock %}
+
+{% block body %}
+
+{% if usuario['tipo'] == "ADMIN" %}
+<!-- Lista con los usuarios, añadir usuario nuevo-->
+<div class="container">
+    
+    <h1>No puedes acceder a este recurso</h1>
+
+</div>
+{% endif %}
+
+{% if usuario['tipo'] == "TUTOR" %}
+
+<!-- Lista con los usuarios, añadir usuario nuevo-->
+<div class="container">
+
+  <form class="ui form nombre-grupo" id="aniadir-tarea" method="POST" action="" onsubmit="return hacerSubmit();">
+    <div class=" field edicion-submit">
+      <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">
+        Pulsa aquí para guardar todos los cambios
+      </button>
+    </div>
+
+    <div class="ui warning message" id="warning-mensaje" style="display: none;">
+      <div class="header">Error al enviar los datos. Falta:</div>
+      <ul class="list" id="lista-errores">
+      </ul>
+    </div>
+
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+          <label>Pulsa en la imagen para añadir un archivo</label>
+          <div class="row">
+            <label class="foto-input-label" for="archivo-tarea">
+              <img src="img/image.jpg" />
+            </label>
+            <input class="foto-input" id="archivo-tarea" type="file" name="avatar">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Añadir texto</label>
+          <textarea id="comentario-tarea" name="comentario" style="resize: none; height: 250px;"></textarea>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+          <label>Nombre de la tarea</label>
+          <input id="nombre-tarea" type="text" name="nombre" placeholder="Introduce aquí el nombre de la tarea">
+        </div>
+        <div class="field">
+          <label>Fecha de fin</label>
+          <div class="ui calendar" id="fecha-fin-aniadir">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input type="text" placeholder="Date/Time">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Usuarios/grupos de la tarea</label>
+      <div class="ui fluid icon input" id="busqueda-admin">
+        <input type="text" placeholder="Busqueda...">
+        <i class="search icon"></i>
+      </div>
+    </div>
+
+    <!-- TODO: Añadir fotos de grupo a las tarjetas -->
+    <!-- TODO: Cambiar de añadido a añadir con javascript
+                 Para cambiar el tipo de boton solo hay que quitar y poner la clase basic del boton-->
+    <div class="ui three stackable cards cards-grid">
+      <!-- Aqui van las tarjetas -->
+      <!-- Card -->
+      {% for user in usuarios %}
+      {% if user['tipo'] == "USUARIO" %}
+      <div class="ui card">
+        <div class="image imagen-tarjeta" style="background-image: url('{{ user['avatar'] }}');">
+        </div>
+        <div class="content">
+          <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
+          <div class="meta">
+            <span>USUARIO</span>
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="ui fluid basic blue button" onclick="aniadirUsuario(this, {{ user['cod_usuario'] }})">Añadir</div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      {% for grupo in grupos %}
+      <div class="ui card">
+        <div class="image imagen-tarjeta" style="background-image: url('img/grupo.png');">
+        </div>
+        <div class="content">
+          <a class="header" data-bcup-haslogintext="no">{{ grupo['nombre'] }}</a>
+          <div class="meta">
+            <span>GRUPO</span>
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="ui fluid basic blue button" onclick="aniadirGrupo(this, {{ grupo['cod_grupo'] }})">Añadir</div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="ui card">
+        <div class="image imagen-tarjeta" style="background-image: url('');">
+        </div>
+        <div class="content">
+          <a class="header" data-bcup-haslogintext="no">Nombre de grupo</a>
+        </div>
+        <div class="extra content">
+          <div class="ui fluid blue button">Añadido</div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+<script>
+  $('#fecha-fin-aniadir').calendar({
+    type: 'date'
+  });
+</script>
+
+<script src="assets/js/aniadirTarea.js"></script>
+
+{% endif %}
+
+{% if usuario['tipo'] == "USUARIO" %}
+    
+    <div class="container">
+        
+        <h1>No puedes acceder a este recurso</h1>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}

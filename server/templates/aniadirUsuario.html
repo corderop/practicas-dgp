@@ -7,53 +7,169 @@
 
 <div class="container">
 
-    <!-- Formulario -->
-    <form method="POST" enctype="multipart/form-data" action="registro.php">
-        <div class="row etiqueta-foto-usuario">
-            <p>Pulsa en la imagen para añadir una fotografía</p>
-        </div>
+    <h3>Tipo de usuario a añadir:</h3>
+    
+    <!-- Sistema de pestañas -->
+    <div class="ui top attached tabular menu">
+        <a class="active item" data-tab="first" data-bcup-haslogintext="no">Administrador</a>
+        <a class="item" data-tab="second" data-bcup-haslogintext="no">Capacitador</a>
+        <a class="item" data-tab="third" data-bcup-haslogintext="no">Persona</a>
+    </div>
 
-        <div class="row">
-            <label id="foto-usuario-label" for="foto-usuario-input">
-                <img src="img/image.jpg" />
-            </label>
-            <input id="foto-usuario-input" type="file" name="avatar">
-        </div>
+    <!-- Pestaña para el admin -->
+    <div class="ui bottom attached active tab segment" data-tab="first">
+        <!-- Formulario -->
+        <form method="POST" enctype="multipart/form-data" action="registro.php">
+            <div class="row etiqueta-foto-usuario">
+                <p>Pulsa en la imagen para añadir una fotografía</p>
+            </div>
 
-        <div class="row">
+            <!-- No se muestra -->
+            <input type="hidden" name="tipo" value="Admin">
+
+            <div class="row">
+                <label id="foto-usuario-label" for="foto-usuario-input">
+                    <img src="img/image.jpg" />
+                </label>
+                <input id="foto-usuario-input" type="file" name="avatar">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="usuario">Nombre</label>
+                        <input type="text" class="form-control" name="usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="repetirPass">Repetir contraseña</label>
+                        <input type="password" class="form-control" name="repetirPass" required>
+                    </div>
+                </div>
+            </div>
             
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="usuario">Nombre</label>
-                    <input type="text" class="form-control" name="usuario" required>
-                </div>
-                <div class="form-group">
-                    <label for="pass">Contraseña</label>
-                    <input type="password" class="form-control" name="pass" required>
+            <div class="edicion-submit">
+                <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Pestaña para el capacitador -->
+    <div class="ui bottom attached tab segment" data-tab="second">
+        <!-- Formulario -->
+        <form method="POST" enctype="multipart/form-data" action="registro.php">
+            <div class="row etiqueta-foto-usuario">
+                <p>Pulsa en la imagen para añadir una fotografía</p>
+            </div>
+
+            <!-- No se muestra -->
+            <input type="hidden" name="tipo" value="Tutor">
+
+            <div class="row">
+                <label id="foto-usuario-label" for="foto-usuario-input">
+                    <img src="img/image.jpg" />
+                </label>
+                <input id="foto-usuario-input" type="file" name="avatar">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="usuario">Nombre</label>
+                        <input type="text" class="form-control" name="usuario" required>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="rol-usuario">Rol</label>
-                    <select id="rol-usuario" name="tipo" class="form-control">
-                      <option selected>Usuario</option>
-                      <option>Tutor</option>
-                      <option>Admin</option>
-                    </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="repetirPass">Repetir contraseña</label>
-                    <input type="password" class="form-control" name="repetirPass" required>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="repetirPass">Repetir contraseña</label>
+                        <input type="password" class="form-control" name="repetirPass" required>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="edicion-submit">
-            <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
-                Guardar
-            </button>
-        </div>
-    </form>
+            
+            <div class="edicion-submit">
+                <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Pestaña para personas -->
+    <div class="ui bottom attached tab segment" data-tab="third">
+        <!-- Formulario -->
+        <form method="POST" enctype="multipart/form-data" action="registro.php">
+            <div class="row etiqueta-foto-usuario">
+                <p>Pulsa en la imagen para añadir una fotografía</p>
+            </div>
+
+            <!-- No se muestra -->
+            <input type="hidden" name="tipo" value="Usuario">
+
+            <div class="row">
+                <label id="foto-usuario-label" for="foto-usuario-input">
+                    <img src="img/image.jpg" />
+                </label>
+                <input id="foto-usuario-input" type="file" name="avatar">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="usuario">Nombre</label>
+                        <input type="text" class="form-control" name="usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pass">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="repetirPass">Repetir contraseña</label>
+                        <input type="password" class="form-control" name="repetirPass" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="edicion-submit">
+                <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Javascript necesario para el funcionamiento del sistema de pestañas -->
+    <script>
+        $('.menu .item')
+            .tab()
+        ;
+    </script>
     
   </div>
 

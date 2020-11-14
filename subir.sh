@@ -13,7 +13,7 @@ PASSWD_SSH=dgp.7.host.a
 
 if [ ! -v $2 ]
 then
-    sshpass -f <(printf '%s\n' $PASSWD_SSH) ssh -p 65002 u681824297@31.220.20.85 "cd domains/dgp.esy.es/public_html/$1/ ; rm -r *"
+    sshpass -f <(printf '%s\n' $PASSWD_SSH) ssh -p 65002 u681824297@31.220.20.85 "cd domains/dgp.esy.es/public_html/$1/ ; cp -a img/. ../img/ ; cp -a multimedia/. ../multimedia/ ; rm -r * ; cp -a ../img/. img/ ; cp -a ../multimedia/. multimedia/ ;"
 fi
 
 ncftp -u $USER -p $PASSWD_FTP $HOST <<EOF

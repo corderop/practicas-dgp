@@ -6,7 +6,7 @@
     $mysqli=conectar_bd();
 
     //Captura de variables
-    $respuesta = array();
+    $respuesta = Json();
 
     $body = file_get_contents('php://input');
     $usuario = json_decode($body);
@@ -22,10 +22,8 @@
 
         if ($usuario != NULL) {
             http_response_code(201);
-            $respuesta["nombre"] = $usuario["nombre"];
-            $respuesta["cod_usuario"] = $usuario["cod_usuario"];
-            echo $respuesta["nombre"];
-            echo $respuesta["cod_usuario"];
+            $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
+            echo $respuesta;
         } else {
             http_response_code(401);
             $respuesta["error"] = "no existe cod_usuario con ese usuario";

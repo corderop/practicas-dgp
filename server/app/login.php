@@ -20,9 +20,17 @@
     if(checkLogin($mysqli,$nombre,$contrasena)){
         $usuario = getUsuario($mysqli, $usuario);
         $cod_usuario = $usuario['cod_usuario'];
+
+        if ($cod_usuario != NULL) {
+            http_response_code(200);
+            $respuesta["nombre"] = $usuarioBD["nombre"];
+            $respuesta["claveApi"] = $usuarioBD["claveApi"];
+            return ["estado" => 1, "usuario" => $respuesta];
+        } else {
+            throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Ha ocurrido un error");
+        }
     }else{
-        $msg="Error de login";
-        echo $twig->render('login.html',['msg'=>$msg, 'titulo'=> "Home"]);
+        throw new ExcepcionApi(self::ESTADO_PARAMETROS_INCORRECTOS, utf8_encode("Correo o contraseña inválidos"));
     }
 
 

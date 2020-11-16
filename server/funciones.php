@@ -282,8 +282,10 @@
 
         $mensajes = array();
 
-        while($res = $resultado->fetch_assoc()) {
-            $mensajes[] = $res;
+        if($mensajes){
+            while($res = $resultado->fetch_assoc()) {
+                $mensajes[] = $res;
+            }
         }
 
         return $mensajes;

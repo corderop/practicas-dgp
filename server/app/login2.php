@@ -24,7 +24,8 @@
             http_response_code(201);
             $respuesta["nombre"] = $usuario["nombre"];
             $respuesta["cod_usuario"] = $usuario["cod_usuario"];
-            echo $respuesta;
+            echo $respuesta["nombre"];
+            echo $respuesta["cod_usuario"];
         } else {
             http_response_code(401);
             $respuesta["error"] = "no existe cod_usuario con ese usuario";

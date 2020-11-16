@@ -6,53 +6,6 @@
 
 {% block body %}
 
-    {% if usuario['tipo'] == "ADMIN" %}
-    <!-- Lista con los usuarios, añadir usuario nuevo-->
-    <div class="container">
-        <!-- Barra de búsqueda -->
-        <div class="ui fluid icon input" id="busqueda-admin">
-            <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this,1)" id="busqueda">
-            <i class="search icon"></i>
-        </div>
-
-        <div class="ui three stackable cards cards-grid">
-            <!-- Aqui van las tarjetas -->
-            <!-- Añadir usuario -->
-            <div class="ui card">
-                <a class="image imagen-tarjeta" style="background-image: url('img/aniadir.jpg');" href="aniadirUsuario.php" data-bcup-haslogintext="no">
-                </a>
-                <div class="content">
-                    <a class="center aligned header" data-bcup-haslogintext="no">Añadir un nuevo usuario</a>
-                </div>
-            </div>
-            <!-- Resto de las tarjetas-->
-            {% for user in usuarios %}
-            {% if user['cod_usuario'] != usuario['cod_usuario'] %}
-                <!-- Card -->
-                <div class="ui card">
-                    <div class="image imagen-tarjeta" style="background-image: url({{ user['avatar'] }});">
-                    </div>
-                    <div class="content">
-                        <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
-                        <div class="meta">
-                            <span class="date">{{ user['tipo'] }}</span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <div class="ui two buttons">
-                            <a class="ui basic blue button" href="editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Editar</a>
-                        
-                            <a class="ui basic red button" href="eliminarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Eliminar</a>
-
-                        </div>
-                    </div>
-                </div>
-            {% endif%}
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
-
     {% if usuario['tipo'] == "TUTOR" %}
     <!-- Lista con las tareas, ¿ver tareas completadas tambien?-->
     <!-- Lista con las tareas y añadir un usuario nuevo-->

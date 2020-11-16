@@ -27,7 +27,8 @@
             }
         }
         if($usuario['tipo'] == "USUARIO"){
-            echo $twig->render('index.html', ['usuario'=>$usuario, 'titulo'=> "Home"]);
+            $tareas = getTareas($mysqli, $_SESSION['cod_usuario']);
+            echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home"]);
         }
     }
     else{

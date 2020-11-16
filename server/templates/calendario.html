@@ -1,0 +1,48 @@
+{% extends 'navbar.html' %}
+
+{% block estilos %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class='container' id="calendario">
+
+    </div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendario');
+      
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialDate: moment().format("YYYY-MM-DD"),
+            locale: 'es',
+            editable: true,
+            selectable: true,
+            businessHours: true,
+            dayMaxEvents: true, // allow "more" link when too many events
+            events: [
+                // La que no tienen fecha no se muestran
+                {% for tarea in tareas %}
+                {
+                    title: '{{ tarea['titulo'] }}',
+                    start: '{{ tarea['fecha_limite'] }}',
+                    url: 'tarea.php?cod_tarea={{ tarea['cod_tarea'] }}'
+                },
+                {% endfor %}
+                {
+                    // Tarea vacía para que no haya problema al generar el array con twig
+                    title: '',
+                    start: ''
+                }
+            ]
+          });
+      
+          calendar.render();
+        });
+      
+      </script>
+
+{% endblock %}

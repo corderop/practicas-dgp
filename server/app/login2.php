@@ -33,10 +33,10 @@
     }else{
         http_response_code(401);
         $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
-    }else{
+    }
+
+    if($respuesta == NULL){
         http_response_code(401);
         $respuesta["error"] = "ha habido algún error en el login del usuario";
     }
-
-
 ?>

@@ -5,9 +5,6 @@
     //Conexion a la base de datos
     $mysqli=conectar_bd();
 
-    //Captura de variables
-    $respuesta = Json();
-
     $body = file_get_contents('php://input');
     $usuario = json_decode($body);
 

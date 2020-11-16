@@ -199,15 +199,13 @@
      * Función que toma todas las tareas de un usuario
      * @param mysql $mysqli Base de datos sobre la que se actua
      * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas
-     * @param bool $estado_tarea True si queremos que sean tareas finalizadas, false si tareas sin finalizar
      * @return mixed[] Array con las tareas que hemos pedido.
      */
-    function getTareas($mysqli,$usuario,$estado_tarea){ //Sin comprobar
-        $usuario=getUsuario($mysqli,$usuario);
+    function getTareas($mysqli,$usuario){ //Sin comprobar
+        // $usuario=getUsuario($mysqli,$usuario);
+        // $cod_usuario = $usuario['cod_usuario'];
 
-        $cod_usuario = $usuario['cod_usuario'];
-
-        $sql="SELECT * FROM TAREA WHERE(crea='$cod_usuario' OR realiza='$cod_usuario') AND WHERE realizada='$estado_tarea'";
+        $sql="SELECT * FROM TAREA WHERE(crea='$usuario' OR realiza='$usuario')";
         
         $res = $mysqli->query($sql);
 

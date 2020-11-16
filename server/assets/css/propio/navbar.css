@@ -94,3 +94,7 @@ footer{
     margin-top: 30px;
 }
 
+/* Calendario */
+#calendario a{
+    color: black;
+}

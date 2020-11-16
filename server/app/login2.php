@@ -1,6 +1,6 @@
 <?php
-    require_once "../vendor/autoload.php";
-    include('funciones.php');
+    require_once "../../vendor/autoload.php";
+    include('../funciones.php');
 
     //Conexion a la base de datos
     $mysqli=conectar_bd();

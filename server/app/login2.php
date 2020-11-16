@@ -27,10 +27,15 @@
             $respuesta["cod_usuario"] = $usuario["cod_usuario"];
             return ["estado" => 1, "usuario" => $respuesta];
         } else {
-            throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Ha ocurrido un error");
+            http_response_code(401);
+            $respuesta["error"] = "no existe cod_usuario con ese usuario";
         }
     }else{
-        throw new ExcepcionApi(self::ESTADO_PARAMETROS_INCORRECTOS, utf8_encode("Correo o contraseña inválidos"));
+        http_response_code(401);
+        $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
+    }else{
+        http_response_code(401);
+        $respuesta["error"] = "ha habido algún error en el login del usuario";
     }
 
 

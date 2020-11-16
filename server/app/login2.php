@@ -23,8 +23,8 @@
 
         if ($cod_usuario != NULL) {
             http_response_code(200);
-            $respuesta["nombre"] = $usuarioBD["nombre"];
-            $respuesta["claveApi"] = $usuarioBD["claveApi"];
+            $respuesta["nombre"] = $usuario["nombre"];
+            $respuesta["cod_usuario"] = $usuario["cod_usuario"];
             return ["estado" => 1, "usuario" => $respuesta];
         } else {
             throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Ha ocurrido un error");

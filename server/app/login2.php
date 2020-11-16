@@ -22,16 +22,18 @@
         $cod_usuario = $usuario['cod_usuario'];
 
         if ($cod_usuario != NULL) {
-            http_response_code(200);
-            $respuesta["nombre"] = $usuario["nombre"];
+            http_response_code(201);
+            $respuesta["nombre"] = "hola";
             $respuesta["cod_usuario"] = $usuario["cod_usuario"];
             return ["estado" => 1, "usuario" => $respuesta];
         } else {
             http_response_code(401);
             $respuesta["error"] = "no existe cod_usuario con ese usuario";
+            return ["estado" => 1, "usuario" => $respuesta];
         }
     }else{
         http_response_code(401);
         $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
+        return ["estado" => 1, "usuario" => $respuesta];
     }
 ?>

@@ -17,15 +17,14 @@
 
     $usuario = mysqli_real_escape_string($mysqli,$nombre);
 
-    if(checkLogin($mysqli,$nombre,$contrasena)){
+    if(checkLogin($mysqli,$usuario,$contrasena)){
         $usuario = getUsuario($mysqli, $usuario);
-        $cod_usuario = $usuario['cod_usuario'];
 
-        if ($cod_usuario != NULL) {
+        if ($usuario != NULL) {
             http_response_code(201);
-            $respuesta["nombre"] = "hola";
+            $respuesta["nombre"] = $usuario["nombre"];
             $respuesta["cod_usuario"] = $usuario["cod_usuario"];
-            return ["estado" => 1, "usuario" => $respuesta];
+            echo $respuesta;
         } else {
             http_response_code(401);
             $respuesta["error"] = "no existe cod_usuario con ese usuario";

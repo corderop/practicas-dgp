@@ -10,27 +10,24 @@
     session_start();
 
     if(isset($_SESSION['cod_usuario'])){
-        
-        if(isset($_POST['tarea'])){
-            $cod_tarea = $_POST['tarea'];
+        $usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
+
+        if(isset($_GET['cod_tarea'])){
+            $cod_tarea = $_GET['cod_tarea'];
             $tarea = getTarea($mysqli, $cod_tarea);
 
             // Cargar la tarea
             if($usuario['tipo'] == "TUTOR"){
-                
+                echo $twig->render('tarea.html', ['usuario'=>$usuario, 'tarea'=>$tarea, 'titulo'=>$tarea['titulo']]);
             }
             if($usuario['tipo'] == "USUARIO"){
-
+                echo $twig->render('tarea.html', ['usuario'=>$usuario, 'tarea'=>$tarea, 'titulo'=>$tarea['titulo']]);
             }
         }
         else{
             // Si no se ha indicado ninguna tarea se redirecciona al inicio
-            header("Location: index.php");
-        }
-        
-        $usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
-
-        
+            // header("Location: index.php");
+        }        
     }
     else{
         echo $twig->render('login.html');

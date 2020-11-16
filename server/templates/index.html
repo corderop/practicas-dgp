@@ -129,7 +129,7 @@
         <div class="ui three stackable cards cards-grid">        
             {% for tarea in tareas %}
                 <!-- Card -->
-                <a href="#">
+                <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                     <div class="ui card">
                         {% if tarea['realizada']%}
                         <div class="image imagen-tarjeta" style="background-image: url('img/bien.png');"></div>

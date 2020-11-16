@@ -6,110 +6,71 @@
 
 {% block body %}
 
-    {% if usuario['tipo'] == "TUTOR" %}
-    <!-- Lista con las tareas, ¿ver tareas completadas tambien?-->
-    <!-- Lista con las tareas y añadir un usuario nuevo-->
-    <div class="container">
-        <!-- Si ha sido redireccionado desde la creación de grupos -->
-        {% if msg %}
-            <div class="alert alert-success" role="alert">
-                {{ msg }}
-            </div>
-        {% endif %}
-        <!-- TODO: hacer busqueda -->
-        <!-- TODO: Hacer el filtro de seleccionadas y no seleccionadas -->
+		{% if usuario['tipo'] == "TUTOR" %}
+		
+		{% endif %}
 
-        <div class="ui form row">
-            <!-- Barra de búsqueda -->
-            <div class="col-md-6">
-                <div class="ui fluid icon input">
-                    <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this,1)" id="busqueda">
-                    <i class="search icon"></i>
-                </div>
-            </div>
-            <!-- Selector corregidas y no corregidas -->
-            <div class="col-md-6">
-                <select class="ui fluid dropdown" onchange="filtroCorregidas(this)">
-                    <option value="T">Todas</option>
-                    <option value="C">Corregidas</option>
-                    <option value="NC">No corregidas</option>
-                </select>
-            </div>
-        </div>
-    
-        <!-- Grid con las cartas -->
-        <div class="ui three stackable cards cards-grid">
-            <!-- Añadir tarea -->
-            <div class="ui card">
-                <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-                </a>
-                <div class="content">
-                    <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-                </div>
-            </div>
-        
-            <!-- TODO: Sacar tareas de un tutor -->
-            <!-- Ejemplo de tarea -->
-            {% for tarea in tareas %}
-                <!-- Card -->
-                {% if tarea['realizada'] %}
-                <div class="ui card realizada">
-                {% else %}
-                <div class="ui card no-realizada">
-                {% endif %}
-                    <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
-                    <div class="content">
-                        <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                        <div class="meta">
-                            <span class="date">{{ tarea['nombre'] }}</span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <div class="ui two buttons">
-                            <div class="ui basic blue button">Editar</div>
-                            <div class="ui basic red button">Eliminar</div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
+		{% if usuario['tipo'] == "USUARIO" %}
+		<div class="container">
+			<h1 id="titulo-tarea">{{ tarea['titulo'] }}</h1>
 
-    {% if usuario['tipo'] == "USUARIO" %}
-    <div class="container">    
-        <!-- Grid con las cartas -->
-        <div class="ui three stackable cards cards-grid">        
-            {% for tarea in tareas %}
-                <!-- Card -->
-                <a href="#">
-                    <div class="ui card">
-                        {% if tarea['realizada']%}
-                        <div class="image imagen-tarjeta" style="background-image: url('img/bien.png');"></div>
-                        {% else %}
-                        <div class="image imagen-tarjeta" style="background-image: url('img/trabajar.png');"></div>
-                        {% endif %}
-                        <div class="content">
-                            <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                            <div class="meta">
-                                {% if tarea['realizada']%}
-                                    <span class="date">Realizada</span>
-                                {% else %}
-                                    <span class="date">Por realizar</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <button class="ui labeled icon button fluid" data-bcup-haslogintext="no">
-                                <i class="eye icon"></i>
-                                Pulsa para ver la tarea
-                            </button>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
+			<div class="row">
+				<div class="col-md-6">
+					<img src="{{ tarea['multimedia']}}" alt="">
+				</div>
+				<div class="col-md-6" id="descripcion-tarea">
+					<h2>Descripción</h2>
+					<p>{{ tarea['descripcion'] }}</p>
+				</div>
+			</div>
+			<h2 class="text-center" id="titulo-mensajes">Mensajes</h2>
+			<div class="mesgs">
+				<div class="msg_history">
+					<div class="incoming_msg">
+						<div class="received_msg">
+							<div class="received_withd_msg">
+								<p>Test which is a new approach to have all
+								solutions</p>
+								<!-- <span class="time_date"> 11:01 AM    |    June 9</span></div> -->
+							</div>
+						</div>
+					<div class="outgoing_msg">
+						<div class="sent_msg">
+						<p>Test which is a new approach to have all
+							solutions</p>
+						</div>
+					</div>
+					<div class="incoming_msg">
+						<div class="received_msg">
+							<div class="received_withd_msg">
+								<p>Test, which is a new approach to have</p>
+							</div>
+						</div>
+					</div>
+					<div class="outgoing_msg">
+						<div class="sent_msg">
+							<p>Apollo University, Delhi, India Test</p>
+						</div>
+					</div>
+					<div class="incoming_msg">
+						<div class="received_msg">
+							<div class="received_withd_msg">
+								<p>We work directly with our designers and suppliers,
+								and sell direct to you, which means quality, exclusive
+								products, at a price anyone can afford.</p>
+							</div>
+						</div>
+					</div>
+					<!-- </div> -->
+					<div class="ui fluid action input" id="input-enviar">
+						<input type="text" placeholder="Search...">
+						<div class="ui button">
+							Enviar
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
 
 {% endblock %}

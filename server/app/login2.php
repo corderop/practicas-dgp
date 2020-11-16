@@ -15,6 +15,8 @@
     $contrasena = $usuario->contrasena;
     $tipo = "usuario";
 
+    $respuesta = NULL;
+
     $usuario = mysqli_real_escape_string($mysqli,$nombre);
 
     if(checkLogin($mysqli,$nombre,$contrasena)){

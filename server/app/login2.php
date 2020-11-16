@@ -15,8 +15,6 @@
     $contrasena = $usuario->contrasena;
     $tipo = "usuario";
 
-    $respuesta = NULL;
-
     $usuario = mysqli_real_escape_string($mysqli,$nombre);
 
     if(checkLogin($mysqli,$nombre,$contrasena)){
@@ -35,10 +33,5 @@
     }else{
         http_response_code(401);
         $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
-    }
-
-    if($respuesta == NULL){
-        http_response_code(401);
-        $respuesta["error"] = "ha habido algún error en el login del usuario";
     }
 ?>

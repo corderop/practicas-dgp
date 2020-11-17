@@ -16,6 +16,12 @@
             $cod_tarea = $_GET['cod_tarea'];
             $tarea = getTarea($mysqli, $cod_tarea);
             $tipo = mime_content_type($tarea['multimedia']);
+            
+            foreach($tarea['mensajes'] as &$msg){
+                if($msg['multimedia']){
+                    $msg['tipo_archivo'] = mime_content_type($msg['multimedia']);
+                }
+            }
 
             // Cargar la tarea
             if($usuario['tipo'] == "TUTOR"){

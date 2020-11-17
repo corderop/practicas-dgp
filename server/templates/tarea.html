@@ -6,11 +6,11 @@
 
 {% block body %}
 
-		{% if usuario['tipo'] == "TUTOR" %}
+		<!-- {% if usuario['tipo'] == "TUTOR" %}
 		
-		{% endif %}
+		{% endif %} -->
 
-		{% if usuario['tipo'] == "USUARIO" %}
+		{% if usuario['tipo'] == "USUARIO" or usuario['tipo'] == "TUTOR"  %}
 		<div class="container">
 			<h1 id="titulo-tarea">{{ tarea['titulo'] }}</h1>
 
@@ -44,20 +44,60 @@
 				<div class="msg_history">
 					{% for mensaje in tarea['mensajes'] %}
 					{% if mensaje['envia'] is same as(usuario['cod_usuario']) %}
+						{% if mensaje['contenido'] %}
 						<div class="outgoing_msg">
 							<div class="sent_msg">
 							<p>{{ mensaje['contenido'] }}</p>
 							</div>
 						</div>
-					{% else %}
-					<div class="incoming_msg">
-						<div class="received_msg">
-							<div class="received_withd_msg">
-								<p>{{ mensaje['contenido'] }} </p>
-								<span class="time_date">{{ mensaje['fecha'] }} </span>
+						{% endif %}
+						{% if mensaje['multimedia'] %}
+						<div class="outgoing_msg">
+							<div class="sent_msg">
+							{% if 'image' in mensaje['tipo_archivo'] %}
+								<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+							{% elseif 'video' in mensaje['tipo_archivo'] %}
+								<video controls id="video-tarea" preload="metadata">
+									<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+								</video>
+							{% elseif 'audio' in mensaje['tipo_archivo'] %}
+								<audio controls id="video-tarea">
+									<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+								</audio>
+							{% endif %}
 							</div>
 						</div>
-					</div>
+						{% endif %}
+					{% else %}
+						{% if mensaje['contenido'] %}
+						<div class="incoming_msg">
+							<div class="received_msg">
+								<div class="received_withd_msg">
+									<p>{{ mensaje['contenido'] }} </p>
+									<span class="time_date">{{ mensaje['fecha'] }} </span>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						{% if mensaje['multimedia'] %}
+						<div class="incoming_msg">
+							<div class="received_msg">
+								<div class="received_withd_msg">
+									{% if 'image' in mensaje['tipo_archivo'] %}
+										<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+									{% elseif 'video' in mensaje['tipo_archivo'] %}
+										<video controls id="video-tarea" preload="metadata">
+											<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+										</video>
+									{% elseif 'audio' in mensaje['tipo_archivo'] %}
+										<audio controls id="video-tarea">
+											<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+										</audio>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endif %}
 					{% endif %}
 					{% endfor %}
 				</div>
@@ -71,4 +111,9 @@
 		</div>
 		{% endif %}
 
+		<script>
+			// Para hacer scroll del chat al último mensaje
+			var element = document.querySelector(".msg_history");
+			element.scrollTop = element.scrollHeight;
+		</script>
 {% endblock %}

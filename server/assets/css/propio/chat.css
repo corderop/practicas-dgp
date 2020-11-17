@@ -79,6 +79,13 @@ img{ max-width:100%;}
   padding: 5px 10px 5px 12px;
   width: 100%;
 }
+
+.received_withd_msg audio, .received_withd_msg div , .received_withd_msg video  {
+  padding: 5px 10px 5px 12px;
+  border-radius: 3px;
+  background: #ebebeb none repeat scroll 0 0;
+}
+
 .time_date {
   color: #747474;
   display: block;
@@ -100,6 +107,13 @@ img{ max-width:100%;}
   padding: 5px 10px 5px 12px;
   width:100%;
 }
+
+.sent_msg audio, .sent_msg div , .sent_msg video  {
+  padding: 5px 10px 5px 12px;
+  border-radius: 3px;
+  background: #05728f none repeat scroll 0 0;
+}
+
 .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
 .sent_msg {
   float: right;

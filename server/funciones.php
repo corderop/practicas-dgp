@@ -276,13 +276,13 @@
      * @return mixed[] Datos de los mensajes, si la tarea tiene mensajes
      */
     function getMensajesTarea($mysqli, $cod_tarea){ //Sin comprobar
-        $sql = "SELECT * FROM MENSAJES WHERE cod_tarea='$cod_tarea'";
+        $sql = "SELECT * FROM MENSAJE WHERE contiene='$cod_tarea'";
         
         $resultado = $mysqli->query($sql);
 
         $mensajes = array();
 
-        if($mensajes){
+        if($resultado->num_rows > 0){
             while($res = $resultado->fetch_assoc()) {
                 $mensajes[] = $res;
             }

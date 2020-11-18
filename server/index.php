@@ -21,6 +21,11 @@
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home", 'msg'=>"Tarea creada correctamente"]);
                 $_SESSION['previous_location'] = '';
             }
+            else if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'eliminarTarea') {
+                $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+                echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home", 'msg'=>"Tarea eliminada correctamente"]);
+                $_SESSION['previous_location'] = '';
+            }
             else{
                 $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home"]);

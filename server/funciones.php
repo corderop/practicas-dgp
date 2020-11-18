@@ -270,6 +270,24 @@
     }
 
     /**
+     * Funcion para tomar una tarea de una base de datos sin los mensajes
+     * @param mysql $mysqli Base de datos sobre la que actuar
+     * @param int $cod_tarea La tarea que se quiere tomar de la BBDD
+     * @return mixed[] Datos de la tarea, en caso de que exista
+     */
+    function getTareaSinMensajes($mysqli, $cod_tarea){ //Sin comprobar
+        $sql="SELECT * FROM TAREA WHERE cod_tarea='$cod_tarea'";
+
+        $resultado = $mysqli->query($sql);
+    
+        while($res = $resultado->fetch_assoc()) {
+          $tarea = $res;
+        }
+
+        return $tarea;
+    }
+
+    /**
      * Devuelve los mensajes asociados a una tarea concreta
      * @param mysql $mysqli Base de datos sobre la que actuar
      * @param int $cod_tarea Codigo de la tarea de la que extraemos los mensajes 
@@ -331,6 +349,18 @@
         $mysqli->query($sql);
     }	
 
+    /**
+     * Funcion para eliminar una tarea
+     * @param mysql $msqli Base de datos sobre la que actuar
+     * @param int $cod_tarea Codigo de la tarea a eliminar
+     */
+    function deleteTarea($mysqli, $cod_grupo) {
+        //Elimina los mensajes de la tarea
+        $mysqli->query("DELETE FROM MENSAJE where contiene='$cod_tarea'");
+
+        //Eliminar una tarea
+        $mysqli->query("DELETE FROM TAREA where cod_tarea='$cod_tarea'"); 
+    }
 
     ///////////////////////////////////////
     //****** Grupos de trabajo **********//

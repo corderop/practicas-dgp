@@ -99,25 +99,24 @@
             <!-- Ejemplo de tarea -->
             {% for tarea in tareas %}
                 <!-- Card -->
-                {% if tarea['realizada'] %}
-                <div class="ui card realizada">
-                {% else %}
-                <div class="ui card no-realizada">
-                {% endif %}
-                    <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
-                    <div class="content">
-                        <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                        <div class="meta">
-                            <span class="date">{{ tarea['nombre'] }}</span>
+                <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                    {% if tarea['realizada'] %}
+                    <div class="ui card realizada">
+                    {% else %}
+                    <div class="ui card no-realizada">
+                    {% endif %}
+                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
+                        <div class="content">
+                            <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                            <div class="meta">
+                                <span class="date">{{ tarea['nombre'] }}</span>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <a href="eliminarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}"><div class="ui fluid red inverted button">Eliminar</div></a>
                         </div>
                     </div>
-                    <div class="extra content">
-                        <div class="ui two buttons">
-                            <div class="ui basic blue button">Editar</div>
-                            <div class="ui basic red button">Eliminar</div>
-                        </div>
-                    </div>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>

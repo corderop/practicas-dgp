@@ -354,7 +354,7 @@
      * @param mysql $msqli Base de datos sobre la que actuar
      * @param int $cod_tarea Codigo de la tarea a eliminar
      */
-    function deleteTarea($mysqli, $cod_grupo) {
+    function deleteTarea($mysqli, $cod_tarea) {
         //Elimina los mensajes de la tarea
         $mysqli->query("DELETE FROM MENSAJE where contiene='$cod_tarea'");
 

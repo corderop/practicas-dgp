@@ -112,6 +112,12 @@ footer{
     margin-top: 30px;
 }
 
+#label-tarea{
+    margin: 0;
+    background-color: #2185d0;
+    color: white;
+}
+
 /* Calendario */
 #calendario a{
     color: black;

@@ -6,114 +6,113 @@
 
 {% block body %}
 
-		<!-- {% if usuario['tipo'] == "TUTOR" %}
-		
-		{% endif %} -->
+{% if usuario['tipo'] == "USUARIO" or usuario['tipo'] == "TUTOR"  %}
+<div class="container">
+	<h1 id="titulo-tarea">{{ tarea['titulo'] }}</h1>
 
-		{% if usuario['tipo'] == "USUARIO" or usuario['tipo'] == "TUTOR"  %}
-		<div class="container">
-			<h1 id="titulo-tarea">{{ tarea['titulo'] }}</h1>
-
-			<div class="row" id="multimedia">
-				{% if not tarea['multimedia'] is same as("multimedia/tarea.png") %}
-				<div class="col-md-6">
-					{% if 'image' in tipo %}
-						<div id="imagen-tarea" style="background-image: url({{ tarea['multimedia'] }});"></div>
-					{% elseif 'video' in tipo %}
-						<video controls id="video-tarea" preload="metadata">
-							<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
-						</video>
-					{% elseif 'audio' in tipo %}
-						<audio controls id="video-tarea">
-							<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
-						</audio>
-					{% endif %}
-					</div>
-				<div class="col-md-6" id="descripcion-tarea">
-					<h2>Descripción</h2>
-					<p>{{ tarea['descripcion'] }}</p>
-				</div>
-				{% else %}
-				<div class="col-md-12" id="descripcion-tarea">
-					<p>{{ tarea['descripcion'] }}</p>
-				</div>
-				{% endif %}
-			</div>
-			<h2 class="text-center" id="titulo-mensajes">Mensajes</h2>
-			<div class="mesgs">
-				<div class="msg_history">
-					{% for mensaje in tarea['mensajes'] %}
-					{% if mensaje['envia'] is same as(usuario['cod_usuario']) %}
-						{% if mensaje['contenido'] %}
-						<div class="outgoing_msg">
-							<div class="sent_msg">
-							<p>{{ mensaje['contenido'] }}</p>
-							</div>
-						</div>
-						{% endif %}
-						{% if mensaje['multimedia'] %}
-						<div class="outgoing_msg">
-							<div class="sent_msg">
-							{% if 'image' in mensaje['tipo_archivo'] %}
-								<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
-							{% elseif 'video' in mensaje['tipo_archivo'] %}
-								<video controls id="video-tarea" preload="metadata">
-									<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
-								</video>
-							{% elseif 'audio' in mensaje['tipo_archivo'] %}
-								<audio controls id="video-tarea">
-									<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
-								</audio>
-							{% endif %}
-							</div>
-						</div>
-						{% endif %}
-					{% else %}
-						{% if mensaje['contenido'] %}
-						<div class="incoming_msg">
-							<div class="received_msg">
-								<div class="received_withd_msg">
-									<p>{{ mensaje['contenido'] }} </p>
-									<span class="time_date">{{ mensaje['fecha'] }} </span>
-								</div>
-							</div>
-						</div>
-						{% endif %}
-						{% if mensaje['multimedia'] %}
-						<div class="incoming_msg">
-							<div class="received_msg">
-								<div class="received_withd_msg">
-									{% if 'image' in mensaje['tipo_archivo'] %}
-										<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
-									{% elseif 'video' in mensaje['tipo_archivo'] %}
-										<video controls id="video-tarea" preload="metadata">
-											<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
-										</video>
-									{% elseif 'audio' in mensaje['tipo_archivo'] %}
-										<audio controls id="video-tarea">
-											<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
-										</audio>
-									{% endif %}
-								</div>
-							</div>
-						</div>
-						{% endif %}
-					{% endif %}
-					{% endfor %}
-				</div>
-			</div>
-			<div class="ui fluid action input" id="input-enviar">
-				<input type="text" placeholder="Search...">
-				<div class="ui button">
-					Enviar
-				</div>
-			</div>
+	<div class="row" id="multimedia">
+		{% if not tarea['multimedia'] is same as("multimedia/tarea.png") %}
+		<div class="col-md-6">
+			{% if 'image' in tipo %}
+			<div id="imagen-tarea" style="background-image: url({{ tarea['multimedia'] }});"></div>
+			{% elseif 'video' in tipo %}
+			<video controls id="video-tarea" preload="metadata">
+				<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
+			</video>
+			{% elseif 'audio' in tipo %}
+			<audio controls id="video-tarea">
+				<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
+			</audio>
+			{% endif %}
+		</div>
+		<div class="col-md-6" id="descripcion-tarea">
+			<h2>Descripción</h2>
+			<p>{{ tarea['descripcion'] }}</p>
+		</div>
+		{% else %}
+		<div class="col-md-12" id="descripcion-tarea">
+			<p>{{ tarea['descripcion'] }}</p>
 		</div>
 		{% endif %}
+	</div>
+	<h2 class="text-center" id="titulo-mensajes">Mensajes</h2>
+	<div class="mesgs">
+		<div class="msg_history">
+			{% for mensaje in tarea['mensajes'] %}
+			{% if mensaje['envia'] is same as(usuario['cod_usuario']) %}
+			{% if mensaje['contenido'] %}
+			<div class="outgoing_msg">
+				<div class="sent_msg">
+					<p>{{ mensaje['contenido'] }}</p>
+				</div>
+			</div>
+			{% endif %}
+			{% if mensaje['multimedia'] %}
+			<div class="outgoing_msg">
+				<div class="sent_msg">
+					{% if 'image' in mensaje['tipo_archivo'] %}
+					<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+					{% elseif 'video' in mensaje['tipo_archivo'] %}
+					<video controls id="video-tarea" preload="metadata">
+						<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+					</video>
+					{% elseif 'audio' in mensaje['tipo_archivo'] %}
+					<audio controls id="video-tarea">
+						<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+					</audio>
+					{% endif %}
+				</div>
+			</div>
+			{% endif %}
+			{% else %}
+			{% if mensaje['contenido'] %}
+			<div class="incoming_msg">
+				<div class="received_msg">
+					<div class="received_withd_msg">
+						<p>{{ mensaje['contenido'] }} </p>
+						<span class="time_date">{{ mensaje['fecha'] }} </span>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% if mensaje['multimedia'] %}
+			<div class="incoming_msg">
+				<div class="received_msg">
+					<div class="received_withd_msg">
+						{% if 'image' in mensaje['tipo_archivo'] %}
+						<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+						{% elseif 'video' in mensaje['tipo_archivo'] %}
+						<video controls id="video-tarea" preload="metadata">
+							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+						</video>
+						{% elseif 'audio' in mensaje['tipo_archivo'] %}
+						<audio controls id="video-tarea">
+							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
+						</audio>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
 
-		<script>
-			// Para hacer scroll del chat al último mensaje
-			var element = document.querySelector(".msg_history");
-			element.scrollTop = element.scrollHeight;
-		</script>
+	<form action="">
+		<div class="ui fluid action left labeled input" id="input-enviar">
+			<label for="multimedia-envio" class="ui label foto-input-label" id="label-tarea">Pulsa aquí para añadir un archivo</label>
+			<input type="text" placeholder="Mensaje" id="amount">
+			<button class="ui primary button" data-bcup-haslogintext="no">Enviar mensaje</button>
+		</div>
+		<input class="foto-input" id="multimedia-envio" type="file" name="multimedia" accept="image/*, video/*, audio/*">
+	</form>
+</div>
+{% endif %}
+
+<script>
+	// Para hacer scroll del chat al último mensaje
+	var element = document.querySelector(".msg_history");
+	element.scrollTop = element.scrollHeight;
+</script>
 {% endblock %}

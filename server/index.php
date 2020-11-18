@@ -18,16 +18,31 @@
         if($usuario['tipo'] == "TUTOR"){
             if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'crearTarea') {
                 $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+                
+                foreach($tareas as &$tarea){
+                    $tarea['tipo_archivo'] = mime_content_type($tarea['multimedia']);
+                }
+
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home", 'msg'=>"Tarea creada correctamente"]);
                 $_SESSION['previous_location'] = '';
             }
             else if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'eliminarTarea') {
                 $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+                
+                foreach($tareas as &$tarea){
+                    $tarea['tipo_archivo'] = mime_content_type($tarea['multimedia']);
+                }
+                
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home", 'msg'=>"Tarea eliminada correctamente"]);
                 $_SESSION['previous_location'] = '';
             }
             else{
                 $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+                
+                foreach($tareas as &$tarea){
+                    $tarea['tipo_archivo'] = mime_content_type($tarea['multimedia']);
+                }
+
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home"]);
             }
         }

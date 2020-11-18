@@ -105,7 +105,11 @@
                     {% else %}
                     <div class="ui card no-realizada">
                     {% endif %}
+				        {% if 'image' in tarea['tipo_archivo'] %}
                         <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
+                        {% else %}
+                        <div class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');"></div>
+                        {% endif %}
                         <div class="content">
                             <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                             <div class="meta">

@@ -9,12 +9,13 @@
     session_start();
 
     $_usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
+    echo $_GET['cod_tarea'];
 
-    if( $_usuario['tipo'] == "TUTOR" && isset($_POST['cod_tarea'])){
-        $cod_tarea = $_POST['cod_tarea'];
+    if( $_usuario['tipo'] == "TUTOR" && isset($_GET['cod_tarea'])){
+        $cod_tarea = $_GET['cod_tarea'];
         $tarea = getTareaSinMensajes($mysqli, $cod_tarea);
 
-        if($tarea['crea'] == $_usuario['cod_tarea']){
+        if($tarea['crea'] == $_usuario['cod_usuario']){
             deleteTarea($mysqli, $cod_tarea);
             $_SESSION['previous_location'] = 'eliminarTarea';
             header("Location: index.php");

@@ -320,10 +320,19 @@
      */
     function sendMensaje($mysqli, $contenido, $multimedia, $contiene, $envia){ //Sin comprobar
 
-        $contenido = mysqli_real_escape_string($mysqli,$contenido);
-        $fecha = date("Y-m-d H:i:s");
+        if($contenido)
+            $contenido = mysqli_real_escape_string($mysqli,$contenido);
+        $fecha = date("Y-m-d");
 
-        $sql = "INSERT INTO MENSAJE(fecha,contenido,multimedia,contiene,envia) VALUES('$fecha','$contenido','$multimedia','$contiene','$envia')";
+        $sql = "";
+        if($multimedia && $contenido)
+            $sql = "INSERT INTO MENSAJE(fecha,contenido,multimedia,contiene,envia) VALUES(STR_TO_DATE('$fecha', '%Y-%m-%d'),'$contenido','$multimedia','$contiene','$envia')";
+        else if($multimedia)
+            $sql = "INSERT INTO MENSAJE(fecha,contenido,multimedia,contiene,envia) VALUES(STR_TO_DATE('$fecha', '%Y-%m-%d'),NULL,'$multimedia','$contiene','$envia')";
+        else if($contenido)
+            $sql = "INSERT INTO MENSAJE(fecha,contenido,multimedia,contiene,envia) VALUES(STR_TO_DATE('$fecha', '%Y-%m-%d'),'$contenido',NULL,'$contiene','$envia')";
+        
+
         $mysqli->query($sql);
     }
 

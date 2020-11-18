@@ -122,5 +122,7 @@ function hacerSubmit(){
         user.style.display = "none";
     }    
 
+    document.getElementById('warning-carga').style.display = "flex";
+
     return true;
 }

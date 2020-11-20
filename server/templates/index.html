@@ -35,7 +35,13 @@
                     <div class="content">
                         <a class="header" data-bcup-haslogintext="no">{{ user['nombre'] }}</a>
                         <div class="meta">
-                            <span class="date">{{ user['tipo'] }}</span>
+                            {% if user['tipo'] == "TUTOR" %}
+                                <span class="date">FACILITADOR</span>
+                            {% elseif user['tipo'] == "USUARIO" %}
+                                <span class="date">PERSONA</span>
+                            {% else %}
+                                <span class="date">{{ user['tipo'] }}</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="extra content">
@@ -150,10 +156,12 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <button class="ui labeled icon button fluid" data-bcup-haslogintext="no">
+                            <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                                <button class="ui labeled icon button fluid" data-bcup-haslogintext="no">
                                 <i class="eye icon"></i>
                                 Pulsa para ver la tarea
-                            </button>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </a>

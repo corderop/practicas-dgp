@@ -14,7 +14,7 @@
 
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
-    for($i=$tareas.size()-2; i >=0; i-=2){
+    for($i=$tareas.size()-2; $i >=0; $i=$i-2){
         unset($tareas[$i]);
     }
 

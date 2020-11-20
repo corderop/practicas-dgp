@@ -17,7 +17,7 @@
     if (!empty($tareas)) {
         $respuesta = "{";
         for($i=0; $i<count($tareas); $i++){
-            $respuesta = $respuesta + '"' + $i + '":'+ json_encode($tareas[$i]);
+            $respuesta = $respuesta . '"' . $i . '":'. json_encode($tareas[$i]);
         }
         $respuesta = $respuesta + "}";
         http_response_code(201);

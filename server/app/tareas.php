@@ -14,13 +14,13 @@
 
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
-    for($i=count($tareas)-2; $i >=0; $i=$i-2){
-        unset($tareas[$i]);
-    }
-
     if (!empty($tareas)) {
+        $respuesta = "{";
+        for(int $i=0; i<count($tareas); i++){
+            $respuesta = $respuesta + '"' + $i + '":'+ json_encode($tareas[$i]);
+        }
+        $respuesta = $respuesta + "}";
         http_response_code(201);
-        $respuesta = json_encode(array($tareas));
         echo $respuesta;
     } else {
         http_response_code(401);

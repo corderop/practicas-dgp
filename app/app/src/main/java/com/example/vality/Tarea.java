@@ -26,7 +26,7 @@ public class Tarea {
     private String multimedia;
     private boolean realizada;
     private int calificacion;
-
+/*
     // Constructor
     public Tarea(String url, RequestQueue queue, TextView tv){
 
@@ -74,15 +74,18 @@ public class Tarea {
         // Access the RequestQueue through your singleton class.
         queue.add(jsonObjectRequest);
     }
+*/
+    public Tarea(){
 
-    public Tarea(int cod_tarea, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, int cod_facilitador, boolean realizada, int calificacion) {
+    }
+
+    public Tarea(int cod_tarea, int cod_facilitador, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, boolean realizada, int calificacion) {
         this.cod_tarea = cod_tarea;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha_limite = fecha_limite;
         this.objetivo = objetivo;
         this.multimedia = multimedia;
-        this.cod_facilitador = cod_facilitador;
         this.realizada = realizada;
         this.calificacion = calificacion;
     }
@@ -105,6 +108,10 @@ public class Tarea {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void setCod_Tarea(int code_tarea) {
+        this.cod_tarea = code_tarea;
     }
 
     public String getDescripcion() {

@@ -16,7 +16,7 @@
 
     if (!empty($tareas)) {
         $respuesta = "{";
-        for(int $i=0; i<count($tareas); i++){
+        for($i=0; $i<count($tareas); $i++){
             $respuesta = $respuesta + '"' + $i + '":'+ json_encode($tareas[$i]);
         }
         $respuesta = $respuesta + "}";

@@ -14,6 +14,10 @@
 
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
+    for($i=0; i < $tareas.size(); i=+2){
+        unset($tareas[$i]);
+    }
+
     if (!empty($tareas)) {
         http_response_code(201);
         $respuesta = json_encode(array($tareas));

@@ -10,9 +10,11 @@
 
     $cod_usuario = $usuario->cod_usuario;
 
+    $tareas = array();
+
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
-    if (!$tareas[].empty()) {
+    if (!empty($tareas)) {
         http_response_code(201);
         $respuesta = json_encode(array($tareas));
         echo $respuesta;

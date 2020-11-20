@@ -18,13 +18,12 @@ import java.util.Date;
 public class Tarea {
 
     private int cod_tarea;
+    private int cod_facilitador;
     private String titulo;
     private String descripcion;
     private Date fecha_limite;
     private String objetivo;
     private String multimedia;
-    private int crea;
-    private int realiza;
     private boolean realizada;
     private int calificacion;
 
@@ -45,8 +44,7 @@ public class Tarea {
                             fecha_limite = new SimpleDateFormat("dd/MM/yyyy").parse(response.getString("fecha_limite"));
                             objetivo = response.getString("objetivo");
                             multimedia = response.getString("multimedia");
-                            crea = response.getInt("crea");
-                            realiza = response.getInt("realiza");
+                            cod_facilitador = response.getInt("crea");
                             realizada = response.getBoolean("realizada");
                             calificacion = response.getInt("calificacion");
 
@@ -56,8 +54,7 @@ public class Tarea {
                                     fecha_limite.toString() + "\n" +
                                     objetivo + "\n" +
                                     multimedia + "\n" +
-                                    crea + "\n" +
-                                    realiza + "\n" +
+                                    cod_facilitador + "\n" +
                                     realizada + "\n" +
                                     calificacion + "\n"
                             );
@@ -78,15 +75,14 @@ public class Tarea {
         queue.add(jsonObjectRequest);
     }
 
-    public Tarea(int cod_tarea, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, int crea, int realiza, boolean realizada, int calificacion) {
+    public Tarea(int cod_tarea, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, int cod_facilitador, boolean realizada, int calificacion) {
         this.cod_tarea = cod_tarea;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha_limite = fecha_limite;
         this.objetivo = objetivo;
         this.multimedia = multimedia;
-        this.crea = crea;
-        this.realiza = realiza;
+        this.cod_facilitador = cod_facilitador;
         this.realizada = realizada;
         this.calificacion = calificacion;
     }
@@ -99,12 +95,8 @@ public class Tarea {
         return cod_tarea;
     }
 
-    public int getCrea() {
-        return crea;
-    }
-
-    public int getRealiza() {
-        return realiza;
+    public int getCod_facilitador() {
+        return cod_facilitador;
     }
 
     public String getTitulo() {

@@ -79,13 +79,36 @@ public class Usuario {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
+                        System.out.println("Ha llegado la lista con las tareas");
                         Tarea aux = new Tarea();
-                        aux.setCod_Tarea(response.getInt("cod_tarea"));
+                        JSONObject tarea_Aux;
+                        int contador =0;
+                        boolean terminado = response.isNull(contador+"");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                        while(!terminado){
+                            tarea_Aux = response.getJSONObject(contador+"");
 
+                            aux.setCod_Tarea(response.getInt("cod_tarea"));
+                            aux.setTitulo(response.getString("titulo"));
+                            aux.setDescripcion(response.getString("descripcion"));
+                            aux.setCod_facilitador(response.getInt("cod_facilitador"));
+                            try {
+                                aux.setFecha_limite(formatoFecha.parse(response.getString("fecha_limite")));
+                            }catch (ParseException ex){
+                                System.out.println(ex);
+                            }
+                            aux.setObjetivo(response.getString("objetivo"));
+                            aux.setMultimedia(response.getString("multimedia"));
+                            aux.setRealizada(response.getBoolean("realizada"));
+                            aux.setCalificacion(response.getInt("calificacion"));
 
+                            tareas.add(aux);
+                            System.out.println("Añadida tarea " + tarea_Aux.toString());
 
-                        System.out.println("Ha llegado una nueva tarea "+ aux);
-                        tareas.add(aux);
+                            contador++;
+                            terminado = response.isNull(contador+"");
+                        }
+                        System.out.println("La lista contenía " + contador + "tareas");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

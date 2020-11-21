@@ -81,6 +81,7 @@ public class Tarea {
 
     public Tarea(int cod_tarea, int cod_facilitador, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, boolean realizada, int calificacion) {
         this.cod_tarea = cod_tarea;
+        this.cod_facilitador = cod_facilitador;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha_limite = fecha_limite;
@@ -100,6 +101,10 @@ public class Tarea {
 
     public int getCod_facilitador() {
         return cod_facilitador;
+    }
+
+    public void setCod_facilitador(int code_facilitador) {
+        this.cod_facilitador = code_facilitador;
     }
 
     public String getTitulo() {

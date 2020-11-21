@@ -17,7 +17,7 @@
 
 
     foreach($tareas as $tarea){
-        echo ($tarea);
+        echo implode($tarea);
         echo "\nOtra tarea\n";
     }
     

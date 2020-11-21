@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,6 +76,7 @@ public class Usuario {
 
             System.out.println("Creando mensaje para pedir tareas, cod_usuario: " + cod_usuario);
 
+            /*
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -109,6 +111,31 @@ public class Usuario {
                             terminado = response.isNull(contador+"");
                         }
                         System.out.println("La lista contenía " + contador + "tareas");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO: Handle error
+                    System.out.println("ERROR: "+ error);
+                }
+            });
+            */
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        System.out.println("Ha llegado la lista con las tareas");
+                        Tarea aux = new Tarea();
+                        JSONObject tarea_Aux;
+                        for(int i =0; i<response.length();i++){
+                            tarea_Aux = response.getJSONObject(i+"");
+                            aux.setCod_Tarea(tarea_Aux.getInt("cod_tarea"));
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

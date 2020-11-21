@@ -19,20 +19,13 @@
         echo $tarea['cod_tarea'];
         echo "\n";
     }
-    /*
-    foreach($tareas as $tarea){
-        foreach($tarea as $atributo){
-            echo $atributo;
-            echo "\n";
-        }
-    }
-    */
     
-/*
     if (!empty($tareas)) {
         $respuesta = "{";
-        for($i=0; $i<count($tareas); $i++){
-            $respuesta = $respuesta . '"' . $i . '":'. json_encode($tareas[$i]);
+        $contador = 0;
+        foreach($tareas as $tarea){
+            $respuesta = $respuesta . '"' . $contador . '"' . ":" . json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "calificacion" => $tarea["calificacion"]));
+            $contador = $contador++;
         }
         $respuesta = $respuesta . "}";
         http_response_code(201);
@@ -42,5 +35,4 @@
         $respuesta["error"] = "no existen tareas para ese usuario";
         return ["estado" => 1, "usuario" => $respuesta];
     }
-    */
 ?>

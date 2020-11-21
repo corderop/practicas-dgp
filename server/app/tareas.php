@@ -15,8 +15,10 @@
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
     foreach($tareas as $tarea){
-        echo $tarea;
-        echo "\n";
+        foreach($tarea as $atributo){
+            echo $atributo;
+        }
+        echo "\nOtra tarea\n";
     }
 /*
     if (!empty($tareas)) {

@@ -11,21 +11,16 @@
     $cod_usuario = $usuario->cod_usuario;
 
     $tareas_aux = array();
-
     $tareas_aux[] = getTareas($mysqli, $cod_usuario);
 
     $tareas = $tareas_aux[0];
 
-    echo count($tareas);
 
-    /*
     foreach($tareas as $tarea){
-        foreach($tarea as $atributo){
-            echo implode($atributo);
-        }
+        echo ($tarea);
         echo "\nOtra tarea\n";
     }
-    */
+    
 /*
     if (!empty($tareas)) {
         $respuesta = "{";

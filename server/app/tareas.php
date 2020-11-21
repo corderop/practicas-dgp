@@ -14,12 +14,16 @@
 
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
+    echo count($tareas);
+
+    /*
     foreach($tareas as $tarea){
         foreach($tarea as $atributo){
             echo implode($atributo);
         }
         echo "\nOtra tarea\n";
     }
+    */
 /*
     if (!empty($tareas)) {
         $respuesta = "{";

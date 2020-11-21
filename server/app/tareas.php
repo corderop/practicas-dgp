@@ -17,8 +17,10 @@
 
 
     foreach($tareas as $tarea){
-        echo implode($tarea);
-        echo "\nOtra tarea\n";
+        foreach($tarea as $atributo){
+            echo $atributo;
+            echo "\n";
+        }
     }
     
 /*

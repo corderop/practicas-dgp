@@ -15,7 +15,9 @@
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
     foreach($tareas as $tarea){
-        echo implode($tarea);
+        foreach($tarea as $atributo){
+            echo implode($atributo);
+        }
         echo "\nOtra tarea\n";
     }
 /*

@@ -10,9 +10,11 @@
 
     $cod_usuario = $usuario->cod_usuario;
 
-    $tareas = array();
+    $tareas_aux = array();
 
-    $tareas[] = getTareas($mysqli, $cod_usuario);
+    $tareas_aux[] = getTareas($mysqli, $cod_usuario);
+
+    $tareas = $tareas_aux[0];
 
     echo count($tareas);
 

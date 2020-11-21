@@ -15,17 +15,12 @@
 
     $tareas = $tareas_aux[0];
 
-    foreach($tareas as $tarea){
-        echo $tarea['cod_tarea'];
-        echo "\n";
-    }
-    
     if (!empty($tareas)) {
         $respuesta = "{";
         $contador = 0;
         foreach($tareas as $tarea){
-            $respuesta = $respuesta . '"' . $contador . '"' . ":" . json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "calificacion" => $tarea["calificacion"]));
-            $contador = $contador++;
+            $respuesta = $respuesta . '"' . $contador . '"' . ":" . json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "calificacion" => $tarea["calificacion"])) . ",";
+            $contador = $contador + 1;
         }
         $respuesta = $respuesta . "}";
         http_response_code(201);

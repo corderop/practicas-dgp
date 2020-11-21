@@ -15,7 +15,7 @@
 
     $tareas = $tareas_aux[0];
 
-    $respuesta = json_encode(array(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "realizada" => $tarea["realizada"], "calificacion" => $tarea["calificacion"])));
+    $respuesta = json_encode(array(array($tareas)));
 
     echo $respuesta;
     /*

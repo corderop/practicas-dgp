@@ -14,6 +14,10 @@
 
     $tareas[] = getTareas($mysqli, $cod_usuario);
 
+    foreach($tareas as $tarea){
+        echo $tarea . "\n";
+    }
+/*
     if (!empty($tareas)) {
         $respuesta = "{";
         for($i=0; $i<count($tareas); $i++){
@@ -27,4 +31,5 @@
         $respuesta["error"] = "no existen tareas para ese usuario";
         return ["estado" => 1, "usuario" => $respuesta];
     }
+    */
 ?>

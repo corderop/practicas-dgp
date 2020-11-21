@@ -15,13 +15,18 @@
 
     $tareas = $tareas_aux[0];
 
-
+    foreach($tareas as $tarea){
+        echo $tarea['cod_tarea'];
+        echo "\n";
+    }
+    /*
     foreach($tareas as $tarea){
         foreach($tarea as $atributo){
             echo $atributo;
             echo "\n";
         }
     }
+    */
     
 /*
     if (!empty($tareas)) {

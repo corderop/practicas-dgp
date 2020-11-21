@@ -16,7 +16,7 @@
 
     foreach($tareas as $tarea){
         echo $tarea;
-        echo "\n"
+        echo "\n";
     }
 /*
     if (!empty($tareas)) {

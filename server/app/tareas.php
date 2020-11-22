@@ -14,16 +14,16 @@
     $tareas_aux[] = getTareas($mysqli, $cod_usuario);
 
     $tareas = $tareas_aux[0];
-
+/*
     $elementos_array_json [] = array();
     foreach($tareas as $tarea){
         $elementos_array_json [] = json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "realizada" => $tarea["realizada"], "calificacion" => $tarea["calificacion"]));
     }
 
     $respuesta = json_encode(array($elementos_array_json));
-
+*/
     //echo $tareas[0]["cod_tarea"];
-    /*
+    
     if (!empty($tareas)) {
         $respuesta = "{";
         $contador = 0;
@@ -42,5 +42,5 @@
         $respuesta["error"] = "no existen tareas para ese usuario";
         return ["estado" => 1, "usuario" => $respuesta];
     }
-    */
+    
 ?>

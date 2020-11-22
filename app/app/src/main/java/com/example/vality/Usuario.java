@@ -76,33 +76,49 @@ public class Usuario {
 
             System.out.println("Creando mensaje para pedir tareas, cod_usuario: " + cod_usuario);
 
-            /*
+
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
                         System.out.println("Ha llegado la lista con las tareas");
                         Tarea aux = new Tarea();
-                        JSONObject tarea_Aux;
+                        JSONObject tarea_Aux = null;
                         int contador =0;
                         boolean terminado = response.isNull(contador+"");
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                         while(!terminado){
+
+
                             tarea_Aux = response.getJSONObject(contador+"");
 
-                            aux.setCod_Tarea(response.getInt("cod_tarea"));
-                            aux.setTitulo(response.getString("titulo"));
-                            aux.setDescripcion(response.getString("descripcion"));
-                            aux.setCod_facilitador(response.getInt("cod_facilitador"));
+                            if(tarea_Aux != null){
+                                System.out.println("Leemos  tarea " + contador);
+                            }else{
+                                System.out.println("Error el valor de la tarea " + contador + " está vacío.");
+                            }
+
+                            aux.setCod_Tarea(tarea_Aux.getInt("cod_tarea"));
+                            aux.setTitulo(tarea_Aux.getString("titulo"));
+                            aux.setDescripcion(tarea_Aux.getString("descripcion"));
+                            aux.setCod_facilitador(tarea_Aux.getInt("cod_facilitador"));
                             try {
-                                aux.setFecha_limite(formatoFecha.parse(response.getString("fecha_limite")));
+                                aux.setFecha_limite(formatoFecha.parse(tarea_Aux.getString("fecha_limite")));
                             }catch (ParseException ex){
                                 System.out.println(ex);
                             }
-                            aux.setObjetivo(response.getString("objetivo"));
-                            aux.setMultimedia(response.getString("multimedia"));
-                            aux.setRealizada(response.getBoolean("realizada"));
-                            aux.setCalificacion(response.getInt("calificacion"));
+                            aux.setObjetivo(tarea_Aux.getString("objetivo"));
+                            aux.setMultimedia(tarea_Aux.getString("multimedia"));
+                            if(tarea_Aux.getInt("realizada") == 0){
+                                aux.setRealizada(false);
+                            }else{
+                                aux.setRealizada(true);
+                            }
+                            if(tarea_Aux.isNull("calificacion")){
+                                aux.setCalificacion(-1);
+                            }else{
+                                aux.setCalificacion(tarea_Aux.getInt("calificacion"));
+                            }
 
                             tareas.add(aux);
                             System.out.println("Añadida tarea " + tarea_Aux.toString());
@@ -123,31 +139,8 @@ public class Usuario {
                     System.out.println("ERROR: "+ error);
                 }
             });
-            */
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        System.out.println("Ha llegado la lista con las tareas");
-                        Tarea aux = new Tarea();
-                        JSONObject tarea_Aux;
-                        for(int i =0; i<response.length();i++){
-                            tarea_Aux = response.getJSONObject(i+"");
-                            aux.setCod_Tarea(tarea_Aux.getInt("cod_tarea"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO: Handle error
-                    System.out.println("ERROR: "+ error);
-                }
-            });
 
             // Access the RequestQueue through your singleton class.
             queue.add(jsonObjectRequest);

@@ -22,7 +22,7 @@
 
     $respuesta = json_encode(array($elementos_array_json));
 */
-    echo $tareas;
+    echo $tareas[0];
     /*
     if (!empty($tareas)) {
         $respuesta = "{";

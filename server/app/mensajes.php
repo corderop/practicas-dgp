@@ -10,10 +10,7 @@
 
     $cod_tarea = $tarea->cod_tarea;
 
-    $mensajes_aux = array();
-    $mensajes_aux[] = getMensajesTarea($mysqli, $cod_tarea);
-
-    $mensajes = $mensajes_aux[0];
+    $mensajes = getMensajesTarea($mysqli, $cod_tarea);
     
     if (!empty($mensajes)) {
         $respuesta = "{";
@@ -29,7 +26,7 @@
         http_response_code(201);
         echo $respuesta;
     } else {
-        http_response_code(401);
+        http_response_code(402);
         $respuesta["error"] = "no existen mensaje para esa tarea";
         return ["estado" => 1, "tarea" => $respuesta];
     }

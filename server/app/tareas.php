@@ -10,7 +10,6 @@
 
     $cod_usuario = $usuario->cod_usuario;
 
-    $tareas_aux = array();
     $tareas = getTareas($mysqli, $cod_usuario);
 
     if (!empty($tareas)) {

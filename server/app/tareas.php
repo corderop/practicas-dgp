@@ -11,10 +11,8 @@
     $cod_usuario = $usuario->cod_usuario;
 
     $tareas_aux = array();
-    $tareas_aux[] = getTareas($mysqli, $cod_usuario);
+    $tareas = getTareas($mysqli, $cod_usuario);
 
-    $tareas = $tareas_aux[0];
-    
     if (!empty($tareas)) {
         $respuesta = "{";
         $contador = 0;

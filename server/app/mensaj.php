@@ -31,7 +31,7 @@
     } else {
         http_response_code(401);
         $respuesta["error"] = "no existen mensaje para esa tarea";
-        return ["estado" => 1, "usuario" => $respuesta];
+        return ["estado" => 1, "tarea" => $respuesta];
     }
     
 ?>

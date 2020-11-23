@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Tarea {
@@ -26,6 +27,7 @@ public class Tarea {
     private String multimedia;
     private boolean realizada;
     private int calificacion;
+    ArrayList<Mensaje> mensajes;
 /*
     // Constructor
     public Tarea(String url, RequestQueue queue, TextView tv){
@@ -76,7 +78,7 @@ public class Tarea {
     }
 */
     public Tarea(){
-
+        mensajes = new ArrayList();
     }
 
     public Tarea(int cod_tarea, int cod_facilitador, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, boolean realizada, int calificacion) {
@@ -89,6 +91,78 @@ public class Tarea {
         this.multimedia = multimedia;
         this.realizada = realizada;
         this.calificacion = calificacion;
+        mensajes = new ArrayList();
+    }
+
+    public void obtenerMensajes(String url, RequestQueue queue){
+        try {
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("cod_usuario", cod_tarea);
+
+            System.out.println("Creando mensaje para pedir mensaejes, cod_tarea: " + cod_tarea);
+
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        System.out.println("Ha llegado la lista con los mensajes");
+                        Mensaje aux = new Mensaje();
+                        JSONObject mensaje_Aux = null;
+                        int contador =0;
+                        boolean terminado = response.isNull(contador+"");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                        while(!terminado){
+                            mensaje_Aux = response.getJSONObject(contador+"");
+
+                            if(mensaje_Aux != null){
+                                System.out.println("Leemos  mensaje " + contador);
+                            }else{
+                                System.out.println("Error el valor del mensaje " + contador + " está vacío.");
+                            }
+
+                            aux.setCod_mensaje(mensaje_Aux.getInt("cod_mensaje"));
+                            try {
+                                aux.setFecha(formatoFecha.parse(mensaje_Aux.getString("fecha")));
+                            }catch (ParseException ex){
+                                System.out.println(ex);
+                            }
+                            aux.setContenido(mensaje_Aux.getString("contenido"));
+                            aux.setMultimedia(mensaje_Aux.getString("multimedia"));
+                            if(mensaje_Aux.getInt("leido") == 0){
+                                aux.setLeido(false);
+                            }else{
+                                aux.setLeido(true);
+                            }
+                            aux.setCod_emisor(mensaje_Aux.getInt("envia"));
+
+                            mensajes.add(aux);
+                            System.out.println("Añadido mensaje " + mensaje_Aux.toString());
+
+                            contador++;
+                            terminado = response.isNull(contador+"");
+                        }
+                        System.out.println("La lista contenía " + contador + " mensajes");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO: Handle error
+                    System.out.println("ERROR: "+ error);
+                }
+            });
+
+
+
+            // Access the RequestQueue through your singleton class.
+            queue.add(jsonObjectRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     // ---------------------------------
@@ -165,5 +239,9 @@ public class Tarea {
 
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public ArrayList<Mensaje> getMensajes() {
+        return mensajes;
     }
 }

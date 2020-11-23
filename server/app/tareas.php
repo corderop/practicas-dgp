@@ -26,7 +26,7 @@
         http_response_code(201);
         echo $respuesta;
     } else {
-        http_response_code(401);
+        http_response_code(201);
         $respuesta["error"] = "no existen tareas para ese usuario";
         return ["estado" => 1, "usuario" => $respuesta];
     }

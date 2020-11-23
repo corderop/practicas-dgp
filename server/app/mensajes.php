@@ -26,7 +26,7 @@
         http_response_code(201);
         echo $respuesta;
     } else {
-        http_response_code(402);
+        http_response_code(201);
         $respuesta["error"] = "no existen mensaje para esa tarea";
         return ["estado" => 1, "tarea" => $respuesta];
     }

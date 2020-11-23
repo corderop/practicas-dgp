@@ -1,0 +1,16 @@
+#caja-login{
+    max-width: 450px;
+    margin: 60px auto;
+}
+
+#grid-imagenes{
+    margin: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.imagen-selector{
+    width: 150px;
+    flex-grow: 1;
+}

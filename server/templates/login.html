@@ -1,77 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>InterfazWeb - admin</title>
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-        <link rel="stylesheet" href="assets/css/Animated-Menu-Icon.css">
-        <link rel="stylesheet" href="assets/css/Article-List.css">
-        <link rel="stylesheet" href="assets/css/Bootstrap-Calendar.css">
-        <link rel="stylesheet" href="assets/css/Burger-Menu-1.css">
-        <link rel="stylesheet" href="assets/css/Burger-Menu.css">
-        <link rel="stylesheet" href="assets/css/Calendar-BS4-1.css">
-        <link rel="stylesheet" href="assets/css/Calendar-BS4.css">
-        <link rel="stylesheet" href="assets/css/Campaign-Progress--Summary-Panel.css">
-        <link rel="stylesheet" href="assets/css/CDRapido-Listar-Deportes.css">
-        <link rel="stylesheet" href="assets/css/Community-ChatComments.css">
-        <link rel="stylesheet" href="assets/css/Custom-Upload-File.css">
-        <link rel="stylesheet" href="assets/css/Drag-Drop-File-Input-Upload.css">
-        <link rel="stylesheet" href="assets/css/Dynamically-Queue-Videos.css">
-        <link rel="stylesheet" href="assets/css/Features-Clean.css">
-        <link rel="stylesheet" href="assets/css/Footer-Basic.css">
-        <link rel="stylesheet" href="assets/css/Header---Apple.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="assets/css/Login-Box-En.css">
-        <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-        <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
-        <link rel="stylesheet" href="assets/css/Navigation-with-Search.css">
-        <link rel="stylesheet" href="assets/css/Profile-Edit-Form-1.css">
-        <link rel="stylesheet" href="assets/css/Profile-Edit-Form.css">
-        <link rel="stylesheet" href="assets/css/Search-Field-With-Icon.css">
-        <link rel="stylesheet" href="assets/css/select.css">
-        <link rel="stylesheet" href="assets/css/Studious-selectbox.css">
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="stylesheet" href="assets/css/TextEditor.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/propio/login.css">
+    <script type="text/javascript" src="../assets/js/login.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
 
-    <body>
-        <div class="row">
-            <div class="col" style="margin-top: 139px;">
-                <div class="d-flex flex-column" id="login-box">
-                    <div class="login-box-header">
-                        <h4 style="color:rgb(139,139,139);margin-bottom:0px;font-weight:400;font-size:27px;">Asociacion VALE</h4>
-                    </div>
+<body>
 
-                    <form action="login.php" method="POST">
-                        {% if msg %}
-                        <div> {{ msg }} </div>    
-                        {% endif %}
-                        <div class="email-login" style="background-color:#ffffff;">
-                            <input type="text" class="email-imput form-control" style="margin-top:10px;" required="" placeholder="Usuario" name="usuario" >
-                            <input type="password" class="password-input form-control" style="margin-top:10px;" required="" placeholder="Contraseña" name="pass">
-                        </div>
-        
-                        <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;margin-top: 8px;">
-                            <input type="submit" class="btn btn-primary btn-block box-shadow" value="Iniciar Sesión" id="submit-id-submit" style="background: rgb(0,0,0);padding-top: 10px;">
-                        </div>
-                    </form>
-                </div>
+    <div class="login-form" id="caja-login">
+        <form action="login.php" method="post" id="login-normal" style="display: none;">
+            <h2 class="text-center">Inicio de sesión</h2>
+            <div class="form-group">
+                <input type="text" class="form-control" name="usuario" placeholder="Usuario" required="required">
             </div>
-        </div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/Burger-Menu.js"></script>
-        <script src="assets/js/Custom-Upload-File.js"></script>
-        <script src="assets/js/Dynamically-Queue-Videos.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-        <script src="assets/js/Profile-Edit-Form.js"></script>
-        <script src="assets/js/Studious-selectbox.js"></script>
-        <script src="assets/js/TextEditor.js"></script>
-    </body>
+            <div class="form-group">
+                <input type="password" class="form-control" name="pass" placeholder="Contraseña" required="required">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+            </div>
+        </form>
+        <form action="login.php" method="post" id="login-fotos">
+            <h2 class="text-center">Pulsa sobre las imágenes en orden</h2>
+            <button type="button" onclick="borrarContrasena()" class="ui primary fluid button" data-bcup-haslogintext="no">Pulsa aquí para empezar de nuevo</button>
+            <input type="hidden" name="fotos" id="input-fotos" value="">
+            <div id="grid-imagenes">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'arbol')" src="../img/pictogramas/arbol.png" alt="árbol" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'avion')" src="../img/pictogramas/avion.png" alt="avión" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'balon')" src="../img/pictogramas/balon.png" alt="balón" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'botella')" src="../img/pictogramas/botella.png" alt="botella" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'coche')" src="../img/pictogramas/coche.png" alt="coche" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'leon')" src="../img/pictogramas/leon.png" alt="león" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'moto')" src="../img/pictogramas/moto.png" alt="moto" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'ordenador')" src="../img/pictogramas/ordenador.png" alt="ordenador" data-seleccionada="no">
+                <img class="imagen-selector" onclick="aniadirContrasena(this, 'telefono')" src="../img/pictogramas/telefono.png" alt="teléfono" data-seleccionada="no">
+            </div>
+            <button type="submit" class="ui primary fluid button" data-bcup-haslogintext="no">Iniciar sesión</button>
+        </form>
+        <p class="text-center"><a href="#" id="link-cambio" onclick="cambiar(this, false);">Iniciar sesión como administrador o facilitador</a></p>
+    </div>
+</body>
 
 </html>

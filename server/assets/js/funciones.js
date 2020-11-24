@@ -66,7 +66,7 @@ function comprobarPass() {
     let pass = document.getElementById("input-fotos").value;
     console.log("pass: " + pass);
     $.ajax({
-        url:"comprobarpass.php",
+        url:"comprobarPass.php",
         method:"POST",
         data:{imagenes:pass},
         success:function(data)
@@ -74,9 +74,11 @@ function comprobarPass() {
             console.log("Resultado: " + data);
             if(data === "true"){
                 console.log("Es true");
+                //TODO que meta otra
             }
             else{
                 console.log("Es false");
+                //TODO enseñar guardar
             }
         }
     });

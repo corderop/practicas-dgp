@@ -8,8 +8,8 @@
     $mysqli=conectar_bd();
 
     //Captura de variables
-    if(isset($_POST['pass'])){
-        $pass = $_REQUEST['pass'];
+    if(isset($_POST['imagenes'])){
+        $pass = $_REQUEST['imagenes'];
     }
 
     $usuarios=array();
@@ -17,7 +17,7 @@
     $err_login=true;
 
     foreach($usuarios as $usuario){
-        if(checkLogin($mysqli,$usuario['nombre'],$fotos)){
+        if(checkLogin($mysqli,$usuario['nombre'],$pass)){
             echo("false");
             $err_login = false;
         }

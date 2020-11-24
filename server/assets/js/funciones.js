@@ -59,3 +59,25 @@ function filtroCorregidas(element) {
         }
     }
 }
+
+function comprobarPass() {
+    //alert("Funciona");
+    let comprobada = false;
+    let pass = document.getElementById("input-fotos").value;
+    console.log("pass: " + pass);
+    $.ajax({
+        url:"comprobarpass.php",
+        method:"POST",
+        data:{imagenes:pass},
+        success:function(data)
+        {
+            console.log("Resultado: " + data);
+            if(data === "true"){
+                console.log("Es true");
+            }
+            else{
+                console.log("Es false");
+            }
+        }
+    });
+}

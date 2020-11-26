@@ -32,13 +32,12 @@ public class Usuario{
         tareas = new ArrayList();
     }
 
-    public void iniciar(String url, RequestQueue queue, TextView tv, String usuarioIntroducido, String contrasenaIntroducida, MainActivity general) {
+    public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida) {
         try {
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("nombre", usuarioIntroducido);
             jsonBody.put("contrasena", contrasenaIntroducida);
 
-            System.out.println("Creando mensaje nombre: "+usuarioIntroducido + " contrasena: "+ contrasenaIntroducida);
+            System.out.println("Creando mensaje de logueo con contrasena: "+ contrasenaIntroducida);
 
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {

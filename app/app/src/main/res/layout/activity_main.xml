@@ -6,46 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/nombreIntroducido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/contrasenaIntroducida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="46dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreIntroducido" />
-
     <Button
         android:id="@+id/botonLogeo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="84dp"
         android:onClick="logueo"
         android:text="Loguearse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contrasenaIntroducida" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/mensajeServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="376dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="664dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/botonArbol"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="pulsadoArbol" />
+
+        <ImageView
+            android:id="@+id/imagenArbol"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_below="@id/botonArbol"
+            android:src="@drawable/arbol"
+            app:layout_constraintBottom_toBottomOf="@+id/botonArbol" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

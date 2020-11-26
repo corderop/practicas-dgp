@@ -8,27 +8,26 @@
     $body = file_get_contents('php://input');
     $usuario = json_decode($body);
 
-    $nombre = $usuario->nombre;
-    $contrasena = $usuario->contrasena;
-    $tipo = "usuario";
+    $fotos = $usuario->fotos;
 
-    $usuario = mysqli_real_escape_string($mysqli,$nombre);
+    $usuarios=array();
+    $usuarios=getUsuarios($mysqli);
+    $err_login=true;
 
-    if(checkLogin($mysqli,$usuario,$contrasena)){
-        $usuario = getUsuario($mysqli, $usuario);
-
-        if ($usuario != NULL) {
-            http_response_code(201);
-            $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
-            echo $respuesta;
-        } else {
-            http_response_code(401);
-            $respuesta["error"] = "no existe cod_usuario con ese usuario";
-            return ["estado" => 1, "usuario" => $respuesta];
+    foreach($usuarios as $usuario){
+        if(checkLogin($mysqli,$usuario['nombre'],$fotos)){
+            $err_login=false;
+            $usuario = getUsuario($mysqli, $usuario);
         }
-    }else{
-        http_response_code(401);
+    }
+
+    if($err_login){
+        http_response_code(402);
         $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
         return ["estado" => 1, "usuario" => $respuesta];
+    }else{
+        http_response_code(201);
+        $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
+        echo $respuesta;
     }
 ?>

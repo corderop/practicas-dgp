@@ -2,6 +2,7 @@ package com.example.vality;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
          */
 
     }
-    public void logueo (View  v){
+    public void logueo (View v){
         EditText nombre=(EditText)findViewById(R.id.nombreIntroducido);
         EditText contrasena=(EditText)findViewById(R.id.contrasenaIntroducida);
         TextView textView=(TextView)findViewById(R.id.mensajeServer);
 
-        usuario.iniciar(url, queue, textView, nombre.getText().toString(), contrasena.getText().toString());
+        usuario.iniciar(url, queue, textView, nombre.getText().toString(), contrasena.getText().toString(), this);
     }
+
 }

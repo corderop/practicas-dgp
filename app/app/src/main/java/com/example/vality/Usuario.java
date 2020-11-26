@@ -1,5 +1,7 @@
 package com.example.vality;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -17,7 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario{
     private String nombre;
     private String contrasena;
     private int cod_usuario;
@@ -30,7 +32,7 @@ public class Usuario {
         tareas = new ArrayList();
     }
 
-    public void iniciar(String url, RequestQueue queue, TextView tv, String usuarioIntroducido, String contrasenaIntroducida) {
+    public void iniciar(String url, RequestQueue queue, TextView tv, String usuarioIntroducido, String contrasenaIntroducida, MainActivity general) {
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("nombre", usuarioIntroducido);
@@ -48,7 +50,15 @@ public class Usuario {
                         contrasena = contrasenaIntroducida;
 
                         tv.setText("Logueo realizado con éxito");
+                        tv.setTextColor(Color.BLACK);
                         obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue);
+
+                        if(nombre != null){
+                            tv.setText("Credenciales correctos");
+                        }else {
+                            tv.setText("Credenciales inválidos");
+                            tv.setTextColor(Color.RED);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -67,6 +77,8 @@ public class Usuario {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
     public void obtenerTareas(String url, RequestQueue queue){

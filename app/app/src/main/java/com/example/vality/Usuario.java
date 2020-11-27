@@ -35,7 +35,7 @@ public class Usuario{
     public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida, MainActivity general) {
         try {
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("contrasena", contrasenaIntroducida);
+            jsonBody.put("fotos", contrasenaIntroducida);
 
             System.out.println("Creando mensaje de logueo con contrasena: "+ contrasenaIntroducida);
 

@@ -24,10 +24,10 @@
     if($err_login){
         http_response_code(402);
         $respuesta["error"] = "no existe uauario con ese nombre y/o contraseña";
-        return ["estado" => 1, "usuario" => $respuesta];
+        echo $respuesta;
     }else{
         http_response_code(201);
         $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
-        return ["estado" => 0, $respuesta];
+        echo $respuesta;
     }
 ?>

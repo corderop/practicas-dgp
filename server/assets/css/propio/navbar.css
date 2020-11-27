@@ -23,7 +23,12 @@ footer{
     color: black;
 }
 
-/* Imagen del admin */
+/* Titulo de las páginas */
+.titulo-pagina{
+    text-align: center;
+}
+
+
 #imagen-cambiar-pass-padre{
     display: flex;
     justify-content: center;

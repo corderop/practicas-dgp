@@ -14,14 +14,21 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/css/propio/login.css">
+    <link rel="stylesheet" href="../assets/css/propio/navbar.css">
     <script type="text/javascript" src="../assets/js/login.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </head>
 
 <body>
+    <!-- <div class="container">
+        <h1 class="titulo-pagina">Login</h1>
+    </div> -->
 
     <div class="login-form" id="caja-login">
+        <h1 class="titulo-pagina">Login</h1>
+        </br>
+
         {% if msg %}
         <div class="alert alert-danger" role="alert">
             {{ msg }}

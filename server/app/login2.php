@@ -28,6 +28,6 @@
     }else{
         http_response_code(201);
         $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
-        echo $respuesta;
+        return ["estado" => 0, $respuesta];
     }
 ?>

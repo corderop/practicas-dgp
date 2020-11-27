@@ -9,6 +9,9 @@
     {% if usuario['tipo'] == "ADMIN" %}
     <!-- Lista con los usuarios, añadir usuario nuevo-->
     <div class="container">
+
+        <h1 class="titulo-pagina">Gestión de usuarios</h1>
+
         <!-- Barra de búsqueda -->
         <div class="ui fluid icon input" id="busqueda-admin">
             <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this,1)" id="busqueda">
@@ -63,6 +66,9 @@
     <!-- Lista con las tareas, ¿ver tareas completadas tambien?-->
     <!-- Lista con las tareas y añadir un usuario nuevo-->
     <div class="container">
+
+        <h1 class="titulo-pagina">Tareas</h1>
+
         <!-- Si ha sido redireccionado desde la creación de grupos -->
         {% if msg %}
             <div class="alert alert-success" role="alert">
@@ -133,7 +139,10 @@
     {% endif %}
 
     {% if usuario['tipo'] == "USUARIO" %}
-    <div class="container">    
+    <div class="container">
+
+        <h1 class="titulo-pagina">Tareas</h1>
+
         <!-- Grid con las cartas -->
         <div class="ui three stackable cards cards-grid">        
             {% for tarea in tareas %}

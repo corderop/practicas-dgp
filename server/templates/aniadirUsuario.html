@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="container">
-
+    <h1 class="titulo-pagina">Añadir un nuevo usuario</h1>
     <h3>Tipo de usuario a añadir:</h3>
     
     <!-- Sistema de pestañas -->
@@ -153,11 +153,15 @@
                         <img class="imagen-selector" onclick="aniadirContrasena(this, 'ordenador')" src="../img/pictogramas/ordenador.png" alt="ordenador" data-seleccionada="no">
                         <img class="imagen-selector" onclick="aniadirContrasena(this, 'telefono')" src="../img/pictogramas/telefono.png" alt="teléfono" data-seleccionada="no">
                     </div>
-                    <button type="button" onclick="comprobarPass()" class="ui primary fluid button" data-bcup-haslogintext="no">Comprobar contraseña</button>
+                    <!-- Aqui añadir una alerta si la contraseña no es válida -->
+                    <div class="alert alert-danger" id="alerta-pass-invalida" role="alert">
+                        Contraseña inválida. Introduzca otra combinación
+                    </div>
+                    <button type="button" id="boton-comprobar" onclick="comprobarPass()" class="ui primary fluid button" data-bcup-haslogintext="no">Comprobar contraseña</button>
                 </form>
             </div>
             
-            <div class="edicion-submit" style="display: none;">
+            <div class="edicion-submit"  id="boton-guardar" style="display: none;">
                 <button type="submit" class="ui primary button" data-bcup-haslogintext="no">
                     Guardar
                 </button>

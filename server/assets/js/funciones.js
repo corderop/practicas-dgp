@@ -72,13 +72,30 @@ function comprobarPass() {
         success:function(data)
         {
             console.log("Resultado: " + data);
+
+            let alerta = document.getElementById('alerta-pass-invalida');
+            let comprobar = document.getElementById("boton-comprobar");
+            let guardar = document.getElementById("boton-guardar");
+
             if(data === "true"){
                 console.log("Es true");
-                //TODO que meta otra
+                //TODO contraseña válida se muestra el boton guardar
+                //Esconder la alerta
+                alerta.style.display = 'none';
+
+                //Mostrar el boton de guardar
+                guardar.style.display = "";
+
             }
             else{
                 console.log("Es false");
-                //TODO enseñar guardar
+                //TODO contraseña inválida mostrar la alerta
+                //Mostrar la alerta
+                alerta.style.display = '';
+                //Esconder guardar
+                guardar.style.display = "none";
+                //Mostrar comprobar
+                comprobar.style.display = "";
             }
         }
     });

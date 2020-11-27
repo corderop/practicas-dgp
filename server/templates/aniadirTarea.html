@@ -8,8 +8,9 @@
 {% if usuario['tipo'] == "ADMIN" %}
 <!-- Lista con los usuarios, añadir usuario nuevo-->
 <div class="container">
-    
-    <h1>No puedes acceder a este recurso</h1>
+
+  <h1 class="titulo-pagina">Añadir una nueva tarea</h1>
+  <h1>No puedes acceder a este recurso</h1>
 
 </div>
 {% endif %}
@@ -19,6 +20,7 @@
 <!-- Lista con los usuarios, añadir usuario nuevo-->
 <div class="container">
 
+  <h1 class="titulo-pagina">Añadir una nueva tarea</h1>
   <form class="ui form nombre-grupo" id="aniadir-tarea" method="POST" enctype="multipart/form-data" action="nuevaTarea.php" onsubmit="return hacerSubmit();">
     <div class=" field edicion-submit">
       <button type="submit" class="ui fluid primary button" data-bcup-haslogintext="no">

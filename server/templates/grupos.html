@@ -10,6 +10,7 @@
     <!-- Lista con los usuarios, añadir usuario nuevo-->
     <div class="container">
         
+        <h1 class="titulo-pagina">Grupos</h1>
         <h1>No puedes acceder a este recurso</h1>
 
     </div>
@@ -18,6 +19,9 @@
     {% if usuario['tipo'] == "TUTOR" %}
     <!-- Grupos confeccionados por el tutor -->
     <div class="container">
+
+        <h1 class="titulo-pagina">Grupos</h1>
+
         <!-- Si ha sido redireccionado desde la creación de grupos -->
         {% if msg %}
             <div class="alert alert-success" role="alert">

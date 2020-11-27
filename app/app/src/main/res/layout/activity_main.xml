@@ -8,12 +8,23 @@
 
     <Button
         android:id="@+id/botonLogeo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="166dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
         android:onClick="logueo"
         android:text="Loguearse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/botonBorrar"
+        android:layout_width="166dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginBottom="48dp"
+        android:onClick="pulsadoBorrar"
+        android:text="Borrar contraseña"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,24 +37,135 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageButton
+        android:id="@+id/botonImagenAvion"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="52dp"
+        android:onClick="pulsadoAvion"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avion"
+        tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/botonArbol"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:backgroundTint="#FFFFFF"
-            android:onClick="pulsadoArbol" />
+    <ImageButton
+        android:id="@+id/botonImagenOrdenador"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="348dp"
+        android:onClick="pulsadoOrdenador"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ordenador"
+        tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/imagenArbol"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_below="@id/botonArbol"
-            android:src="@drawable/arbol"
-            app:layout_constraintBottom_toBottomOf="@+id/botonArbol" />
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/botonImagenMoto"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="348dp"
+        android:onClick="pulsadoMoto"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/moto"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenBotella"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:onClick="pulsadoBotella"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/botella"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenArbol"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:onClick="pulsadoArbol"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arbol"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenCoche"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="200dp"
+        android:onClick="pulsadoCoche"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coche"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenLeon"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="200dp"
+        android:onClick="pulsadoLeon"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/leon"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenBalon"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="52dp"
+        android:onClick="pulsadoBalon"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/balon"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonImagenTelefono"
+        android:layout_width="114dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="348dp"
+        android:onClick="pulsadoTelefono"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/telefono"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tituloPantalla"
+        android:layout_width="274dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="Inicio de sesión"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

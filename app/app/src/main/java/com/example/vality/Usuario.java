@@ -32,7 +32,7 @@ public class Usuario{
         tareas = new ArrayList();
     }
 
-    public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida) {
+    public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida, MainActivity general) {
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("contrasena", contrasenaIntroducida);
@@ -55,6 +55,7 @@ public class Usuario{
                         if(nombre != null){
                             tv.setText("Credenciales correctos");
                         }else {
+                            general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
                             tv.setTextColor(Color.RED);
                         }

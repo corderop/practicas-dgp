@@ -15,6 +15,10 @@
 }
 
 .imagen-selector{
-    width: 150px;
+    width: 130px;
     flex-grow: 1;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
 }

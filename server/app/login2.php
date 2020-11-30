@@ -17,7 +17,7 @@
     foreach($usuarios as $usuario){
         if(checkLogin($mysqli,$usuario['nombre'],$fotos)){
             $err_login=false;
-            $usuario = getUsuario($mysqli, $usuario);
+            $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
         }
     }
 

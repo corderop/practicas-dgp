@@ -184,3 +184,8 @@ footer{
     margin: 3px;
     flex-grow: 1;
 }
+
+#no-actividad-semana{
+    text-align: center;
+    margin: 50px;
+}

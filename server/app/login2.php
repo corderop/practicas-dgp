@@ -6,9 +6,9 @@
     $mysqli=conectar_bd();
 
     $body = file_get_contents('php://input');
-    $usuario = json_decode($body);
+    $aux = json_decode($body);
 
-    $fotos = mysqli_real_escape_string($mysqli,$usuario->fotos);
+    $fotos = mysqli_real_escape_string($mysqli,$aux->fotos);
 
     $usuarios=array();
     $usuarios=getUsuarios($mysqli);
@@ -17,7 +17,7 @@
     foreach($usuarios as $usuario){
         if(checkLogin($mysqli,$usuario['nombre'],$fotos)){
             $err_login=false;
-            $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+            $usuariofinal = getUsuario($mysqli, $usuario['cod_usuario']);
         }
     }
 
@@ -27,7 +27,7 @@
         echo $respuesta;
     }else{
         http_response_code(201);
-        $respuesta = json_encode(array("nombre" => $usuario["nombre"], "cod_usuario" => $usuario["cod_usuario"]));
+        $respuesta = json_encode(array("nombre" => $usuariofinal["nombre"], "cod_usuario" => $usuariofinal["cod_usuario"]));
         echo $respuesta;
     }
 ?>

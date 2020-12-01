@@ -177,15 +177,10 @@ footer{
 }
 
 .indicador-semana-div{
-    position: relative;
+    display: flex;
 }
 
 .titulo-semana{
-    margin: auto;
-    display: inline-block;
-    margin-left: 20px;
-    padding: px 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    margin: 3px;
+    flex-grow: 1;
 }

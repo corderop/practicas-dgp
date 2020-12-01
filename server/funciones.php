@@ -221,6 +221,29 @@
     }
 
     /**
+     * Obtiene todas la tareas de un usuario en una semana
+     * @param mysql $mysqli Base de datos sobre la que se actua
+     * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas
+     * @param mixed $lunes Primer día de la semana. Obtiene las tareas a partir de ese día. Formato: string 'DD/MM/AAAA'
+     * @return mixed[] Array con las tareas que hemos pedido.
+     */
+    function getTareasSemana($mysqli,$usuario, $lunes){
+        $sql="SELECT * FROM TAREA WHERE(realiza='$usuario' AND fecha_limite>=FROM_UNIXTIME($lunes) AND fecha_limite<ADDDATE( FROM_UNIXTIME($lunes), INTERVAL 7 DAY));";
+        
+        $res = $mysqli->query($sql);
+
+        $resultado = array();
+
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
+        }
+
+        return $resultado;
+    }
+
+    /**
      * Se obtienen las tareas de un tutor con los nombres de los usuarios que la realizan
      * @param mysql $mysqli Base de datos sobre la que se actua
      * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas

@@ -149,8 +149,16 @@ footer{
     margin: 30px 0px;
 }
 
+.tareas-dia{
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
 .tarjeta-calendario{
     display: inline-block !important;
+    margin: 0 20px !important;
+    width: 200px !important;
+    white-space: normal;
 }
 
 .tarjeta-calendario .imagen-tarjeta{
@@ -159,12 +167,25 @@ footer{
 
 .indicador-dia-div{
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .indicador-dia{
+    width: 100%;
+}
+
+.indicador-semana-div{
+    position: relative;
+}
+
+.titulo-semana{
+    margin: auto;
+    display: inline-block;
+    margin-left: 20px;
+    padding: px 0;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
+    transform: translateY(-50%);
 }

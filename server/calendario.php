@@ -19,8 +19,21 @@
             echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=>"Calendario"]);
         }
         if($usuario['tipo'] == "USUARIO"){
-            $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
-            echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=>"Calendario"]);
+            $semana = 0;
+            if(isset($_GET['semana'])){
+                $semana = $_GET['semana'];
+            }
+
+            $dias = $semana*7;
+            if($dias >= 0)
+                $lunes = strtotime("previous monday " . " + $dias days");
+            else{
+                $dias = $dias * (-1);
+                $lunes = strtotime("previous monday " . " - $dias days");
+            }
+
+            $tareas = getTareasSemana($mysqli, $_SESSION['cod_usuario'], $lunes);
+            echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'semana'=>$semana, 'lunes'=>$lunes,'titulo'=>"Calendario"]);
         }
     }
     else{

@@ -19,7 +19,8 @@
             echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=>"Calendario"]);
         }
         if($usuario['tipo'] == "USUARIO"){
-            header("Location: index.php");
+            $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
+            echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=>"Calendario"]);
         }
     }
     else{

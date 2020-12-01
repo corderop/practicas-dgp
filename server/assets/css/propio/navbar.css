@@ -135,3 +135,36 @@ footer{
     color: black;
 }
 
+/* Calendario usuario */
+.titulo-calendario-usuario{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.imagen-calendario-usuario{
+    width: 100%;
+}
+
+.dia-usuario{
+    margin: 30px 0px;
+}
+
+.tarjeta-calendario{
+    display: inline-block !important;
+}
+
+.tarjeta-calendario .imagen-tarjeta{
+    height: 200px;
+}
+
+.indicador-dia-div{
+    height: 100%;
+}
+
+.indicador-dia{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}

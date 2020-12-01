@@ -33,7 +33,41 @@
             }
 
             $tareas = getTareasSemana($mysqli, $_SESSION['cod_usuario'], $lunes);
-            echo $twig->render('calendario.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'semana'=>$semana, 'lunes'=>$lunes,'titulo'=>"Calendario"]);
+            $dias_semana = array(
+                "lunes" => array(),
+                "martes" => array(),
+                "miercoles" => array(),
+                "jueves" => array(),
+                "viernes" => array(),
+                "sabado" => array(),
+                "domingo" => array()
+            );
+            if($tareas){
+                foreach ($tareas as &$tarea){
+                    if(strtotime("previous monday " . " - " . $dias . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["lunes"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 1 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["martes"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 2 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["miercoles"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 3 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["jueves"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 4 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["viernes"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 5 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["sabado"][] = $tarea;
+                    }
+                    elseif(strtotime("previous monday " . " - " . $dias . "days + " . 6 . "days") == strtotime($tarea["fecha_limite"]) ){
+                        $dias_semana["domingo"][] = $tarea;
+                    }
+                }
+            }
+            echo $twig->render('calendario.html', ['usuario'=>$usuario, 'dias'=>$dias_semana, 'semana'=>$semana,'titulo'=>"Calendario"]);
         }
     }
     else{

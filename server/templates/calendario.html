@@ -90,117 +90,193 @@
 
     <!-- Lunes -->
     <div class="dias-calendario">
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment indicador-dia-div">
-            <div class="indicador-dia">
-              <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-              <h2 class="titulo-calendario-usuario">Lunes</h2>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-10">
-          <div class="ui segment tareas-dia">
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
+
+      {% if dias['lunes'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
+                <h2 class="titulo-calendario-usuario">Lunes</h2>
               </div>
             </div>
           </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['lunes'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
-      <!-- Martes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/martes.png" alt="Pictograma del martes">
-            <h2 class="titulo-calendario-usuario">Martes</h2>
+      {% if dias['martes'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/martes.png" alt="Pictograma del martes">
+                <h2 class="titulo-calendario-usuario">Martes</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['martes'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
 
-      <!-- Lunes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-            <h2 class="titulo-calendario-usuario">Lunes</h2>
+      {% if dias['miercoles'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/miercoles.png" alt="Pictograma del miércoles">
+                <h2 class="titulo-calendario-usuario">Miércoles</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['miercoles'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
 
-      <!-- Lunes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-            <h2 class="titulo-calendario-usuario">Lunes</h2>
+      {% if dias['jueves'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/jueves.png" alt="Pictograma del jueves">
+                <h2 class="titulo-calendario-usuario">Jueves</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['jueves'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
 
-      <!-- Lunes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-            <h2 class="titulo-calendario-usuario">Lunes</h2>
+      {% if dias['viernes'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/viernes.png" alt="Pictograma del viernes">
+                <h2 class="titulo-calendario-usuario">Viernes</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['viernes'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
 
-      <!-- Lunes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-            <h2 class="titulo-calendario-usuario">Lunes</h2>
+      {% if dias['sabado'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/sabado.png" alt="Pictograma del sabado">
+                <h2 class="titulo-calendario-usuario">Sábado</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['sabado'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
 
-      <!-- Lunes -->
-      <div class="row dia-usuario">
-        <div class="col-sm-2">
-          <div class="ui segment">
-            <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-            <h2 class="titulo-calendario-usuario">Lunes</h2>
+      {% if dias['domingo'] %}
+        <div class="row dia-usuario">
+          <div class="col-sm-2">
+            <div class="ui segment indicador-dia-div">
+              <div class="indicador-dia">
+                <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/domingo.png" alt="Pictograma del domingo">
+                <h2 class="titulo-calendario-usuario">Domingo</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            {% for tarea in dias['domingo'] %}
+              <div class="ui segment tareas-dia">
+                <div class="ui card tarjeta-calendario">
+                  <a class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                  </a>
+                  <div class="content">
+                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
           </div>
         </div>
-        <div class="col-sm-10">
-          <div class="ui segment">
-            <p>fsadfas</p>
-          </div>
-        </div>
-      </div>
+      {% endif %}
+
+      {% if not dias['lunes'] and not dias['martes'] and not dias['miercoles'] and not dias['jueves'] and not dias['viernes'] and not dias['sabado'] and not dias['domingo'] %}
+        <h3 id="no-actividad-semana">No hay ninguna actividad programada en la semana</h3>
+      {% endif %}
+
     </div>
   </div>
   

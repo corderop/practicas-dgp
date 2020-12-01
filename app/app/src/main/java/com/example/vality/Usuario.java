@@ -48,12 +48,11 @@ public class Usuario{
                         cod_usuario = response.getInt("cod_usuario");
                         contrasena = contrasenaIntroducida;
 
-                        tv.setText("Logueo realizado con éxito");
-                        tv.setTextColor(Color.BLACK);
-                        obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue);
-
                         if(nombre != null){
-                            tv.setText("Credenciales correctos");
+                            tv.setText("Logueo realizado con éxito");
+                            tv.setTextColor(Color.BLACK);
+                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue);
+                            general.setContentView(R.layout.tareas);
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");

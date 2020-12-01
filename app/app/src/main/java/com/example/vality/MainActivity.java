@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
          */
 
     }
-    public void logueo (View v){
+    public void logueo (View v) throws InterruptedException {
         TextView textView=(TextView)findViewById(R.id.mensajeServer);
 
         usuario.iniciar(url, queue, textView, contrasenaIntroducida, this);

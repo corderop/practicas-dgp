@@ -8,7 +8,7 @@
     $body = file_get_contents('php://input');
     $usuario = json_decode($body);
 
-    $fotos = $usuario->fotos;
+    $fotos = mysqli_real_escape_string($mysqli,$usuario->fotos);
 
     $usuarios=array();
     $usuarios=getUsuarios($mysqli);

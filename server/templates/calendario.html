@@ -55,18 +55,36 @@
     <h1 class="titulo-pagina">Calendario</h1>
 
     <div class="indicador-semana-div">
+      <h2 class="titulo-semana">
+        {% if semana == 0 %}
+          Semana actual
+        {% elseif semana == -1 %}
+          Semana anterior
+        {% elseif semana == 1 %}
+          Semana siguiente
+        {% elseif semana > 1 %}
+          Dentro de {{ semana }} semanas
+        {% elseif semana < -1 %}
+          Hace {{ semana|abs }} semanas
+        {% endif %}
+      </h2>      
       <div class="ui icon buttons">
-        <button class="ui left attached icon button" data-bcup-haslogintext="no" alt="Ir a la semana anterior">
-          <i class="left chevron icon"></i>
-          <!-- Semana anterior -->
-        </button>
-        <button class="ui right attached icon button" data-bcup-haslogintext="no" alt="Ir a la semana siguiente">
-          <!-- Siguiente semana -->
-          <i class="right chevron icon"></i>
-        </button>
+        <form METHOD="GET" action="calendario.php">
+          <button class="ui left attached icon button" data-bcup-haslogintext="no" alt="Ir a la semana anterior">
+            <i class="left chevron icon"></i>
+            <!-- Semana anterior -->
+          </button>
+          <input type="hidden" name="semana" value="{{ semana-1 }}">
+        </form>
+        <form METHOD="GET" action="calendario.php">
+          <button class="ui right attached icon button" data-bcup-haslogintext="no" alt="Ir a la semana siguiente">
+            <!-- Siguiente semana -->
+            <i class="right chevron icon"></i>
+          </button>
+          <input type="hidden" name="semana" value="{{semana+1}}">
+        </form>
       </div>
-      <!-- <button class="ui fluid button" data-bcup-haslogintext="no"> -->
-      <h2 class="titulo-semana">Semana actual</h2>        
+      <!-- <button class="ui fluid button" data-bcup-haslogintext="no"> -->  
       <!-- </button> -->    
     </div>
 
@@ -83,55 +101,6 @@
         </div>
         <div class="col-sm-10">
           <div class="ui segment tareas-dia">
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
-            <div class="ui card tarjeta-calendario">
-              <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
-              </a>
-              <div class="content">
-                  <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
-              </div>
-            </div>
             <div class="ui card tarjeta-calendario">
               <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
               </a>

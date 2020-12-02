@@ -111,12 +111,34 @@ footer{
 
 #input-enviar{
     margin-top: 30px;
+    display: flex;
 }
 
-#label-tarea{
+.label-tarea{
+    margin: 0 !important;
+    background-color: #2185d0 !important;
+    color: white !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-weight: 700 !important;
+    line-height: 1em !important;
+    padding: .78571429em 1.5em .78571429em !important;
+    font-size: 14px !important;
+}
+
+#mensaje-envio-div{
+    flex-grow: 1;
+}
+
+#boton-mensaje{
     margin: 0;
-    background-color: #2185d0;
-    color: white;
+}
+
+@media screen and (max-width: 800px) {
+    #input-enviar{
+        flex-direction: column;
+    }
 }
 
 .seccion-tarea{
@@ -126,7 +148,7 @@ footer{
     padding: 20px;
 }
 
-#form-mensaje, #boton-mensaje{
+#form-mensaje, #boton-mensaje, #label-tarea-usuario{
     font-size: 17px;
 }
 

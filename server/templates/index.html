@@ -149,20 +149,9 @@
                 <!-- Card -->
                 <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                     <div class="ui card">
-                        {% if tarea['realizada']%}
-                        <div class="image imagen-tarjeta" style="background-image: url('img/bien.png');"></div>
-                        {% else %}
                         <div class="image imagen-tarjeta" style="background-image: url('img/trabajar.png');"></div>
-                        {% endif %}
                         <div class="content">
                             <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                            <div class="meta">
-                                {% if tarea['realizada']%}
-                                    <span class="date">Realizada</span>
-                                {% else %}
-                                    <span class="date">Por realizar</span>
-                                {% endif %}
-                            </div>
                         </div>
                         <div class="extra content">
                             <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">

@@ -19,6 +19,7 @@ CREATE TABLE TAREA(
     crea int,
     realiza int,
     realizada boolean default false,
+    corregida boolean default true,
     calificacion int,
     pictograma varchar(200) not null,
     FOREIGN KEY (crea) REFERENCES USUARIO(cod_usuario),

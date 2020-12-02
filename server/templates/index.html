@@ -129,7 +129,14 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <a href="eliminarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}"><div class="ui fluid red inverted button">Eliminar</div></a>
+                            <div class="ui two buttons">
+                                {% if tarea['realizada'] %}
+                                <a class="ui green button" style="cursor: auto;">Finalizada</a>
+                                {% else %}
+                                <a class="ui basic green button" href="finalizarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Finalizar</a>
+                                {% endif %}
+                                <a class="ui basic red button" href="eliminarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Eliminar</a>
+                            </div>
                         </div>
                     </div>
                 </a>

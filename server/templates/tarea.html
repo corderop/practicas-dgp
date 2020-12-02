@@ -109,13 +109,19 @@
 		{% else %}
 		<form action="nuevoMensaje.php" method="POST" enctype="multipart/form-data" onsubmit="return hacerSubmitChat();">
 		{% endif %}
-			<div class="ui fluid action left labeled input" id="input-enviar">
-				<label for="multimedia-envio" class="ui label foto-input-label" id="label-tarea">Pulsa aquí para añadir un archivo</label>
-				<input type="text" placeholder="Mensaje" id="mensaje-envio" name="mensaje">
+			<div id="input-enviar">
 				{% if usuario['tipo'] == "USUARIO" %}
-				<button class="ui primary button" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
+				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
 				{% else %}
-				<button class="ui primary button" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
+				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor"><span>Pulsa aquí para añadir un archivo</span></label>
+				{% endif %}
+				<div class="ui input" id="mensaje-envio-div">
+					<input type="text" placeholder="Mensaje" id="mensaje-envio" name="mensaje">
+				</div>
+				{% if usuario['tipo'] == "USUARIO" %}
+				<button class="ui primary button boton-enviar-mensaje" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
+				{% else %}
+				<button class="ui primary button boton-enviar-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
 				{% endif %}
 			</div>
 			<input class="foto-input" id="multimedia-envio" type="file" name="multimedia" accept="image/*, video/*, audio/*">

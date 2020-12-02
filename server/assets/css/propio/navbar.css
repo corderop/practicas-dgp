@@ -211,3 +211,9 @@ footer{
     text-align: center;
     margin: 50px;
 }
+
+/* Añadir tarea */
+.fecha-fin-aniadir{
+    width: 100%;
+    margin-top: 10px;
+}

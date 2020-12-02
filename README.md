@@ -15,24 +15,24 @@ Ejecutar el script, para subir los archivos de la carpeta `server` al servidor:
 
 ## Uso de GitHub
 
-***REMOVED***
+```
 # Para descargar el repositorio
 
 git clone https://github.com/corderop/practicas-dgp.git
-***REMOVED***
+```
 
 Una vez lo tienes:
 
 (Todos los comandos se tienen que ejecutar en la carpeta del repositorio, no en alguna subcarpeta como puede ser `server` o `base-de-datos`)
 
-***REMOVED***
+```
 # Para descargar la última versión de cambios del servidor 
 # sin tu haber editado nada desde el último commit que hiciste
 
 git pull
-***REMOVED***
+```
 
-***REMOVED***
+```
 # Para añadir un cambio
 
 git stash # Guarda por un momento los cambios que tu has hecho y los elimina de los archivos
@@ -60,4 +60,4 @@ git stash pop # Volver a poner en los archivos lo que tu has cambiado
 git add .
 git commit # Escribes un título representativo de lo que has hecho y guardas
 git push # Para subirlo al servidor
-***REMOVED***
+```

@@ -47,6 +47,10 @@
             $multimedia = null;
         }
 
+        if($_usuario['tipo'] == "USUARIO" ){
+            modificarCorregidaTarea($mysqli, $cod_tarea, 0);
+        }
+
         sendMensaje($mysqli, $mensaje, $multimedia, $cod_tarea, $_usuario['cod_usuario']);
         
         header("Location: tarea.php?cod_tarea=$cod_tarea");

@@ -37,8 +37,8 @@ function filtroCorregidas(element) {
         }
     }
     else if(estado == "C"){
-        let tarjetas_corregidas = document.querySelectorAll('.realizada');
-        let tarjetas_no_corregidas = document.querySelectorAll('.no-realizada');
+        let tarjetas_corregidas = document.querySelectorAll('.corregida');
+        let tarjetas_no_corregidas = document.querySelectorAll('.no-corregida');
 
         for(i=0; i<tarjetas_corregidas.length; i++){
             tarjetas_corregidas[i].style.display = '';
@@ -48,8 +48,8 @@ function filtroCorregidas(element) {
         }
     }
     else if(estado == "NC"){
-        let tarjetas_corregidas = document.querySelectorAll('.realizada');
-        let tarjetas_no_corregidas = document.querySelectorAll('.no-realizada');
+        let tarjetas_corregidas = document.querySelectorAll('.corregida');
+        let tarjetas_no_corregidas = document.querySelectorAll('.no-corregida');
         
         for(i=0; i<tarjetas_corregidas.length; i++){
             tarjetas_corregidas[i].style.display = 'none';

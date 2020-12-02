@@ -392,7 +392,7 @@
      * @param int $tarea codigo de la tarea a marcar como finalizada
      */
     function finalizarTarea($mysqli, $tarea){
-        $sql = "UPDATE TAREA set (realizada = true) where cod_tarea='$tarea'";
+        $sql = "UPDATE TAREA set realizada = true where cod_tarea='$tarea'";
         $mysqli->query($sql);
     }
 
@@ -403,7 +403,7 @@
      * @param int $Puntuacion Numero de 1 a 5 en la satisfacción de la tarea
      */
     function calificarTarea($mysqli, $tarea, $puntuacion){
-        $sql = "UPDATE TAREA set (puntuacion = '$puntuacion') where cod_tarea='$tarea'";
+        $sql = "UPDATE TAREA set puntuacion = '$puntuacion' where cod_tarea='$tarea'";
         $mysqli->query($sql);
     }	
 

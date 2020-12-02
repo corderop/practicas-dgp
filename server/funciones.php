@@ -270,7 +270,7 @@
     }
 
     /**
-     * Se obtienen las tareas de un tutor con los nombres de los usuarios que la realizan
+     * Se obtienen las tareas de un tutor con los nombres de los usuarios que la realizan ordenada por las no realizadas primero y dentro de esto las no corregidas primero
      * @param mysql $mysqli Base de datos sobre la que se actua
      * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas
      * @return mixed[] Array con las tareas que hemos pedido.
@@ -280,7 +280,7 @@
 
         // $cod_usuario = $usuario['cod_usuario'];
 
-        $sql="SELECT * FROM TAREA T inner join USUARIO U on (T.realiza=U.cod_usuario) WHERE T.crea='$tutor'";
+        $sql="SELECT * FROM TAREA T inner join USUARIO U on (T.realiza=U.cod_usuario) WHERE T.crea='$tutor' ORDER BY T.realizada, T.corregida";
         
         $res = $mysqli->query($sql);
 
@@ -383,6 +383,18 @@
         
 
         $mysqli->query($sql);
+    }
+
+    /**
+     * Modifica el campo corregida de la tarea
+     * @param mysql $mysqli Base de datos sobre la que actuar
+     * @param string $tarea Código de la tarea a modificar
+     * @param bool $valor Valor true o false al que cambiar
+     */
+    function modificarCorregidaTarea($mysqli, $tarea, $valor){
+        $sql="UPDATE TAREA SET corregida=$valor WHERE cod_tarea=$tarea;";
+        
+        $res = $mysqli->query($sql);
     }
 
     //TODO Hace falta acabarla

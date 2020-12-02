@@ -112,10 +112,10 @@
             {% for tarea in tareas %}
                 <!-- Card -->
                 <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
-                    {% if tarea['realizada'] %}
-                    <div class="ui card realizada">
+                    {% if tarea['corregida'] %}
+                    <div class="ui card corregida">
                     {% else %}
-                    <div class="ui card no-realizada">
+                    <div class="ui card no-corregida">
                     {% endif %}
 				        {% if 'image' in tarea['tipo_archivo'] %}
                         <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>

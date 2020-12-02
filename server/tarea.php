@@ -25,6 +25,7 @@
 
             // Cargar la tarea
             if($usuario['tipo'] == "TUTOR"){
+                modificarCorregidaTarea($mysqli, $cod_tarea, 1);
                 echo $twig->render('tarea.html', ['usuario'=>$usuario, 'tarea'=>$tarea, 'tipo'=>$tipo, 'titulo'=>$tarea['titulo']]);
             }
             if($usuario['tipo'] == "USUARIO"){

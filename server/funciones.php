@@ -221,6 +221,32 @@
     }
 
     /**
+     * Función que toma todas las tareas por realizar de un usuario
+     * @param mysql $mysqli Base de datos sobre la que se actua
+     * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas
+     * @return mixed[] Array con las tareas que hemos pedido.
+     */
+    function getTareasPorRealizar($mysqli,$usuario){ //Sin comprobar
+        // $usuario=getUsuario($mysqli,$usuario);
+        // $cod_usuario = $usuario['cod_usuario'];
+
+        $sql="SELECT * FROM TAREA WHERE(crea='$usuario' OR realiza='$usuario') AND realizada=0";
+        
+        $res = $mysqli->query($sql);
+
+        $resultado = array();
+
+        if ($res->num_rows > 0) {
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
+        }
+
+        return $resultado;
+    }
+
+
+    /**
      * Obtiene todas la tareas de un usuario en una semana
      * @param mysql $mysqli Base de datos sobre la que se actua
      * @param mixed $usuario String con el user o int con el codigo de usuario del que necesitamos las tareas

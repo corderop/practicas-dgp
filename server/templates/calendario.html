@@ -32,6 +32,9 @@
                   {
                       title: '{{ tarea['titulo'] }} - {{ tarea['nombre'] }}',
                       start: '{{ tarea['fecha_limite'] }}',
+                      {% if tarea['realizada'] %}
+                      color: 'green',
+                      {% endif %}
                       url: 'tarea.php?cod_tarea={{ tarea['cod_tarea'] }}'
                   },
                   {% endfor %}

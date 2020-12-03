@@ -86,10 +86,15 @@
      * @param string $pass nueva contraseña
      * @param string $avatar Nuevo avatar
      */
-    function actualizarUsuario($mysqli, $usuario, $nombre, $pass, $tipo, $avatar){
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
+    function actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar){
+        if($pass){
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            $sql = "UPDATE USUARIO set nombre='$nombre', pass='$pass', avatar='$avatar' where cod_usuario=".$usuario['cod_usuario'];
+        }
+        else{
+            $sql = "UPDATE USUARIO set nombre='$nombre', avatar='$avatar' where cod_usuario=".$usuario['cod_usuario'];
+        }
         
-        $sql = "UPDATE USUARIO set nombre='$nombre', pass='$pass', tipo='$tipo', avatar='$avatar' where cod_usuario=".$usuario['cod_usuario'];
         $mysqli->query($sql);
     }
 

@@ -24,17 +24,12 @@
 
     //Captar los elementos que queremos cambiar
     $nombre = $usuario['nombre'];
-    $pass = $usuario['pass'];
+    $pass = null;
     $repetirPass = $usuario['pass'];
-    $tipo = $usuario['tipo'];
     $avatar = $usuario['avatar'];
 
     if(isset($_POST['usuario'])){
         $nombre = mysqli_real_escape_string($mysqli,$_REQUEST['usuario']);
-    }
-    if(isset($_POST['tipo'])){
-        $tipo = strtoupper($_POST['tipo']);
-        $tipo = mysqli_real_escape_string($mysqli, $tipo);
     }
     if($_FILES['avatar']['name'] != ""){
         
@@ -48,25 +43,46 @@
           }
         
     }
-
     
-    
-    if(isset($_POST['pass']) && isset($_POST['repetirPass']) && $_POST['pass'] != ""){
-        $pass = $_REQUEST['pass'];
-        if($_POST['pass'] == $_POST['repetirPass']){
-            actualizarUsuario($mysqli, $usuario, $nombre, $pass, $tipo, $avatar);
-            $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
-            echo $twig->render('editarUsuario.html', ['user' => $usuario, 'usuario'=> $_usuario, 'titulo'=>"Editar usuario"]);
+    print_r($usuario);
+    if( $usuario["tipo"] != "USUARIO"){
+        if(isset($_POST['pass']) && isset($_POST['repetirPass']) && $_POST['pass'] != ""){
+            $pass = $_REQUEST['pass'];
+            if($_POST['pass'] == $_POST['repetirPass']){
+                actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+                $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+                header("Location: index.php");
+            }
+            else{
+                $msg="Error: las contraseñas no coinciden";
+                $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+                echo $twig->render('editarUsuario.html', ['user' => $usuario, 'usuario'=> $_usuario, 'titulo'=>"Editar usuario", 'msg'=> $msg]);
+            }
         }
         else{
-        $msg="Error: las contraseñas no coinciden";
-        $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
-        echo $twig->render('editarUsuario.html', ['user' => $usuario, 'usuario'=> $_usuario, 'titulo'=>"Editar usuario", 'msg'=> $msg]);
+            actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+            $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+            header("Location: index.php");
         }
     }
     else{
-        actualizarUsuario($mysqli, $usuario, $nombre, $pass, $tipo, $avatar);
-        $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
-        echo $twig->render('editarUsuario.html', ['user' => $usuario, 'usuario'=> $_usuario, 'titulo'=>"Editar usuario"]);
+        echo "hola";
+        if(isset($_POST['pass'])){
+            $pass = $_POST['pass'];
+            if($pass){
+                actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+                header("Location: index.php");
+            }
+            else{
+                $pass = null;
+                actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+                header("Location: index.php");
+            }
+        }
+        else{
+            $pass = null;
+            actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+            header("Location: index.php");
+        }
     }
 ?>

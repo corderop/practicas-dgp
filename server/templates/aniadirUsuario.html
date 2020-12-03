@@ -138,10 +138,10 @@
                 </div>
             </div>
             <div class="row">
-                <form action="loginfotos.php" method="post" id="login-fotos">
+                <div id="login-fotos">
                     <h2 class="text-center">Pulsa sobre las imágenes en orden para establecer la contraseña</h2>
                     <button type="button" onclick="borrarContrasena()" class="ui primary fluid button" data-bcup-haslogintext="no">Pulsa aquí para empezar de nuevo</button>
-                    <input type="hidden" name="fotos" id="input-fotos" value="">
+                    <input type="hidden" name="pass" id="input-fotos" value="">
                     <div id="grid-imagenes">
                         <img class="imagen-selector" onclick="aniadirContrasena(this, 'arbol')" src="../img/pictogramas/arbol.png" alt="árbol" data-seleccionada="no">
                         <img class="imagen-selector" onclick="aniadirContrasena(this, 'avion')" src="../img/pictogramas/avion.png" alt="avión" data-seleccionada="no">
@@ -158,7 +158,7 @@
                         Contraseña usada. Introduzca otra combinación
                     </div>
                     <button type="button" id="boton-comprobar" onclick="comprobarPass()" class="ui primary fluid button" data-bcup-haslogintext="no">Comprobar contraseña</button>
-                </form>
+                </div>
             </div>
             
             <div class="edicion-submit"  id="boton-guardar" style="display: none;">

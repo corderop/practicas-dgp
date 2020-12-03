@@ -34,11 +34,8 @@
         if(isset($_POST['avatar'])){
             $avatar = mysqli_real_escape_string($mysqli,$_FILES['avatar']['name']);
         }
-
-        //TODO: subir una imagen
         
-
-        if($pass == $repetirPass){
+        if($tipo == "USUARIO" || $pass == $repetirPass){
             aniadirUsuario($mysqli,$usuario,$pass,$tipo, $avatar); 
             header("Location: index.php");
         }

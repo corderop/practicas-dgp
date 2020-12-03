@@ -28,4 +28,7 @@ function borrarContrasena(){
         imagenes[i].style.backgroundColor = "white";
         imagenes[i].setAttribute('data-seleccionada', 'no');
     }
+
+    // Solo para editar y nuevo usuario
+    document.getElementById("boton-guardar").style.display = "none";
 }

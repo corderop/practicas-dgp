@@ -100,3 +100,20 @@ function comprobarPass() {
         }
     });
 }
+
+function alternarSiContrasena( el, cambiar ){
+    if(cambiar){
+        borrarContrasena();
+        document.getElementById("boton-guardar").style.display = "none";
+        document.getElementById("login-fotos").style.display = "block";
+        el.setAttribute('onclick', 'alternarSiContrasena(this, false);');
+        el.innerHTML = "Pulsa aquí para no modificar la contraseña"
+    }
+    else{
+        borrarContrasena();
+        document.getElementById("boton-guardar").style.display = "block";
+        document.getElementById("login-fotos").style.display = "none";
+        el.innerHTML = "Pulsa aquí para modificar la contraseña"
+        el.setAttribute('onclick', 'alternarSiContrasena(this, true);');
+    }
+}

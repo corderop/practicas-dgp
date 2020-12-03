@@ -30,7 +30,7 @@
                   // La que no tienen fecha no se muestran
                   {% for tarea in tareas %}
                   {
-                      title: '{{ tarea['titulo'] }}',
+                      title: '{{ tarea['titulo'] }} - {{ tarea['nombre'] }}',
                       start: '{{ tarea['fecha_limite'] }}',
                       url: 'tarea.php?cod_tarea={{ tarea['cod_tarea'] }}'
                   },

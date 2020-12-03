@@ -31,11 +31,14 @@
         if(isset($_POST['grupos'])){
             $grupos = $_REQUEST['grupos'];
         }
+        if(isset($_POST['fechas_grupos'])){
+            $fechas_grupos = $_REQUEST['fechas_grupos'];
+        }
         if(isset($_POST['usuarios'])){
             $usuarios = $_REQUEST['usuarios'];
         }
-        if(isset($_POST['fecha'])){
-            $fecha = $_REQUEST['fecha'];
+        if(isset($_POST['fechas_usuarios'])){
+            $fechas_usuarios = $_REQUEST['fechas_usuarios'];
         }
 
         if($nombre && $descripcion && ( $usuarios || $grupos ) ){
@@ -59,17 +62,17 @@
             }
 
             if($usuarios){
-                foreach ($usuarios as &$user){
-                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, $fecha, $_SESSION['cod_usuario'], $user);
+                for ($i = 0; $i < count($usuarios); $i++) {
+                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, $fechas_usuarios[$i], $_SESSION['cod_usuario'], $usuarios[$i]);
                 }
             }
             if($grupos){
-                foreach ($grupos as &$grupo){
-                    $g = getGrupo($mysqli, $grupo);
+                for ($i = 0; $i < count($grupos); $i++) {
+                    $g = getGrupo($mysqli, $grupos[$i]);
                     if($g['integrantes']){
                         foreach ($g['integrantes'] as &$user){
                             if(array_search($user['cod_usuario'], $usuarios) === FALSE)
-                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $fecha, $_SESSION['cod_usuario'], $user['cod_usuario']);
+                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $fechas_grupos[i], $_SESSION['cod_usuario'], $user['cod_usuario']);
                         }
                     }
                 }

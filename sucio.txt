@@ -1,15 +1,4 @@
 //TODO
 
-Borde para las imagenes inicio de sesion
-
-Cambiar el telefono movil inicio de sesion
-
-Tareas con pictogramas obligatorias
-
-Titulo para todas las pantallas - hecho
-
-Arreglar chat en ventanas estrechas
-
 Que en la app se puedan grabar audios automaticamente
 
-Fecha a cada usuario

@@ -182,7 +182,7 @@
      * @param int $tutor Codigo numerico del tutor en la base de datos
      * @param int $alumno Codigo numerico del alumno en la base de datos
      */
-    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $fecha, $tutor, $alumno){
+    function crearTarea($mysqli, $titulo, $objetivo, $descripcion, $multimedia, $pictograma, $fecha, $tutor, $alumno){
 
         $titulo = mysqli_real_escape_string($mysqli,$titulo);
         $objetivo = mysqli_real_escape_string($mysqli,$objetivo);
@@ -195,7 +195,7 @@
             $fecha = "00/00/0000";
         }
 
-        $sql = "INSERT INTO TAREA(titulo,descripcion,fecha_limite,objetivo,multimedia,crea,realiza) VALUES('$titulo','$descripcion',STR_TO_DATE('$fecha', '%d/%m/%Y'),'$objetivo','$multimedia','$tutor','$alumno')";
+        $sql = "INSERT INTO TAREA(titulo,descripcion,fecha_limite,objetivo,multimedia,pictograma,crea,realiza) VALUES('$titulo','$descripcion',STR_TO_DATE('$fecha', '%d/%m/%Y'),'$objetivo','$multimedia','$pictograma','$tutor','$alumno')";
     
         $mysqli->query($sql);
     }

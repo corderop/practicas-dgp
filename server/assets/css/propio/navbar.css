@@ -200,6 +200,7 @@ footer{
 
 .indicador-semana-div{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .titulo-semana{
@@ -210,6 +211,17 @@ footer{
 #no-actividad-semana{
     text-align: center;
     margin: 50px;
+}
+
+.formularios-siguiente-semana{
+    display: inline-block;
+}
+
+@media screen and (max-width: 700px) {
+    .flex-item-calendario-titulo{
+        flex-grow: 1;
+        text-align: center;
+    }
 }
 
 /* Añadir tarea */

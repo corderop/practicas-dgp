@@ -1,0 +1,8 @@
+/* CSS de las tarejetas del usuario */
+.card{
+    border: 2px solid black !important;
+}
+
+.card .image{
+    border-bottom: 2px solid black;
+}

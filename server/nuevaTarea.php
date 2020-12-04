@@ -14,6 +14,7 @@
         $nombre = null;
         $multimedia = null;
         $descripcion = null;
+        $pictograma= null;
         $fecha = "";
         $usuarios = [];
         $grupos = [];
@@ -41,6 +42,12 @@
             $fechas_usuarios = $_REQUEST['fechas_usuarios'];
         }
 
+        if(isset($_FILES['pictograma'])){
+            $pictograma = mysqli_real_escape_string($mysqli,$_FILES['pictograma']['name']);
+        }
+
+        
+
         if($nombre && $descripcion && ( $usuarios || $grupos ) ){
             // Toma el archivo si lo ha anadido
             if($multimedia){
@@ -61,9 +68,31 @@
                 $multimedia = $targetFilePath;
             }
 
+            if($pictograma){    //Cuando hayamos subido un pictograma
+                $targetDir = "img/";
+                $fileName = date("Y-m-d-H-i-s") . $pictograma;
+                $pictogramaFilePath = $targetDir . $fileName;
+
+                // $allowTypes = array('jpg','png','jpeg');
+                $imageFileType = strtolower(pathinfo($pictogramaFilePath,PATHINFO_EXTENSION));
+                // if(in_array($imageFileType, $allowTypes)){
+                if(move_uploaded_file($_FILES["pictograma"]["tmp_name"], $pictogramaFilePath)){
+                    //echo "Bien";
+                }
+                else{
+                    echo "Hay algun error";
+                }
+                // }
+                $pictograma = $pictogramaFilePath;
+            }
+            else{   //Si no hay pictograma ponemos uno generico
+                $pictograma = "img/trabajar.png";
+            }
+
+
             if($usuarios){
                 for ($i = 0; $i < count($usuarios); $i++) {
-                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, $fechas_usuarios[$i], $_SESSION['cod_usuario'], $usuarios[$i]);
+                    crearTarea($mysqli, $nombre, NULL, $descripcion, $multimedia, $pictograma, $fechas_usuarios[$i], $_SESSION['cod_usuario'], $usuarios[$i]);
                 }
             }
             if($grupos){
@@ -72,7 +101,7 @@
                     if($g['integrantes']){
                         foreach ($g['integrantes'] as &$user){
                             if(array_search($user['cod_usuario'], $usuarios) === FALSE)
-                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $fechas_grupos[i], $_SESSION['cod_usuario'], $user['cod_usuario']);
+                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $pictograma, $fechas_grupos[i], $_SESSION['cod_usuario'], $user['cod_usuario']);
                         }
                     }
                 }

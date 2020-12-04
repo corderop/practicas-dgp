@@ -47,7 +47,22 @@
     </div>
 
     <div class="field">
+      <label>Nombre de la tarea</label>
+      <input id="nombre-tarea" type="text" name="nombre" placeholder="Introduce aquí el nombre de la tarea">
+    </div>
+
+    <div class="field">
       <div class="two fields">
+        <div class="field">
+          <label>Pulsa en la imagen para añadir un pictograma</label>
+          <div class="row">
+            <label class="foto-input-label" for="pictograma">
+              <img src="img/image.jpg" />
+            </label>
+            <input class="foto-input" id="pictograma" type="file" name="pictograma" accept="image/*">
+          </div>
+        </div>
+
         <div class="field">
           <label>Pulsa en la imagen para añadir un archivo</label>
           <div class="row">
@@ -57,18 +72,13 @@
             <input class="foto-input" id="multimedia" type="file" name="multimedia" accept="image/*, video/*, audio/*">
           </div>
         </div>
-
-        <div class="field">
-          <label>Añadir texto</label>
-          <textarea id="comentario-tarea" name="comentario" style="resize: none; height: 250px;"></textarea>
-          <!-- </div> -->
-        </div>
       </div>
     </div>
 
     <div class="field">
-      <label>Nombre de la tarea</label>
-      <input id="nombre-tarea" type="text" name="nombre" placeholder="Introduce aquí el nombre de la tarea">
+      <label>Añadir texto</label>
+      <textarea id="comentario-tarea" name="comentario" style="resize: none; height: 250px;"></textarea>
+      <!-- </div> -->
     </div>
 
     <div class="field">

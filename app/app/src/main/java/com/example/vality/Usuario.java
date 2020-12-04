@@ -1,7 +1,9 @@
 package com.example.vality;
 
-import android.content.Intent;
 import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -9,9 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,8 +51,8 @@ public class Usuario{
                         if(nombre != null){
                             tv.setText("Logueo realizado con éxito");
                             tv.setTextColor(Color.BLACK);
-                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue);
-                            general.setContentView(R.layout.tareas);
+                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
+                            general.setContentView(R.layout.listatareas);
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
@@ -80,7 +80,7 @@ public class Usuario{
 
     }
 
-    public void obtenerTareas(String url, RequestQueue queue){
+    public void obtenerTareas(String url, RequestQueue queue, MainActivity general){
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("cod_usuario", cod_usuario);
@@ -137,7 +137,34 @@ public class Usuario{
                             contador++;
                             terminado = response.isNull(contador+"");
                         }
-                        System.out.println("La lista contenía " + contador + "tareas");
+                        System.out.println("La lista contenía " + contador + "tareas, pasamos a crear la interfaz");
+
+                        ListView lista = (ListView) general.findViewById(R.id.ListView_listado);
+                        lista.setAdapter(new listaAdaptador(general, R.layout.tareasimple, tareas){
+                            @Override
+                            public void onEntrada(Object entrada, View view) {
+                                System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
+                                if(((Tarea) entrada).isRealizada()){
+                                    System.out.println(" bien");
+                                }else{
+                                    System.out.println(" trabajar");
+                                }
+
+                                TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                                texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+
+                                TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                                texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+
+                                ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
+                                if(((Tarea) entrada).isRealizada()){
+                                    imagen_entrada.setImageResource(R.drawable.bien);
+                                }else{
+                                    imagen_entrada.setImageResource(R.drawable.trabajar);
+                                }
+                            }
+                        });
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

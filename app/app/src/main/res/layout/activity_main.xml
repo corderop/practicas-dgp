@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="48dp"
         android:onClick="logueo"
-        android:text="Loguearse"
+        android:text="Iniciar sesión"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

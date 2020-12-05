@@ -14,7 +14,7 @@
 
     {% if user['tipo'] == "USUARIO" %}
     <!-- Formulario -->
-    <form method="POST" enctype="multipart/form-data" action="edicionUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
+    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
         <div class="row etiqueta-foto-usuario">
             <p>Pulsa en la imagen para añadir una fotografía</p>
         </div>
@@ -71,7 +71,7 @@
         </div>
     </form>
     {% else %}
-    <form method="POST" enctype="multipart/form-data" action="edicionUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
+    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
         <div class="row etiqueta-foto-usuario">
             <p>Pulsa en la imagen para cambiar la fotografía</p>
         </div>

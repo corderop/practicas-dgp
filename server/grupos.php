@@ -28,7 +28,6 @@
         else {
             echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);
         }
-        // echo $twig->render('grupos.html', ['usuario'=>$usuario, 'grupos'=>$grupos, 'titulo'=> "Grupos" ]);
 
     }
     else{

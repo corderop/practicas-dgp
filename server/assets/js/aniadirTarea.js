@@ -38,7 +38,6 @@ function quitarUsuario(el, cod_user){
 }
 
 function cambiarFechaUsuario(el, cod_user){
-    console.log(`fecha cambiada user ${cod_user}`);
     var index = usuarios.indexOf(cod_user);
     if (index >= 0){
         fechas_usuarios[index] = el.value;
@@ -132,6 +131,7 @@ function hacerSubmit(){
     for(i=0; i<usuarios.length; i++){
         var input = document.createElement("input");
         var user = formulario.appendChild(input);
+        user.classList.add('entrada');
         user.type = 'text';
         user.setAttribute("value",`${usuarios[i]}`);
         user.name = `usuarios[]`;
@@ -148,12 +148,19 @@ function hacerSubmit(){
                 li.innerHTML = "Hay usuarios que no tienen fecha asignada";
                 lista.appendChild(li);
 
+                let por_elimianr = document.getElementsByClassName("entrada");
+
+                for(j=0; j<por_elimianr.length; j++){
+                    por_elimianr[j].parentNode.removeChild(por_elimianr[j]);
+                }
+
                 return false;
             }
         }
 
         var input = document.createElement("input");
         var user = formulario.appendChild(input);
+        user.classList.add('entrada');
         user.type = 'text';
         user.setAttribute("value",`${fechas_usuarios[i]}`);
         user.name = `fechas_usuarios[]`;
@@ -164,6 +171,7 @@ function hacerSubmit(){
     for(i=0; i<grupos.length; i++){
         var input = document.createElement("input");
         var user = formulario.appendChild(input);
+        user.classList.add('entrada');
         user.type = 'text';
         user.setAttribute("value",`${grupos[i]}`);
         user.name = `grupos[]`;
@@ -180,12 +188,19 @@ function hacerSubmit(){
                 li.innerHTML = "Hay grupos que no tienen fecha asignada";
                 lista.appendChild(li);
 
+                let por_elimianr = document.getElementsByClassName("entrada");
+
+                for(j=0; j<por_elimianr.length; j++){
+                    por_elimianr[j].parentNode.removeChild(por_elimianr[j]);
+                }
+
                 return false;
             }
         }
 
         var input = document.createElement("input");
         var user = formulario.appendChild(input);
+        user.classList.add('entrada');
         user.type = 'text';
         user.setAttribute("value",`${fechas_grupos[i]}`);
         user.name = `fechas_grupos[]`;

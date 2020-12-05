@@ -99,7 +99,7 @@ public class Tarea {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("cod_usuario", cod_tarea);
 
-            System.out.println("Creando mensaje para pedir mensaejes, cod_tarea: " + cod_tarea);
+            System.out.println("Creando bocadillo para pedir mensaejes, cod_tarea: " + cod_tarea);
 
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
@@ -116,9 +116,9 @@ public class Tarea {
                             mensaje_Aux = response.getJSONObject(contador+"");
 
                             if(mensaje_Aux != null){
-                                System.out.println("Leemos  mensaje " + contador);
+                                System.out.println("Leemos  bocadillo " + contador);
                             }else{
-                                System.out.println("Error el valor del mensaje " + contador + " está vacío.");
+                                System.out.println("Error el valor del bocadillo " + contador + " está vacío.");
                             }
 
                             aux.setCod_mensaje(mensaje_Aux.getInt("cod_mensaje"));
@@ -137,7 +137,7 @@ public class Tarea {
                             aux.setCod_emisor(mensaje_Aux.getInt("envia"));
 
                             mensajes.add(aux);
-                            System.out.println("Añadido mensaje " + mensaje_Aux.toString());
+                            System.out.println("Añadido bocadillo " + mensaje_Aux.toString());
 
                             contador++;
                             terminado = response.isNull(contador+"");

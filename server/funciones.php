@@ -136,6 +136,12 @@
             }
         }
 
+        // Elimina las tareas asociadas al usuario
+        $tareas = getTareas($mysqli, $cod_usuario);
+        foreach($tareas as &$tarea){
+            deleteTarea($mysqli,$tarea['cod_tarea']);
+        }
+
         // Eliminar de la tabla intregrado 
         $mysqli->query("DELETE FROM INTEGRADO WHERE cod_usuario='$cod_usuario'");
         //Eliminar al usario

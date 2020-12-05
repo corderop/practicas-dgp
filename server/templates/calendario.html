@@ -68,7 +68,7 @@
         {% if semana == 0 %}
           Semana actual
         {% elseif semana == -1 %}
-          Semana anterior
+          Semana pasada
         {% elseif semana == 1 %}
           Semana siguiente
         {% elseif semana > 1 %}
@@ -111,16 +111,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-            {% for tarea in dias['lunes'] %}
-              <div class="ui card tarjeta-calendario">
-                <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                </a>
-                <div class="content">
-                    <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                </div>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['lunes'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor %}
             </div>
           </div>
         </div>
@@ -137,16 +139,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['martes'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['martes'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -163,16 +167,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['miercoles'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['miercoles'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -189,16 +195,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['jueves'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['jueves'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -215,16 +223,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['viernes'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['viernes'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -241,16 +251,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['sabado'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['sabado'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -267,16 +279,18 @@
             </div>
           </div>
           <div class="col-sm-10">
-            <div class="ui segment tareas-dia">
-              {% for tarea in dias['domingo'] %}
-                <div class="ui card tarjeta-calendario">
-                  <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                  </a>
-                  <div class="content">
-                      <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+            <div class="ui segment">
+              <div class="ui cards tareas-dia">
+                {% for tarea in dias['domingo'] %}
+                  <div class="ui card tarjeta-calendario">
+                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
+                    </a>
+                    <div class="content">
+                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                    </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>

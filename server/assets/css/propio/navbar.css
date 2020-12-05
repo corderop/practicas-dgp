@@ -174,11 +174,14 @@ footer{
 .tareas-dia{
     white-space: nowrap;
     overflow-x: auto;
+    margin: 0 !important;
+    flex-wrap: nowrap !important;
 }
 
 .tarjeta-calendario{
     display: inline-block !important;
     margin: 0 20px !important;
+    min-width: 200px !important;
     width: 200px !important;
     white-space: normal;
 }

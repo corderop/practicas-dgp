@@ -11,7 +11,7 @@
         android:layout_width="277dp"
         android:layout_height="61dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:autoSizeTextType="uniform"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +20,19 @@
         android:id="@+id/imagenTarea"
         android:layout_width="246dp"
         android:layout_height="224dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="80dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <VideoView
+        android:id="@+id/videoTarea"
+        android:layout_width="267dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenTarea" />
 </androidx.constraintlayout.widget.ConstraintLayout>

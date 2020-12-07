@@ -1,11 +1,14 @@
 package com.example.vality;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,8 +22,9 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Usuario{
+public class Usuario {
     private String nombre;
     private String contrasena;
     private int cod_usuario;
@@ -55,9 +59,11 @@ public class Usuario{
                         if(nombre != null){
                             tv.setText("Logueo realizado con éxito");
                             tv.setTextColor(Color.BLACK);
-                            general.setContentView(R.layout.listatareas);
-                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
-                            general.estado_app = "LOGUEADO";
+                            Intent i = new Intent(general, tareasActivity.class);
+                            i.putExtra("nombre", nombre);
+                            i.putExtra("contrasena", contrasena);
+                            i.putExtra("cod_usuario", cod_usuario+"");
+                            general.startActivity(i);
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
@@ -85,7 +91,7 @@ public class Usuario{
 
     }
 
-    public void obtenerTareas(String url, RequestQueue queue, MainActivity general){
+    public void obtenerTareas(String url, RequestQueue queue, tareasActivity general){
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("cod_usuario", cod_usuario);
@@ -171,7 +177,7 @@ public class Usuario{
 
                                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
                                     if(imagen_entrada !=null){
-                                        if (((Tarea) entrada).isRealizada()) {
+                                        if (((Tarea) entrada).getRealizada()) {
                                             imagen_entrada.setImageResource(R.drawable.bien);
                                         } else {
                                             imagen_entrada.setImageResource(R.drawable.trabajar);
@@ -186,11 +192,18 @@ public class Usuario{
                             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
                                 Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
 
-                                general.setContentView(R.layout.pantalla_tarea);
-                                general.estado_app= "MOSTRARTAREASIMPLE";
-                                TextView titulo = general.findViewById(R.id.tituloTarea);
-                                titulo.setText(elegida.getTitulo());
+                                Intent i = new Intent(general, unaTareaActivity.class);
 
+                                i.putExtra("cod_tarea", elegida.getCod_tarea()+"");
+                                i.putExtra("cod_facilitador", elegida.getCod_facilitador()+"");
+                                i.putExtra("titulo", elegida.getTitulo()+"");
+                                i.putExtra("descripcion", elegida.getDescripcion()+"");
+                                i.putExtra("fecha_limite", elegida.getFecha_limite()+"");
+                                i.putExtra("objetivo", elegida.getObjetivo()+"");
+                                i.putExtra("multimedia", elegida.getMultimedia()+"");
+                                i.putExtra("realizada", elegida.getRealizada()+"");
+                                i.putExtra("calificacion", elegida.getCalificacion()+"");
+                                general.startActivity(i);
                             }
                         });
 

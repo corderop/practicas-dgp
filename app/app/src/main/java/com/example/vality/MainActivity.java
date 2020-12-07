@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     Usuario usuario;
     RequestQueue queue;
     String contrasenaIntroducida;
-    String estado_app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         usuario = new Usuario();
-        estado_app ="LOGUEO";
         contrasenaIntroducida ="";
         queue = Volley.newRequestQueue(this);
 
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         telefono.setBackgroundColor(Color.WHITE);
         telefono.setClickable(true);
     }
-
+    /*
     @Override
     public void onBackPressed() {
         if(estado_app == "LOGUEO" || estado_app == "LOGUEADO"){
@@ -163,4 +161,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+ */
 }

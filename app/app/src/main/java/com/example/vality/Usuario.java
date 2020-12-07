@@ -2,6 +2,7 @@ package com.example.vality;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,8 @@ public class Usuario{
     private String nombre;
     private String contrasena;
     private int cod_usuario;
-    ArrayList<Tarea> tareas;
+    private ArrayList<Tarea> tareas;
+    private ListView lista;
 
     public Usuario (){
         nombre = null;
@@ -51,8 +53,8 @@ public class Usuario{
                         if(nombre != null){
                             tv.setText("Logueo realizado con éxito");
                             tv.setTextColor(Color.BLACK);
-                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
                             general.setContentView(R.layout.listatareas);
+                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
@@ -93,14 +95,13 @@ public class Usuario{
                 public void onResponse(JSONObject response) {
                     try {
                         System.out.println("Ha llegado la lista con las tareas");
-                        Tarea aux = new Tarea();
+                        Tarea aux;
                         JSONObject tarea_Aux = null;
                         int contador =0;
                         boolean terminado = response.isNull(contador+"");
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                         while(!terminado){
-
-
+                            aux = new Tarea();
                             tarea_Aux = response.getJSONObject(contador+"");
 
                             if(tarea_Aux != null){
@@ -108,7 +109,6 @@ public class Usuario{
                             }else{
                                 System.out.println("Error el valor de la tarea " + contador + " está vacío.");
                             }
-
                             aux.setCod_Tarea(tarea_Aux.getInt("cod_tarea"));
                             aux.setTitulo(tarea_Aux.getString("titulo"));
                             aux.setDescripcion(tarea_Aux.getString("descripcion"));
@@ -132,36 +132,59 @@ public class Usuario{
                             }
 
                             tareas.add(aux);
-                            System.out.println("Añadida tarea " + tarea_Aux.toString());
+                            System.out.println("Añadida tarea " + aux.toString());
 
                             contador++;
                             terminado = response.isNull(contador+"");
                         }
-                        System.out.println("La lista contenía " + contador + "tareas, pasamos a crear la interfaz");
+                        contador--;
+                        System.out.println("La lista contenía " + contador + "tareas, que son: ");
+                        System.out.println(tareas.toString());
+                        System.out.println("pasamos a crear la interfaz de tareas");
 
-                        ListView lista = (ListView) general.findViewById(R.id.ListView_listado);
+                        lista = (ListView) general.findViewById(R.id.ListView_listado);
                         lista.setAdapter(new listaAdaptador(general, R.layout.tareasimple, tareas){
                             @Override
                             public void onEntrada(Object entrada, View view) {
-                                System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
-                                if(((Tarea) entrada).isRealizada()){
-                                    System.out.println(" bien");
-                                }else{
-                                    System.out.println(" trabajar");
+                                if (entrada != null) {
+                                    System.out.println(((Tarea) entrada).toString());
+                                    /*System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
+                                    if (((Tarea) entrada).isRealizada()) {
+                                        System.out.println(" bien");
+                                    } else {
+                                        System.out.println(" trabajar");
+                                    }
+                                    */
+
+                                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                                    if (texto_superior_entrada != null){
+                                        texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+                                    }
+
+                                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                                    if (texto_inferior_entrada != null){
+                                        texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+                                    }
+
+                                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
+                                    if(imagen_entrada !=null){
+                                        if (((Tarea) entrada).isRealizada()) {
+                                            imagen_entrada.setImageResource(R.drawable.bien);
+                                        } else {
+                                            imagen_entrada.setImageResource(R.drawable.trabajar);
+                                        }
+                                    }
                                 }
+                            }
+                        });
 
-                                TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
-                                texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+                        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                                Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
 
-                                TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
-                                texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+                                general.setContentView(R.layout.pantalla_tarea);
 
-                                ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                                if(((Tarea) entrada).isRealizada()){
-                                    imagen_entrada.setImageResource(R.drawable.bien);
-                                }else{
-                                    imagen_entrada.setImageResource(R.drawable.trabajar);
-                                }
                             }
                         });
 

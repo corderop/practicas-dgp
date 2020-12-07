@@ -244,4 +244,9 @@ public class Tarea {
     public ArrayList<Mensaje> getMensajes() {
         return mensajes;
     }
+
+    @Override
+    public String toString(){
+        return "Título: " + this.getTitulo() + " imagen: "+ this.isRealizada();
+    }
 }

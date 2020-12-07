@@ -2,6 +2,12 @@
 
 {% block estilos %}
 
+{% if usuario['tipo'] == "USUARIO" %}
+
+<link rel="stylesheet" href="assets/css/propio/tarjetas.css">
+
+{% endif %}
+
 {% endblock %}
 
 {% block body %}
@@ -51,7 +57,7 @@
                         <div class="ui two buttons">
                             <a class="ui basic blue button" href="editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Editar</a>
                         
-                            <a class="ui basic red button" href="eliminarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Eliminar</a>
+                            <a class="ui basic red button" href="_eliminarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">Eliminar</a>
 
                         </div>
                     </div>
@@ -100,7 +106,7 @@
         <div class="ui three stackable cards cards-grid">
             <!-- Añadir tarea -->
             <div class="ui card">
-                <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="crearTarea.php" data-bcup-haslogintext="no">
+                <a class="image imagen-tarjeta" style="background-image: url('img/aniadir-tarea.png');" href="aniadirTarea.php" data-bcup-haslogintext="no">
                 </a>
                 <div class="content">
                     <a class="center aligned header" data-bcup-haslogintext="no">Añadir una nueva tarea</a>
@@ -117,11 +123,7 @@
                     {% else %}
                     <div class="ui card no-corregida">
                     {% endif %}
-				        {% if 'image' in tarea['tipo_archivo'] %}
-                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['multimedia'] }}');"></div>
-                        {% else %}
-                        <div class="image imagen-tarjeta" style="background-image: url('multimedia/tarea.png');"></div>
-                        {% endif %}
+                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
                         <div class="content">
                             <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                             <div class="meta">
@@ -133,9 +135,9 @@
                                 {% if tarea['realizada'] %}
                                 <a class="ui green button" style="cursor: auto;">Finalizada</a>
                                 {% else %}
-                                <a class="ui basic green button" href="finalizarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Finalizar</a>
+                                <a class="ui basic green button" href="_finalizarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Finalizar</a>
                                 {% endif %}
-                                <a class="ui basic red button" href="eliminarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Eliminar</a>
+                                <a class="ui basic red button" href="_eliminarTarea.php?cod_tarea={{ tarea['cod_tarea'] }}">Eliminar</a>
                             </div>
                         </div>
                     </div>
@@ -156,7 +158,7 @@
                 <!-- Card -->
                 <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                     <div class="ui card">
-                        <div class="image imagen-tarjeta" style="background-image: url('img/trabajar.png');"></div>
+                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
                         <div class="content">
                             <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                         </div>

@@ -21,7 +21,7 @@ CREATE TABLE TAREA(
     realizada boolean default false,
     corregida boolean default true,
     calificacion int,
-    pictograma varchar(200) not null,
+    pictograma varchar(200) not null default 'img/trabajar.png',
     FOREIGN KEY (crea) REFERENCES USUARIO(cod_usuario),
     FOREIGN KEY (realiza) REFERENCES USUARIO(cod_usuario)
 );

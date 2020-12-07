@@ -11,7 +11,7 @@
     if(isset($_SESSION['cod_usuario'])){
         $usuario=getUsuario($mysqli, $_SESSION['cod_usuario']);
         $usuarios = getUsuarios($mysqli);
-        echo $twig->render('crearGrupo.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Crear un nuevo grupo" ]);
+        echo $twig->render('aniadirGrupo.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Crear un nuevo grupo" ]);
 
     }
     else{

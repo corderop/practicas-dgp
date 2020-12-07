@@ -105,9 +105,9 @@
 		</div>
 
 		{% if usuario['tipo'] == "USUARIO" %}
-		<form action="nuevoMensaje.php" id="form-mensaje" method="POST" enctype="multipart/form-data" onsubmit="return hacerSubmitChat();">
+		<form action="_mensaje.php" id="form-mensaje" method="POST" enctype="multipart/form-data" onsubmit="return hacerSubmitChat();">
 		{% else %}
-		<form action="nuevoMensaje.php" method="POST" enctype="multipart/form-data" onsubmit="return hacerSubmitChat();">
+		<form action="_mensaje.php" method="POST" enctype="multipart/form-data" onsubmit="return hacerSubmitChat();">
 		{% endif %}
 			<div id="input-enviar">
 				{% if usuario['tipo'] == "USUARIO" %}

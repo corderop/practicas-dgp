@@ -40,7 +40,7 @@
             <!-- Aqui van las tarjetas -->
             <!-- Añadir usuario -->
             <div class="ui card">
-                <a class="image imagen-tarjeta" style="background-image: url('img/grupo.png');" href="creargrupo.php" data-bcup-haslogintext="no">
+                <a class="image imagen-tarjeta" style="background-image: url('img/grupo.png');" href="aniadirGrupo.php" data-bcup-haslogintext="no">
                 </a>
                 <div class="content">
                     <a class="center aligned header" data-bcup-haslogintext="no">Crear un grupo</a>
@@ -60,7 +60,7 @@
                     <form id="editar-grupo-{{ grupo['cod_grupo'] }}" method="post" action="editarGrupo.php" style="display: none;">
                         <input type="hidden" name="cod_grupo" value="{{ grupo['cod_grupo'] }}">
                     </form>
-                    <form id="eliminar-grupo-{{ grupo['cod_grupo'] }}" method="post" action="eliminarGrupo.php" style="display: none;">
+                    <form id="eliminar-grupo-{{ grupo['cod_grupo'] }}" method="post" action="_eliminarGrupo.php" style="display: none;">
                         <input type="hidden" name="cod_grupo" value="{{ grupo['cod_grupo'] }}">
                     </form>
                     <div class="ui basic blue button" onclick="document.getElementById('editar-grupo-{{ grupo['cod_grupo'] }}').submit();">Editar</div>

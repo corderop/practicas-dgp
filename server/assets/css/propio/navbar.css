@@ -174,11 +174,14 @@ footer{
 .tareas-dia{
     white-space: nowrap;
     overflow-x: auto;
+    margin: 0 !important;
+    flex-wrap: nowrap !important;
 }
 
 .tarjeta-calendario{
     display: inline-block !important;
     margin: 0 20px !important;
+    min-width: 200px !important;
     width: 200px !important;
     white-space: normal;
 }
@@ -200,6 +203,7 @@ footer{
 
 .indicador-semana-div{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .titulo-semana{
@@ -210,6 +214,17 @@ footer{
 #no-actividad-semana{
     text-align: center;
     margin: 50px;
+}
+
+.formularios-siguiente-semana{
+    display: inline-block;
+}
+
+@media screen and (max-width: 700px) {
+    .flex-item-calendario-titulo{
+        flex-grow: 1;
+        text-align: center;
+    }
 }
 
 /* Añadir tarea */

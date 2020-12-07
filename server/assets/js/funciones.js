@@ -66,7 +66,7 @@ function comprobarPass() {
     let pass = document.getElementById("input-fotos").value;
     console.log("pass: " + pass);
     $.ajax({
-        url:"comprobarPass.php",
+        url:"_comprobarPass.php",
         method:"POST",
         data:{imagenes:pass},
         success:function(data)

@@ -27,11 +27,11 @@
     </div> -->
 
     <div class="login-form" id="caja-login">
-        <h1 class="titulo-pagina">Login</h1>
+        <h1 tabindex="0" class="titulo-pagina">Login</h1>
         </br>
 
         {% if msg %}
-        <div class="alert alert-danger" role="alert">
+        <div tabindex="0" class="alert alert-danger" role="alert">
             {{ msg }}
         </div>
         {% endif %}
@@ -48,19 +48,19 @@
             </div>
         </form>
         <form action="_login.php" method="post" id="login-fotos">
-            <h2 class="text-center">Pulsa sobre las imágenes en orden</h2>
+            <h2 tabindex="0" class="text-center">Pulsa sobre las imágenes en orden</h2>
             <button type="button" onclick="borrarContrasena()" class="ui primary fluid button botones-usuario" data-bcup-haslogintext="no">Pulsa aquí para empezar de nuevo</button>
             <input type="hidden" name="fotos" id="input-fotos" value="">
             <div id="grid-imagenes">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'arbol')" src="../img/pictogramas/arbol.png" alt="árbol" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'avion')" src="../img/pictogramas/avion.png" alt="avión" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'balon')" src="../img/pictogramas/balon.png" alt="balón" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'botella')" src="../img/pictogramas/botella.png" alt="botella" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'coche')" src="../img/pictogramas/coche.png" alt="coche" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'leon')" src="../img/pictogramas/leon.png" alt="león" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'moto')" src="../img/pictogramas/moto.png" alt="moto" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'ordenador')" src="../img/pictogramas/ordenador.png" alt="ordenador" data-seleccionada="no">
-                <img class="imagen-selector" onclick="aniadirContrasena(this, 'enchufe')" src="../img/pictogramas/enchufe.png" alt="enchufe" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'arbol')" src="../img/pictogramas/arbol.png" alt="árbol" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'avion')" src="../img/pictogramas/avion.png" alt="avión" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'balon')" src="../img/pictogramas/balon.png" alt="balón" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'botella')" src="../img/pictogramas/botella.png" alt="botella" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'coche')" src="../img/pictogramas/coche.png" alt="coche" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'leon')" src="../img/pictogramas/leon.png" alt="león" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'moto')" src="../img/pictogramas/moto.png" alt="moto" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'ordenador')" src="../img/pictogramas/ordenador.png" alt="ordenador" data-seleccionada="no">
+                <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'enchufe')" src="../img/pictogramas/enchufe.png" alt="enchufe" data-seleccionada="no">
             </div>
             <button type="submit" class="ui primary fluid button botones-usuario" data-bcup-haslogintext="no">Iniciar sesión</button>
         </form>

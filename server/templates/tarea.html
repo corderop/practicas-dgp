@@ -19,28 +19,28 @@
 				{% if 'image' in tipo %}
 				<div class="imagen-tarea" style="background-image: url({{ tarea['multimedia'] }});"></div>
 				{% elseif 'video' in tipo %}
-				<video controls class="video-tarea" preload="metadata">
+				<video tabindex="0" controls class="video-tarea" preload="metadata" name="Video de la tarea">
 					<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
 				</video>
 				{% elseif 'audio' in tipo %}
-				<audio controls class="video-tarea">
+				<audio tabindex="0" controls class="video-tarea">
 					<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
 				</audio>
 				{% endif %}
 			</div>
-			<div class="col-md-6" id="descripcion-tarea">
+			<div tabindex="0" class="col-md-6" id="descripcion-tarea">
 				<h2>Descripción</h2>
 				<p>{{ tarea['descripcion'] }}</p>
 			</div>
 			{% else %}
-			<div class="col-md-12" id="descripcion-tarea">
+			<div tabindex="0" class="col-md-12" id="descripcion-tarea">
 				<p>{{ tarea['descripcion'] }}</p>
 			</div>
 			{% endif %}
 		</div>
 	</div>
 	<div class="seccion-tarea">
-		<h2 class="text-center" id="titulo-mensajes">Mensajes</h2>
+		<h2 class="text-center" id="titulo-mensajes" tabindex="0" >Mensajes</h2>
 		<div class="mesgs">
 			<div class="msg_history" tabindex="0">
 				{% for mensaje in tarea['mensajes'] %}
@@ -48,7 +48,7 @@
 				{% if mensaje['contenido'] %}
 				<div class="outgoing_msg">
 					<div class="sent_msg">
-						<p>{{ mensaje['contenido'] }}</p>
+						<p tabindex="0">{{ mensaje['contenido'] }}</p>
 					</div>
 				</div>
 				{% endif %}
@@ -56,13 +56,13 @@
 				<div class="outgoing_msg">
 					<div class="sent_msg">
 						{% if 'image' in mensaje['tipo_archivo'] %}
-						<div class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+						<div tabindex="0" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 						{% elseif 'video' in mensaje['tipo_archivo'] %}
-						<video controls class="video-tarea" preload="metadata">
+						<video tabindex="0" controls class="video-tarea" preload="metadata">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</video>
 						{% elseif 'audio' in mensaje['tipo_archivo'] %}
-						<audio controls class="video-tarea">
+						<audio tabindex="0" controls class="video-tarea">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</audio>
 						{% endif %}
@@ -74,7 +74,7 @@
 				<div class="incoming_msg">
 					<div class="received_msg">
 						<div class="received_withd_msg">
-							<p>{{ mensaje['contenido'] }} </p>
+							<p tabindex="0">{{ mensaje['contenido'] }} </p>
 							<span class="time_date">{{ mensaje['fecha'] }} </span>
 						</div>
 					</div>
@@ -85,13 +85,13 @@
 					<div class="received_msg">
 						<div class="received_withd_msg">
 							{% if 'image' in mensaje['tipo_archivo'] %}
-							<div class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+							<div tabindex="0" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 							{% elseif 'video' in mensaje['tipo_archivo'] %}
-							<video controls class="video-tarea" preload="metadata">
+							<video tabindex="0" controls class="video-tarea" preload="metadata">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</video>
 							{% elseif 'audio' in mensaje['tipo_archivo'] %}
-							<audio controls class="video-tarea">
+							<audio tabindex="0" controls class="video-tarea">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</audio>
 							{% endif %}
@@ -111,12 +111,12 @@
 		{% endif %}
 			<div id="input-enviar">
 				{% if usuario['tipo'] == "USUARIO" %}
-				<label for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
+				<label role="button" tabindex="0" for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
 				{% else %}
 				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor"><span>Pulsa aquí para añadir un archivo</span></label>
 				{% endif %}
 				<div class="ui input" id="mensaje-envio-div">
-					<input type="text" placeholder="Mensaje" id="mensaje-envio" name="mensaje">
+					<input type="text" placeholder="Escribe el mensaje a enviar" id="mensaje-envio" name="mensaje">
 				</div>
 				{% if usuario['tipo'] == "USUARIO" %}
 				<button class="ui primary button boton-enviar-mensaje botones-usuario" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>

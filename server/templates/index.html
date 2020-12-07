@@ -156,7 +156,7 @@
         <div class="ui three stackable cards cards-grid">        
             {% for tarea in tareas %}
                 <!-- Card -->
-                <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                <!-- <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}"> -->
                     <div class="ui card">
                         <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
                         <div class="content">
@@ -164,16 +164,18 @@
                         </div>
                         <div class="extra content">
                             <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
-                                <button class="ui labeled icon button fluid" data-bcup-haslogintext="no">
-                                <i class="eye icon"></i>
+                                <button class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                                <!-- <i class="eye icon"></i> -->
                                 Pulsa para ver la tarea
                                 </button>
                             </a>
                         </div>
                     </div>
-                </a>
+                <!-- </a> -->
             {% endfor %}
         </div>
+
+        <h2 class="titulo-pagina">Estas han sido todas tus tareas</h2>
     </div>
     {% endif %}
 

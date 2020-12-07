@@ -26,6 +26,7 @@ public class Usuario{
     private int cod_usuario;
     private ArrayList<Tarea> tareas;
     private ListView lista;
+    private MainActivity general;
 
     public Usuario (){
         nombre = null;
@@ -36,6 +37,7 @@ public class Usuario{
 
     public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida, MainActivity general) {
         try {
+            this.general=general;
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("fotos", contrasenaIntroducida);
 
@@ -55,6 +57,7 @@ public class Usuario{
                             tv.setTextColor(Color.BLACK);
                             general.setContentView(R.layout.listatareas);
                             obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
+                            general.estado_app = "LOGUEADO";
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
@@ -184,6 +187,9 @@ public class Usuario{
                                 Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
 
                                 general.setContentView(R.layout.pantalla_tarea);
+                                general.estado_app= "MOSTRARTAREASIMPLE";
+                                TextView titulo = general.findViewById(R.id.tituloTarea);
+                                titulo.setText(elegida.getTitulo());
 
                             }
                         });

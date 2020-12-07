@@ -247,6 +247,6 @@ public class Tarea {
 
     @Override
     public String toString(){
-        return "Título: " + this.getTitulo() + " imagen: "+ this.isRealizada();
+        return "Título: " + this.getTitulo() + " imagen: "+ this.isRealizada() + " descripción: " + this.getDescripcion()+ " multimedia: " + this.getMultimedia();
     }
 }

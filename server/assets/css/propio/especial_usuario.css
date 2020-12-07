@@ -36,3 +36,8 @@
 #nav-calendario{
     background-color: #b39ddb;
 }
+
+label.label-tarea{
+    background-color: #ffeb3b !important;
+    color: black !important;
+}

@@ -17,13 +17,13 @@
 			{% if not tarea['multimedia'] is same as("multimedia/tarea.png") %}
 			<div class="col-md-6">
 				{% if 'image' in tipo %}
-				<div id="imagen-tarea" style="background-image: url({{ tarea['multimedia'] }});"></div>
+				<div class="imagen-tarea" style="background-image: url({{ tarea['multimedia'] }});"></div>
 				{% elseif 'video' in tipo %}
-				<video controls id="video-tarea" preload="metadata">
+				<video controls class="video-tarea" preload="metadata">
 					<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
 				</video>
 				{% elseif 'audio' in tipo %}
-				<audio controls id="video-tarea">
+				<audio controls class="video-tarea">
 					<source src="{{ tarea['multimedia'] }}" type="{{ tipo }}">
 				</audio>
 				{% endif %}
@@ -42,7 +42,7 @@
 	<div class="seccion-tarea">
 		<h2 class="text-center" id="titulo-mensajes">Mensajes</h2>
 		<div class="mesgs">
-			<div class="msg_history">
+			<div class="msg_history" tabindex="0">
 				{% for mensaje in tarea['mensajes'] %}
 				{% if mensaje['envia'] is same as(usuario['cod_usuario']) %}
 				{% if mensaje['contenido'] %}
@@ -56,13 +56,13 @@
 				<div class="outgoing_msg">
 					<div class="sent_msg">
 						{% if 'image' in mensaje['tipo_archivo'] %}
-						<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+						<div class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 						{% elseif 'video' in mensaje['tipo_archivo'] %}
-						<video controls id="video-tarea" preload="metadata">
+						<video controls class="video-tarea" preload="metadata">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</video>
 						{% elseif 'audio' in mensaje['tipo_archivo'] %}
-						<audio controls id="video-tarea">
+						<audio controls class="video-tarea">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</audio>
 						{% endif %}
@@ -85,13 +85,13 @@
 					<div class="received_msg">
 						<div class="received_withd_msg">
 							{% if 'image' in mensaje['tipo_archivo'] %}
-							<div id="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+							<div class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 							{% elseif 'video' in mensaje['tipo_archivo'] %}
-							<video controls id="video-tarea" preload="metadata">
+							<video controls class="video-tarea" preload="metadata">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</video>
 							{% elseif 'audio' in mensaje['tipo_archivo'] %}
-							<audio controls id="video-tarea">
+							<audio controls class="video-tarea">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</audio>
 							{% endif %}
@@ -111,7 +111,7 @@
 		{% endif %}
 			<div id="input-enviar">
 				{% if usuario['tipo'] == "USUARIO" %}
-				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
+				<label for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
 				{% else %}
 				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor"><span>Pulsa aquí para añadir un archivo</span></label>
 				{% endif %}
@@ -119,7 +119,7 @@
 					<input type="text" placeholder="Mensaje" id="mensaje-envio" name="mensaje">
 				</div>
 				{% if usuario['tipo'] == "USUARIO" %}
-				<button class="ui primary button boton-enviar-mensaje" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
+				<button class="ui primary button boton-enviar-mensaje botones-usuario" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
 				{% else %}
 				<button class="ui primary button boton-enviar-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
 				{% endif %}

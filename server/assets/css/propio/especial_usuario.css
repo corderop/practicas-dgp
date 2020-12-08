@@ -41,3 +41,8 @@ label.label-tarea{
     background-color: #ffeb3b !important;
     color: black !important;
 }
+
+.titulo-pagina{
+    display: inline-block;
+    margin: 0 50px;
+}

@@ -120,6 +120,22 @@
     }
 
     /**
+     * Comprueba si ya hay un usuario con el mismo nombre
+     * @param mysqli $mysqli Base de datos sobre la que se actua
+     * @param nombre Nombre a comprobar
+     */
+    function existeNombre( $mysqli, $nombre ){
+        $sql = "SELECT * FROM USUARIO WHERE nombre='$nombre'";
+        $res = $mysqli->query($sql);
+        
+        if($res->num_rows > 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Funcion para eliminar un usuario por completo de la base de datos
      * @param mysql $msqli Base de datos sobre la que actuar
      * @param int $cod_usuario Codigo del usuario que queremos eliminar

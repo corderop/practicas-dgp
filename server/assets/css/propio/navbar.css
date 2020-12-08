@@ -29,11 +29,14 @@ footer{
 }
 
 .imagen-titulo{
-    width: 100px;   
+    width: 130px;   
 }
 
 .imagen-titulo-div{
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #imagen-cambiar-pass-padre{

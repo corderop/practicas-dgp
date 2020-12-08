@@ -160,7 +160,7 @@
                     <div class="ui card">
                         <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
                         <div class="content">
-                            <a tabindex="0" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                            <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                         </div>
                         <div class="extra content">
                             <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">

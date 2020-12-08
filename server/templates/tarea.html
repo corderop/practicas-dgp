@@ -48,7 +48,7 @@
 				{% if mensaje['contenido'] %}
 				<div class="outgoing_msg">
 					<div class="sent_msg">
-						<p tabindex="0">{{ mensaje['contenido'] }}</p>
+						<p tabindex="0" aria-label="Mensaje enviado por ti: {{ mensaje['contenido'] }}">{{ mensaje['contenido'] }}</p>
 					</div>
 				</div>
 				{% endif %}
@@ -56,13 +56,13 @@
 				<div class="outgoing_msg">
 					<div class="sent_msg">
 						{% if 'image' in mensaje['tipo_archivo'] %}
-						<div tabindex="0" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+						<div tabindex="0" aria-label="Imagen enviada por ti" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 						{% elseif 'video' in mensaje['tipo_archivo'] %}
-						<video tabindex="0" controls class="video-tarea" preload="metadata">
+						<video tabindex="0" aria-label="Video enviado por ti" controls class="video-tarea" preload="metadata">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</video>
 						{% elseif 'audio' in mensaje['tipo_archivo'] %}
-						<audio tabindex="0" controls class="video-tarea">
+						<audio tabindex="0" aria-label="Audio enviado por ti" controls class="video-tarea">
 							<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 						</audio>
 						{% endif %}
@@ -74,7 +74,7 @@
 				<div class="incoming_msg">
 					<div class="received_msg">
 						<div class="received_withd_msg">
-							<p tabindex="0">{{ mensaje['contenido'] }} </p>
+							<p tabindex="0" aria-label="Mensaje del facilitador {{ mensaje['contenido'] }}">{{ mensaje['contenido'] }} </p>
 							<span class="time_date">{{ mensaje['fecha'] }} </span>
 						</div>
 					</div>
@@ -85,13 +85,13 @@
 					<div class="received_msg">
 						<div class="received_withd_msg">
 							{% if 'image' in mensaje['tipo_archivo'] %}
-							<div tabindex="0" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
+							<div tabindex="0" aria-label="Imagen enviada por el facilitador" class="imagen-tarea" style="background-image: url({{ mensaje['multimedia'] }});"></div>
 							{% elseif 'video' in mensaje['tipo_archivo'] %}
-							<video tabindex="0" controls class="video-tarea" preload="metadata">
+							<video tabindex="0" aria-label="Video enviado por el facilitador" controls class="video-tarea" preload="metadata">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</video>
 							{% elseif 'audio' in mensaje['tipo_archivo'] %}
-							<audio tabindex="0" controls class="video-tarea">
+							<audio tabindex="0" aria-label="Audio enviado por el facilitador" controls class="video-tarea">
 								<source src="{{ mensaje['multimedia'] }}" type="{{ mensaje['tipo_archivo'] }}">
 							</audio>
 							{% endif %}
@@ -111,9 +111,13 @@
 		{% endif %}
 			<div id="input-enviar">
 				{% if usuario['tipo'] == "USUARIO" %}
-				<label role="button" tabindex="0" for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario" id="label-tarea-usuario"><span>Pulsa aquí para añadir un archivo</span></label>
+				<input type="file" id="multimedia-envio" name="multimedia" accept="image/*, video/*, audio/*" class="sr-only"
+					aria-label="Añadir un archivo para enviar">
+			 	<label for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario"
+					aria-hidden="true">Haz click aquí para añadir un archivo</label>
 				{% else %}
-				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor"><span>Pulsa aquí para añadir un archivo</span></label>
+				<input class="foto-input" aria-label="Multimedia" id="multimedia-envio" type="file" name="multimedia" accept="image/*, video/*, audio/*">
+				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor">Pulsa aquí para añadir un archivo</label>
 				{% endif %}
 				<div class="ui input" id="mensaje-envio-div">
 					<input type="text" placeholder="Escribe el mensaje a enviar" id="mensaje-envio" name="mensaje">
@@ -124,7 +128,6 @@
 				<button class="ui primary button boton-enviar-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
 				{% endif %}
 			</div>
-			<input class="foto-input" id="multimedia-envio" type="file" name="multimedia" accept="image/*, video/*, audio/*">
 			<!-- Input no visible para indicar el codigo de la tarea -->
 			<input type="hidden" name="cod_tarea" value="{{ tarea['cod_tarea'] }}"> 
 		</form>
@@ -133,6 +136,13 @@
 		</div>
 	</div>
 </div>
+<!-- 
+<input type="file" id="resume" class="sr-only"
+       aria-label="Resume">
+<label for="resume" class="btn"
+       aria-hidden="true">Upload Resume</label> -->
+
+
 {% endif %}
 
 <script>

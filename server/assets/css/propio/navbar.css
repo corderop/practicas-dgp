@@ -28,6 +28,13 @@ footer{
     text-align: center;
 }
 
+.imagen-titulo{
+    width: 100px;   
+}
+
+.imagen-titulo-div{
+    text-align: center;
+}
 
 #imagen-cambiar-pass-padre{
     display: flex;
@@ -233,25 +240,3 @@ footer{
     margin-top: 10px;
 }
   
-  /* .sr-only {
-    position: absolute;
-    margin: -1px;
-    width: 1px;
-    height: 1px;
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    overflow: hidden;
-  } */
-  
-  /* .btn {
-    display: inline-block;
-    padding: .5rem 1rem;
-    border-radius: .25rem;
-    color: #fff;
-    background-color: #25a;
-    cursor: pointer;
-  }
-  
-  [type=file]:focus + .btn {
-    outline: 5px solid #a52;
-  } */

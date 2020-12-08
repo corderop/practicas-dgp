@@ -44,7 +44,7 @@
         }
         if($usuario['tipo'] == "USUARIO"){
             $tareas = getTareasPorRealizar($mysqli, $_SESSION['cod_usuario']);
-            echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Home"]);
+            echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Tareas"]);
         }
     }
     else{

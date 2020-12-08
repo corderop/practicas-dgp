@@ -18,6 +18,12 @@
 
         <h1 class="titulo-pagina">Gestión de usuarios</h1>
 
+        {% if msg %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
+
         <!-- Barra de búsqueda -->
         <div class="ui fluid icon input" id="busqueda-admin">
             <input type="text" placeholder="Busqueda..." name="busqueda" oninput="buscar(this,1)" id="busqueda">

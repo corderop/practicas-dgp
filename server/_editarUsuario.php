@@ -51,6 +51,7 @@
             if($_POST['pass'] == $_POST['repetirPass']){
                 actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
                 $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+                $_SESSION['previous_location'] = 'editarUsuario';
                 header("Location: index.php");
             }
             else{
@@ -62,6 +63,7 @@
         else{
             actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
             $usuario = getUsuario($mysqli, $usuario['cod_usuario']);
+            $_SESSION['previous_location'] = 'editarUsuario';
             header("Location: index.php");
         }
     }
@@ -71,17 +73,20 @@
             $pass = $_POST['pass'];
             if($pass){
                 actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+                $_SESSION['previous_location'] = 'editarUsuario';
                 header("Location: index.php");
             }
             else{
                 $pass = null;
                 actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+                $_SESSION['previous_location'] = 'editarUsuario';
                 header("Location: index.php");
             }
         }
         else{
             $pass = null;
             actualizarUsuario($mysqli, $usuario, $nombre, $pass, $avatar);
+            $_SESSION['previous_location'] = 'editarUsuario';
             header("Location: index.php");
         }
     }

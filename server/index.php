@@ -13,7 +13,22 @@
         if($usuario['tipo'] == "ADMIN"){
             //Coger los datos que necesitemos 
             $usuarios = getUsuarios($mysqli);
-            echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Usuarios" ]);
+            
+            if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'crearUsuario') {
+                echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Usuarios", 'msg'=>"Usuario creado correctamente"]);
+                $_SESSION['previous_location'] = '';
+            }
+            else if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'editarUsuario') {
+                echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Usuarios", 'msg'=>"Usuario editado correctamente"]);
+                $_SESSION['previous_location'] = '';
+            }
+            else if (isset($_SESSION['previous_location']) && $_SESSION['previous_location'] == 'eliminarUsuario') {
+                echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Usuarios", 'msg'=>"Usuario eliminado correctamente"]);
+                $_SESSION['previous_location'] = '';
+            }
+            else{
+                echo $twig->render('index.html', ['usuario'=>$usuario, 'usuarios'=>$usuarios, 'titulo'=> "Usuarios" ]);
+            }
         }
         if($usuario['tipo'] == "TUTOR"){
             $tareas = getTareasTutor($mysqli, $_SESSION['cod_usuario']);
@@ -38,7 +53,6 @@
                 $_SESSION['previous_location'] = '';
             }
             else{
-
                 echo $twig->render('index.html', ['usuario'=>$usuario, 'tareas'=>$tareas, 'titulo'=> "Tareas"]);
             }
         }

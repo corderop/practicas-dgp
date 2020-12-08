@@ -37,6 +37,7 @@
         
         if($tipo == "USUARIO" || $pass == $repetirPass){
             aniadirUsuario($mysqli,$usuario,$pass,$tipo, $avatar); 
+            $_SESSION['previous_location'] = 'crearUsuario';
             header("Location: index.php");
         }
         else{

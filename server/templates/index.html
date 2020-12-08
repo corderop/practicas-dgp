@@ -149,23 +149,25 @@
 
     {% if usuario['tipo'] == "USUARIO" %}
     <div class="container">
-
-        <h1 class="titulo-pagina">Tareas</h1>
+        <div class="imagen-titulo-div">
+            <img class="imagen-titulo" src="img/trabajar.png" alt="Pictograma de tareas">
+        </div>
+        <h1 tabindex="0" class="titulo-pagina">Tareas</h1>
 
         <!-- Grid con las cartas -->
         <div class="ui three stackable cards cards-grid">        
             {% for tarea in tareas %}
                 <!-- Card -->
-                <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                     <div class="ui card">
                         <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
                         <div class="content">
-                            <a class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                            <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
                         </div>
                         <div class="extra content">
-                            <a href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
-                                <button class="ui labeled icon button fluid" data-bcup-haslogintext="no">
-                                <i class="eye icon"></i>
+                            <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                                <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                                <!-- <i class="eye icon"></i> -->
                                 Pulsa para ver la tarea
                                 </button>
                             </a>
@@ -174,6 +176,8 @@
                 </a>
             {% endfor %}
         </div>
+
+        <h2 tabindex="0" class="titulo-pagina">Estas han sido todas tus tareas</h2>
     </div>
     {% endif %}
 

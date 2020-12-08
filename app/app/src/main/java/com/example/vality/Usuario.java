@@ -1,10 +1,14 @@
 package com.example.vality;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,12 +22,15 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Usuario{
+public class Usuario {
     private String nombre;
     private String contrasena;
     private int cod_usuario;
-    ArrayList<Tarea> tareas;
+    private ArrayList<Tarea> tareas;
+    private ListView lista;
+    private MainActivity general;
 
     public Usuario (){
         nombre = null;
@@ -34,6 +41,7 @@ public class Usuario{
 
     public void iniciar(String url, RequestQueue queue, TextView tv, String contrasenaIntroducida, MainActivity general) {
         try {
+            this.general=general;
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("fotos", contrasenaIntroducida);
 
@@ -51,8 +59,11 @@ public class Usuario{
                         if(nombre != null){
                             tv.setText("Logueo realizado con éxito");
                             tv.setTextColor(Color.BLACK);
-                            obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, general);
-                            general.setContentView(R.layout.listatareas);
+                            Intent i = new Intent(general, tareasActivity.class);
+                            i.putExtra("nombre", nombre);
+                            i.putExtra("contrasena", contrasena);
+                            i.putExtra("cod_usuario", cod_usuario+"");
+                            general.startActivity(i);
                         }else {
                             general.borrarContrasena();
                             tv.setText("Credenciales inválidos");
@@ -80,7 +91,7 @@ public class Usuario{
 
     }
 
-    public void obtenerTareas(String url, RequestQueue queue, MainActivity general){
+    public void obtenerTareas(String url, RequestQueue queue, tareasActivity general){
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("cod_usuario", cod_usuario);
@@ -93,14 +104,13 @@ public class Usuario{
                 public void onResponse(JSONObject response) {
                     try {
                         System.out.println("Ha llegado la lista con las tareas");
-                        Tarea aux = new Tarea();
+                        Tarea aux;
                         JSONObject tarea_Aux = null;
                         int contador =0;
                         boolean terminado = response.isNull(contador+"");
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                         while(!terminado){
-
-
+                            aux = new Tarea();
                             tarea_Aux = response.getJSONObject(contador+"");
 
                             if(tarea_Aux != null){
@@ -108,7 +118,6 @@ public class Usuario{
                             }else{
                                 System.out.println("Error el valor de la tarea " + contador + " está vacío.");
                             }
-
                             aux.setCod_Tarea(tarea_Aux.getInt("cod_tarea"));
                             aux.setTitulo(tarea_Aux.getString("titulo"));
                             aux.setDescripcion(tarea_Aux.getString("descripcion"));
@@ -132,36 +141,69 @@ public class Usuario{
                             }
 
                             tareas.add(aux);
-                            System.out.println("Añadida tarea " + tarea_Aux.toString());
+                            System.out.println("Añadida tarea " + aux.toString());
 
                             contador++;
                             terminado = response.isNull(contador+"");
                         }
-                        System.out.println("La lista contenía " + contador + "tareas, pasamos a crear la interfaz");
+                        contador--;
+                        System.out.println("La lista contenía " + contador + "tareas, que son: ");
+                        System.out.println(tareas.toString());
+                        System.out.println("pasamos a crear la interfaz de tareas");
 
-                        ListView lista = (ListView) general.findViewById(R.id.ListView_listado);
+                        lista = (ListView) general.findViewById(R.id.ListView_listado);
                         lista.setAdapter(new listaAdaptador(general, R.layout.tareasimple, tareas){
                             @Override
                             public void onEntrada(Object entrada, View view) {
-                                System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
-                                if(((Tarea) entrada).isRealizada()){
-                                    System.out.println(" bien");
-                                }else{
-                                    System.out.println(" trabajar");
+                                if (entrada != null) {
+                                    System.out.println(((Tarea) entrada).toString());
+                                    /*System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
+                                    if (((Tarea) entrada).isRealizada()) {
+                                        System.out.println(" bien");
+                                    } else {
+                                        System.out.println(" trabajar");
+                                    }
+                                    */
+
+                                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                                    if (texto_superior_entrada != null){
+                                        texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+                                    }
+
+                                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                                    if (texto_inferior_entrada != null){
+                                        texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+                                    }
+
+                                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
+                                    if(imagen_entrada !=null){
+                                        if (((Tarea) entrada).getRealizada()) {
+                                            imagen_entrada.setImageResource(R.drawable.bien);
+                                        } else {
+                                            imagen_entrada.setImageResource(R.drawable.trabajar);
+                                        }
+                                    }
                                 }
+                            }
+                        });
 
-                                TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
-                                texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+                        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                                Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
 
-                                TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
-                                texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+                                Intent i = new Intent(general, unaTareaActivity.class);
 
-                                ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                                if(((Tarea) entrada).isRealizada()){
-                                    imagen_entrada.setImageResource(R.drawable.bien);
-                                }else{
-                                    imagen_entrada.setImageResource(R.drawable.trabajar);
-                                }
+                                i.putExtra("cod_tarea", elegida.getCod_tarea()+"");
+                                i.putExtra("cod_facilitador", elegida.getCod_facilitador()+"");
+                                i.putExtra("titulo", elegida.getTitulo()+"");
+                                i.putExtra("descripcion", elegida.getDescripcion()+"");
+                                i.putExtra("fecha_limite", elegida.getFecha_limite()+"");
+                                i.putExtra("objetivo", elegida.getObjetivo()+"");
+                                i.putExtra("multimedia", elegida.getMultimedia()+"");
+                                i.putExtra("realizada", elegida.getRealizada()+"");
+                                i.putExtra("calificacion", elegida.getCalificacion()+"");
+                                general.startActivity(i);
                             }
                         });
 

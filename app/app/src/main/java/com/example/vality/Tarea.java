@@ -225,7 +225,7 @@ public class Tarea {
         this.multimedia = multimedia;
     }
 
-    public boolean isRealizada() {
+    public boolean getRealizada() {
         return realizada;
     }
 
@@ -243,5 +243,10 @@ public class Tarea {
 
     public ArrayList<Mensaje> getMensajes() {
         return mensajes;
+    }
+
+    @Override
+    public String toString(){
+        return "Título: " + this.getTitulo() + " imagen: "+ this.getRealizada() + " descripción: " + this.getDescripcion()+ " multimedia: " + this.getMultimedia();
     }
 }

@@ -61,25 +61,36 @@
 
   <div class="container">
     <!-- Título -->
-    <h1 class="titulo-pagina">Calendario</h1>
+    <div class="imagen-titulo-div">
+      <img class="imagen-titulo" src="img/pictogramas/calendario.png" alt="Pictograma de calendario">
+    </div>
+    <h1 tabindex="0" class="titulo-pagina">Calendario</h1>
 
     <div class="indicador-semana-div">
-      <h2 class="titulo-semana flex-item-calendario-titulo">
         {% if semana == 0 %}
+        <h2 tabindex="0" aria-label="Tareas de la semana actual" class="titulo-semana flex-item-calendario-titulo">
           Semana actual
+        </h2>
         {% elseif semana == -1 %}
+        <h2 tabindex="0" aria-label="Tareas de la semana pasada" class="titulo-semana flex-item-calendario-titulo">
           Semana pasada
+        </h2>
         {% elseif semana == 1 %}
+        <h2 tabindex="0" aria-label="Tareas de la semana siguiente" class="titulo-semana flex-item-calendario-titulo">
           Semana siguiente
+        </h2>
         {% elseif semana > 1 %}
+        <h2 tabindex="0" aria-label="Tareas de dentro de {{ semana }} semanas" class="titulo-semana flex-item-calendario-titulo">
           Dentro de {{ semana }} semanas
+        </h2>
         {% elseif semana < -1 %}
-          Hace {{ semana|abs }} semanas
+        <h2 tabindex="0" aria-label="Tareas de hace de {{ semana }} semanas" class="titulo-semana flex-item-calendario-titulo">
+          Hace de {{ semana }} semanas
+        </h2>
         {% endif %}
-      </h2>      
       <div class="flex-item-calendario-titulo">
         <form METHOD="GET" action="calendario.php" class="formularios-siguiente-semana">
-          <button class="botones-calendario big ui labeled icon button" data-bcup-haslogintext="no" alt="Ir a la semana anterior">
+          <button class="botones-calendario big ui labeled icon button" data-bcup-haslogintext="no" aria-label="Ir a la semana anterior a la que estás viendo">
             <i class="left chevron icon"></i>
             <!-- Semana anterior -->
             Semana anterior
@@ -87,7 +98,7 @@
           <input type="hidden" name="semana" value="{{ semana-1 }}">
         </form>
         <form METHOD="GET" action="calendario.php" class="formularios-siguiente-semana">
-          <button class="botones-calendario big ui labeled icon button" data-bcup-haslogintext="no" alt="Ir a la semana siguiente">
+          <button class="botones-calendario big ui labeled icon button" data-bcup-haslogintext="no" aria-label="Ir a la semana siguiente a la que estás viendo">
             <!-- Siguiente semana -->
             <i class="right chevron icon"></i>
             Siguiente semana
@@ -106,7 +117,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/lunes.png" alt="Pictograma del lunes">
-                <h2 class="titulo-calendario-usuario">Lunes</h2>
+                <h2 tabindex="0" aria-label="Tareas del lunes" class="titulo-calendario-usuario">Lunes</h2>
               </div>
             </div>
           </div>
@@ -114,13 +125,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['lunes'] %}
-                  <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                    <div class="ui card tarjeta-calendario">
+                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                        <div class="content">
+                            <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                        </div>
+                        <div class="extra content">
+                            <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                                <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                                <!-- <i class="eye icon"></i> -->
+                                Pulsa para ver la tarea
+                                </button>
+                            </a>
+                        </div>
                     </div>
-                  </div>
+                  </a>
                 {% endfor %}
               </div>
             </div>
@@ -134,7 +154,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/martes.png" alt="Pictograma del martes">
-                <h2 class="titulo-calendario-usuario">Martes</h2>
+                <h2 tabindex="0" aria-label="Tareas del martes" class="titulo-calendario-usuario">Martes</h2>
               </div>
             </div>
           </div>
@@ -142,13 +162,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['martes'] %}
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                   <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                    </div>
+                      <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                      <div class="content">
+                          <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                      </div>
+                      <div class="extra content">
+                          <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                              <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                              <!-- <i class="eye icon"></i> -->
+                              Pulsa para ver la tarea
+                              </button>
+                          </a>
+                      </div>
                   </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
@@ -162,7 +191,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/miercoles.png" alt="Pictograma del miércoles">
-                <h2 class="titulo-calendario-usuario">Miércoles</h2>
+                <h2 tabindex="0" aria-label="Tareas del miércoles"  class="titulo-calendario-usuario">Miércoles</h2>
               </div>
             </div>
           </div>
@@ -170,13 +199,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['miercoles'] %}
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                   <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                    </div>
+                      <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                      <div class="content">
+                          <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                      </div>
+                      <div class="extra content">
+                          <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                              <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                              <!-- <i class="eye icon"></i> -->
+                              Pulsa para ver la tarea
+                              </button>
+                          </a>
+                      </div>
                   </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
@@ -190,7 +228,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/jueves.png" alt="Pictograma del jueves">
-                <h2 class="titulo-calendario-usuario">Jueves</h2>
+                <h2 tabindex="0" aria-label="Tareas del jueves" class="titulo-calendario-usuario">Jueves</h2>
               </div>
             </div>
           </div>
@@ -198,13 +236,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['jueves'] %}
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                   <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                    </div>
+                      <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                      <div class="content">
+                          <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                      </div>
+                      <div class="extra content">
+                          <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                              <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                              <!-- <i class="eye icon"></i> -->
+                              Pulsa para ver la tarea
+                              </button>
+                          </a>
+                      </div>
                   </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
@@ -218,7 +265,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/viernes.png" alt="Pictograma del viernes">
-                <h2 class="titulo-calendario-usuario">Viernes</h2>
+                <h2 tabindex="0" aria-label="Tareas del viernes" class="titulo-calendario-usuario">Viernes</h2>
               </div>
             </div>
           </div>
@@ -226,13 +273,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['viernes'] %}
-                  <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                  <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                    <div class="ui card tarjeta-calendario">
+                        <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                        <div class="content">
+                            <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                        </div>
+                        <div class="extra content">
+                            <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                                <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                                <!-- <i class="eye icon"></i> -->
+                                Pulsa para ver la tarea
+                                </button>
+                            </a>
+                        </div>
                     </div>
-                  </div>
+                  </a>
                 {% endfor %}
               </div>
             </div>
@@ -246,7 +302,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/sabado.png" alt="Pictograma del sabado">
-                <h2 class="titulo-calendario-usuario">Sábado</h2>
+                <h2 tabindex="0" aria-label="Tareas del sábado" class="titulo-calendario-usuario">Sábado</h2>
               </div>
             </div>
           </div>
@@ -254,13 +310,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['sabado'] %}
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                   <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                    </div>
+                      <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                      <div class="content">
+                          <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                      </div>
+                      <div class="extra content">
+                          <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                              <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                              <!-- <i class="eye icon"></i> -->
+                              Pulsa para ver la tarea
+                              </button>
+                          </a>
+                      </div>
                   </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
@@ -274,7 +339,7 @@
             <div class="ui segment indicador-dia-div">
               <div class="indicador-dia">
                 <img class="imagen-calendario-usuario" src="../img/pictogramas/semana/domingo.png" alt="Pictograma del domingo">
-                <h2 class="titulo-calendario-usuario">Domingo</h2>
+                <h2 tabindex="0" aria-label="Tareas del Domingo"  class="titulo-calendario-usuario">Domingo</h2>
               </div>
             </div>
           </div>
@@ -282,13 +347,22 @@
             <div class="ui segment">
               <div class="ui cards tareas-dia">
                 {% for tarea in dias['domingo'] %}
+                <a tabindex="-1" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
                   <div class="ui card tarjeta-calendario">
-                    <a class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" data-bcup-haslogintext="no">
-                    </a>
-                    <div class="content">
-                        <a class="center aligned header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
-                    </div>
+                      <div class="image imagen-tarjeta" style="background-image: url('{{ tarea['pictograma'] }}');"></div>
+                      <div class="content">
+                          <a tabindex="0" aria-label="Título de la tarea {{ tarea['titulo'] }}" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}" class="header" data-bcup-haslogintext="no">{{ tarea['titulo'] }}</a>
+                      </div>
+                      <div class="extra content">
+                          <a tabindex="0" href="tarea.php?cod_tarea={{ tarea['cod_tarea'] }}">
+                              <button tabindex="-1" class="ui icon button fluid botones-usuario" data-bcup-haslogintext="no">
+                              <!-- <i class="eye icon"></i> -->
+                              Pulsa para ver la tarea
+                              </button>
+                          </a>
+                      </div>
                   </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
@@ -297,9 +371,22 @@
       {% endif %}
 
       {% if not dias['lunes'] and not dias['martes'] and not dias['miercoles'] and not dias['jueves'] and not dias['viernes'] and not dias['sabado'] and not dias['domingo'] %}
-        <h3 id="no-actividad-semana">No hay ninguna actividad programada en la semana</h3>
+        <h3 tabindex="0" id="no-actividad-semana">No hay ninguna actividad programada en la semana</h3>
+      {% else %}
+      <h3 tabindex="0" id="no-actividad-semana">
+        {% if semana == 0 %}
+          Ya has visto todas las tareas de la semana actual
+        {% elseif semana == -1 %}
+          Ya has visto todas las tareas de la semana pasada
+        {% elseif semana == 1 %}
+          Ya has visto todas las tareas de la semana siguiente
+        {% elseif semana > 1 %}
+          Ya has visto todas las tareas de dentro de {{ semana }} semanas
+        {% elseif semana < -1 %}
+          Ya has visto todas las tareas de hace {{ semana|abs }} semanas
+        {% endif %}
+      </h3>
       {% endif %}
-
     </div>
   </div>
   

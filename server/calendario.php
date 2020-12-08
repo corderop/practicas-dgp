@@ -25,11 +25,23 @@
             }
 
             $dias = $semana*7;
-            if($dias >= 0)
-                $lunes = strtotime("previous monday " . " + $dias days");
+            if(date('w') == 1){
+                if($dias >= 0){
+                    $lunes = strtotime("today " . " + $dias days");
+                }
+                else{
+                    $dias = $dias * (-1);
+                    $lunes = strtotime("today " . " - $dias days");
+                }
+            }
             else{
-                $dias = $dias * (-1);
-                $lunes = strtotime("previous monday " . " - $dias days");
+                if($dias >= 0){
+                    $lunes = strtotime("previous monday " . " + $dias days");
+                }
+                else{
+                    $dias = $dias * (-1);
+                    $lunes = strtotime("previous monday " . " - $dias days");
+                }
             }
 
             $tareas = getTareasSemana($mysqli, $_SESSION['cod_usuario'], $lunes);

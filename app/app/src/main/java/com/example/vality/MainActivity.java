@@ -146,4 +146,21 @@ public class MainActivity extends AppCompatActivity {
         telefono.setBackgroundColor(Color.WHITE);
         telefono.setClickable(true);
     }
+    /*
+    @Override
+    public void onBackPressed() {
+        if(estado_app == "LOGUEO" || estado_app == "LOGUEADO"){
+            super.onBackPressed();
+        }else{
+            if(estado_app == "MOSTRARTAREASIMPLE"){
+                this.setContentView(R.layout.listatareas);
+                this.estado_app = "LOGUEADO";
+            }else{
+
+            }
+
+        }
+    }
+
+ */
 }

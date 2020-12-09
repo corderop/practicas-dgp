@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         telefono.setBackgroundColor(Color.WHITE);
         telefono.setClickable(true);
     }
+
     /*
     @Override
     public void onBackPressed() {

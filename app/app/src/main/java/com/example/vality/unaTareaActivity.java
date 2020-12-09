@@ -1,5 +1,6 @@
 package com.example.vality;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -28,6 +29,7 @@ import java.util.Date;
 public class unaTareaActivity extends AppCompatActivity {
     Tarea tarea;
     RequestQueue queue;
+    int cod_usuario;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -51,6 +53,9 @@ public class unaTareaActivity extends AppCompatActivity {
                 Integer.parseInt(getIntent().getStringExtra("calificacion"))
 
         );
+
+        this.cod_usuario = Integer.parseInt(getIntent().getStringExtra("cod_usuario"));
+
         queue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.pantalla_tarea);
@@ -68,8 +73,6 @@ public class unaTareaActivity extends AppCompatActivity {
                 }
             }
         }
-        String url = "test.dgp.esy/tarea.php?cod_tarea="+tarea.getCod_tarea();
-        tarea.obtenerMensajes(url,queue);
     }
 
     private void cargarImagen(){
@@ -136,5 +139,12 @@ public class unaTareaActivity extends AppCompatActivity {
 
     private void cargarAudio(){
 
+    }
+
+    public void abrir_chat(View view) {
+        Intent i = new Intent(this, Chat.class);
+        i.putExtra("cod_usuario", cod_usuario+"");
+        i.putExtra("cod_tarea", tarea.getCod_tarea()+"");
+        this.startActivity(i);
     }
 }

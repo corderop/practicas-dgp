@@ -77,4 +77,9 @@ public class Mensaje {
     public void setCod_emisor(int cod_emisor) {
         this.cod_emisor = cod_emisor;
     }
+
+    @Override
+    public String toString(){
+        return "Cod_mensaje: "+cod_mensaje + " contenido: "+ contenido;
+    }
 }

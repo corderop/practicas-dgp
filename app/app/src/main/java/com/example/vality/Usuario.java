@@ -1,8 +1,11 @@
 package com.example.vality;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -203,6 +206,7 @@ public class Usuario {
                                 i.putExtra("multimedia", elegida.getMultimedia()+"");
                                 i.putExtra("realizada", elegida.getRealizada()+"");
                                 i.putExtra("calificacion", elegida.getCalificacion()+"");
+                                i.putExtra("cod_usuario", cod_usuario+"");
                                 general.startActivity(i);
                             }
                         });

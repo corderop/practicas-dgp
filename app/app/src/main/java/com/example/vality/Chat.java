@@ -42,15 +42,15 @@ public class Chat extends AppCompatActivity {
 
     class AdaptadorChat extends ArrayAdapter<Mensaje> {
         Context contexto;
-        String textos[];
-        Date fechas[];
+        ArrayList<String> textos = new ArrayList<>();
+        ArrayList<Date> fechas = new ArrayList<>();
 
         public AdaptadorChat(@NonNull Context context, int resource, List<Mensaje> mensajes) {
             super(context, resource);
             contexto = context;
             for (int i = 0 ; i < mensajes.size() ; i++) {
-                textos[i] = mensajes.get(i).getContenido();
-                fechas[i] = mensajes.get(i).getFecha();
+                textos.add(mensajes.get(i).getContenido());
+                fechas.add(mensajes.get(i).getFecha());
             }
         }
 
@@ -62,8 +62,8 @@ public class Chat extends AppCompatActivity {
             TextView miTexto = mensaje.findViewById(R.id.texto_mensaje);
             TextView miFecha = mensaje.findViewById(R.id.fecha_mensaje);
 
-            miTexto.setText(textos[position]);
-            miFecha.setText(fechas[position].toString());
+            miTexto.setText(textos.get(position));
+            miFecha.setText(fechas.get(position).toString());
 
             return mensaje;
         }

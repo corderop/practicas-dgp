@@ -73,7 +73,7 @@ function comprobarPass() {
         {
             console.log("Resultado: " + data);
 
-            let alerta = document.getElementById('alerta-pass-invalida');
+            let alerta = document.getElementById('alerta-usuario');
             let comprobar = document.getElementById("boton-comprobar");
             let guardar = document.getElementById("boton-guardar");
 
@@ -92,6 +92,7 @@ function comprobarPass() {
                 //TODO contraseña inválida mostrar la alerta
                 //Mostrar la alerta
                 alerta.style.display = '';
+                alerta.innerHTML = "Contraseña usada. Introduzca otra combinación"
                 //Esconder guardar
                 guardar.style.display = "none";
                 //Mostrar comprobar
@@ -116,4 +117,33 @@ function alternarSiContrasena( el, cambiar ){
         el.innerHTML = "Pulsa aquí para modificar la contraseña"
         el.setAttribute('onclick', 'alternarSiContrasena(this, true);');
     }
+}
+
+function usuarioBien( el ,tipo){
+    $.ajax({
+        url:"_comprobarNombre.php",
+        method:"GET",
+        data:{nombre:document.getElementById(`nombre-${tipo}`).value},
+        success:function(data)
+        {
+            if(!data){
+                if(tipo == "admin" || tipo == "tutor"){
+                    if(document.getElementById(`pass-1-${tipo}`).value == document.getElementById(`pass-2-${tipo}`).value){
+                        el.submit();
+                    }
+                    else{
+                        document.getElementById(`alerta-${tipo}`).style.display="";
+                        document.getElementById(`alerta-${tipo}`).innerHTML="Las contraseñas no son iguales";
+                    }
+                }
+                else if(tipo == "usuario"){
+                    el.submit();
+                }
+            }
+            else{
+                document.getElementById(`alerta-${tipo}`).style.display="";
+                document.getElementById(`alerta-${tipo}`).innerHTML="El nombre ya existe";
+            }
+        }
+    })
 }

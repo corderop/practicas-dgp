@@ -16,7 +16,8 @@
     <!-- Pestaña para el admin -->
     <div class="ui bottom attached active tab segment" data-tab="first">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'admin'); return false;">
+            <div id="alerta-admin" class="alert alert-warning" role="alert" style="display: none;"></div>
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
             </div>
@@ -35,7 +36,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="usuario">Nombre</label>
-                        <input type="text" class="form-control" name="usuario" required>
+                        <input type="text" id="nombre-admin" class="form-control" name="usuario" required>
                     </div>
                 </div>
             </div>
@@ -43,13 +44,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="pass">Contraseña</label>
-                        <input type="password" class="form-control" name="pass" required>
+                        <input id="pass-1-admin" type="password" class="form-control" name="pass" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="repetirPass">Repetir contraseña</label>
-                        <input type="password" class="form-control" name="repetirPass" required>
+                        <input id="pass-2-admin" type="password" class="form-control" name="repetirPass" required>
                     </div>
                 </div>
             </div>
@@ -65,7 +66,8 @@
     <!-- Pestaña para el capacitador -->
     <div class="ui bottom attached tab segment" data-tab="second">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'tutor'); return false;">
+            <div id="alerta-tutor" class="alert alert-warning" role="alert" style="display: none;"></div>
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
             </div>
@@ -84,7 +86,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="usuario">Nombre</label>
-                        <input type="text" class="form-control" name="usuario" required>
+                        <input id="nombre-tutor" type="text" class="form-control" name="usuario" required>
                     </div>
                 </div>
             </div>
@@ -92,13 +94,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="pass">Contraseña</label>
-                        <input type="password" class="form-control" name="pass" required>
+                        <input id="pass-1-tutor" type="password" class="form-control" name="pass" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="repetirPass">Repetir contraseña</label>
-                        <input type="password" class="form-control" name="repetirPass" required>
+                        <input id="pass-2-tutor" type="password" class="form-control" name="repetirPass" required>
                     </div>
                 </div>
             </div>
@@ -114,7 +116,7 @@
     <!-- Pestaña para personas -->
     <div class="ui bottom attached tab segment" data-tab="third">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this, 'usuario'); return false;">
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
             </div>
@@ -133,7 +135,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label for="usuario">Nombre</label>
-                        <input type="text" class="form-control" name="usuario" required>
+                        <input id="nombre-usuario" type="text" class="form-control" name="usuario" required>
                     </div>
                 </div>
             </div>
@@ -154,9 +156,7 @@
                         <img class="imagen-selector" onclick="aniadirContrasena(this, 'enchufe')" src="../img/pictogramas/enchufe.png" alt="enchufe" data-seleccionada="no">
                     </div>
                     <!-- Aqui añadir una alerta si la contraseña no es válida -->
-                    <div class="alert alert-danger" style="width: 100%; display: none;" id="alerta-pass-invalida" role="alert">
-                        Contraseña usada. Introduzca otra combinación
-                    </div>
+                    <div id="alerta-usuario" class="alert alert-danger" style="width: 100%; display: none;" role="alert"></div>
                     <button type="button" id="boton-comprobar" onclick="comprobarPass()" class="ui primary fluid button" data-bcup-haslogintext="no">Comprobar contraseña</button>
                 </div>
             </div>

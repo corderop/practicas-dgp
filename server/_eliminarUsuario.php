@@ -16,5 +16,6 @@
         deleteUsuario($mysqli, $userEliminar);
 
     }
+    $_SESSION['previous_location'] = 'eliminarUsuario';
     header("Location: index.php");
 ?>

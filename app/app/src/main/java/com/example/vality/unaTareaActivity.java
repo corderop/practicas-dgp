@@ -68,6 +68,8 @@ public class unaTareaActivity extends AppCompatActivity {
                 }
             }
         }
+        String url = "test.dgp.esy/tarea.php?cod_tarea="+tarea.getCod_tarea();
+        tarea.obtenerMensajes(url,queue);
     }
 
     private void cargarImagen(){

@@ -14,7 +14,7 @@
 
     {% if user['tipo'] == "USUARIO" %}
     <!-- Formulario -->
-    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
+    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}" onsubmit="usuarioBien(this,'usuario'); return false;">
         <div class="row etiqueta-foto-usuario">
             <p>Pulsa en la imagen para añadir una fotografía</p>
         </div>
@@ -33,7 +33,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="usuario">Nombre</label>
-                    <input type="text" class="form-control" name="usuario" value={{user['nombre']}} required>
+                    <input id="nombre-usuario" type="text" class="form-control" name="usuario" value={{user['nombre']}} required>
                 </div>
             </div>
         </div>
@@ -41,6 +41,7 @@
             <button type="button" class="ui primary fluid button" onclick="alternarSiContrasena(this, true);" data-bcup-haslogintext="no">Pulsa aquí para modificar la contraseña</button>
         </div>
         <div class="row">
+            <div class="alert alert-danger" style="width: 100%; display: none;" id="alerta-usuario" role="alert"></div>
             <div id="login-fotos" style="display: none;">
                 <h2 class="text-center">Pulsa sobre las imágenes en orden para establecer la contraseña</h2>
                 <button type="button" onclick="borrarContrasena()" class="ui primary fluid button" data-bcup-haslogintext="no">Pulsa aquí para empezar de nuevo</button>
@@ -57,9 +58,6 @@
                     <img class="imagen-selector" onclick="aniadirContrasena(this, 'enchufe')" src="../img/pictogramas/enchufe.png" alt="enchufe" data-seleccionada="no">
                 </div>
                 <!-- Aqui añadir una alerta si la contraseña no es válida -->
-                <div class="alert alert-danger" style="width: 100%; display: none;" id="alerta-pass-invalida" role="alert">
-                    Contraseña usada. Introduzca otra combinación
-                </div>
                 <button type="button" id="boton-comprobar" onclick="comprobarPass()" class="ui primary fluid button" data-bcup-haslogintext="no">Comprobar contraseña</button>
             </div>
         </div>
@@ -71,7 +69,8 @@
         </div>
     </form>
     {% else %}
-    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}">
+    <form method="POST" enctype="multipart/form-data" action="_editarUsuario.php?cod_usuario={{ user['cod_usuario'] }}" onsubmit="usuarioBien(this,'admin'); return false;">
+        <div id="alerta-admin" class="alert alert-warning" role="alert" style="display: none;"></div>
         <div class="row etiqueta-foto-usuario">
             <p>Pulsa en la imagen para cambiar la fotografía</p>
         </div>
@@ -87,7 +86,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="usuario">Nombre</label>
-                    <input type="text" class="form-control" name="usuario" value={{user['nombre']}} required>
+                    <input id="nombre-admin" type="text" class="form-control" name="usuario" value={{user['nombre']}} required>
                 </div>
             </div>
         </div>
@@ -95,13 +94,13 @@
             <div class="col-md-6">   
                 <div class="form-group">
                     <label for="pass">Contraseña</label>
-                    <input type="password" class="form-control" name="pass" placeholder="Rellenar solo si quiere cambiar su contraseña">
+                    <input id="pass-1-admin" type="password" class="form-control" name="pass" placeholder="Rellenar solo si quiere cambiar su contraseña">
                 </div>
             </div>
             <div class="col-md-6">   
                 <div class="form-group">
                     <label for="repetirPass">Repetir contraseña</label>
-                    <input type="password" class="form-control" name="repetirPass" placeholder="Rellenar solo si quiere cambiar su contraseña">
+                    <input id="pass-2-admin" type="password" class="form-control" name="repetirPass" placeholder="Rellenar solo si quiere cambiar su contraseña">
                 </div>
             </div>
         </div>

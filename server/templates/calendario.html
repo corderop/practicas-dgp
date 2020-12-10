@@ -84,8 +84,8 @@
           Dentro de {{ semana }} semanas
         </h2>
         {% elseif semana < -1 %}
-        <h2 tabindex="0" aria-label="Tareas de hace de {{ semana }} semanas" class="titulo-semana flex-item-calendario-titulo">
-          Hace de {{ semana }} semanas
+        <h2 tabindex="0" aria-label="Tareas de hace de {{ semana|abs }} semanas" class="titulo-semana flex-item-calendario-titulo">
+          Hace de {{ semana|abs }} semanas
         </h2>
         {% endif %}
       <div class="flex-item-calendario-titulo">

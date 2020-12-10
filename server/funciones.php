@@ -128,11 +128,15 @@
         $sql = "SELECT * FROM USUARIO WHERE nombre='$nombre'";
         $res = $mysqli->query($sql);
         
+        $resultado = array();
+
         if($res->num_rows > 0){
-            return true;
+            while($row = $res->fetch_array()) {
+                $resultado[] = $row;
+            }
         }
 
-        return false;
+        return $resultado;
     }
 
     /**

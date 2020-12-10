@@ -119,13 +119,17 @@ function alternarSiContrasena( el, cambiar ){
     }
 }
 
-function usuarioBien( el ,tipo){
+function usuarioBien( el ,tipo, id){
     $.ajax({
         url:"_comprobarNombre.php",
         method:"GET",
-        data:{nombre:document.getElementById(`nombre-${tipo}`).value},
+        data:{
+            nombre:document.getElementById(`nombre-${tipo}`).value,
+            id_nombre: id
+        },
         success:function(data)
         {
+            console.log(data);
             if(!data){
                 if(tipo == "admin" || tipo == "tutor"){
                     if(document.getElementById(`pass-1-${tipo}`).value == document.getElementById(`pass-2-${tipo}`).value){

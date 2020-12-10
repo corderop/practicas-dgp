@@ -16,7 +16,7 @@
     <!-- Pestaña para el admin -->
     <div class="ui bottom attached active tab segment" data-tab="first">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'admin'); return false;">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'admin',-1); return false;">
             <div id="alerta-admin" class="alert alert-warning" role="alert" style="display: none;"></div>
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
@@ -66,7 +66,7 @@
     <!-- Pestaña para el capacitador -->
     <div class="ui bottom attached tab segment" data-tab="second">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'tutor'); return false;">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this,'tutor', -1); return false;">
             <div id="alerta-tutor" class="alert alert-warning" role="alert" style="display: none;"></div>
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
@@ -116,7 +116,7 @@
     <!-- Pestaña para personas -->
     <div class="ui bottom attached tab segment" data-tab="third">
         <!-- Formulario -->
-        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this, 'usuario'); return false;">
+        <form method="POST" enctype="multipart/form-data" action="_aniadirUsuario.php" onsubmit="usuarioBien(this, 'usuario', -1); return false;">
             <div class="row etiqueta-foto-usuario">
                 <p>Pulsa en la imagen para añadir una fotografía</p>
             </div>

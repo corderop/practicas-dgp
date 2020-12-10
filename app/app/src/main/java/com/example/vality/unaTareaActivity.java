@@ -5,14 +5,19 @@ import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
@@ -25,17 +30,26 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class unaTareaActivity extends AppCompatActivity {
     Tarea tarea;
     RequestQueue queue;
     int cod_usuario;
 
+    TextView tvTime, tvDuration;
+    SeekBar seekBarTime, seekBarVolume;
+    Button btnPlay;
+    MediaPlayer mp;
+
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         Date aux = new Date();
+        mp = new MediaPlayer();
+
         try {
             aux = formatoFecha.parse(getIntent().getStringExtra("fecha_limite"));
         }catch (ParseException ex){
@@ -138,7 +152,105 @@ public class unaTareaActivity extends AppCompatActivity {
     }
 
     private void cargarAudio(){
+        try {
+            mp.setDataSource("http://test.dgp.esy.es/"+ tarea.getMultimedia());
+            mp.prepare();
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    // hide the actionbar
+                    getSupportActionBar().hide();
 
+                    tvTime = findViewById(R.id.tvTime);
+                    tvDuration = findViewById(R.id.tvDuration);
+                    seekBarTime = findViewById(R.id.seekBarTime);
+                    btnPlay = findViewById(R.id.btnPlay);
+                    btnPlay.setBackgroundResource(R.drawable.ic_play);
+
+                    mp.setLooping(true);
+                    mp.seekTo(0);
+                    mp.setVolume(0.5f, 0.5f);
+
+                    String duration = millisecondsToString(mp.getDuration());
+                    tvDuration.setText(duration);
+
+                    seekBarTime.setMax(mp.getDuration());
+                    seekBarTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean isFromUser) {
+                            if(isFromUser) {
+                                mp.seekTo(progress);
+                                seekBar.setProgress(progress);
+                            }
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        }
+                    });
+
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (mp != null) {
+                                if(mp.isPlaying()) {
+                                    try {
+                                        final double current = mp.getCurrentPosition();
+                                        final String elapsedTime = millisecondsToString((int) current);
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                tvTime.setText(elapsedTime);
+                                                seekBarTime.setProgress((int) current);
+                                            }
+                                        });
+
+                                        Thread.sleep(500);
+                                    }catch (InterruptedException e) {}
+                                }
+                            }
+                        }
+                    }).start();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void accionBoton(View v){
+        if(v.getId() == R.id.btnPlay) {
+            if(mp.isPlaying()) {
+                // is playing
+                mp.pause();
+                btnPlay.setBackgroundResource(R.drawable.ic_play);
+            } else {
+                // on pause
+                mp.start();
+                btnPlay.setBackgroundResource(R.drawable.ic_pause);
+            }
+        }
+    }
+
+    public String millisecondsToString(int time) {
+        String elapsedTime = "";
+        int minutes = time / 1000 / 60;
+        int seconds = time / 1000 % 60;
+        elapsedTime = minutes+":";
+        if(seconds < 10) {
+            elapsedTime += "0";
+        }
+        elapsedTime += seconds;
+
+        return  elapsedTime;
     }
 
     public void abrir_chat(View view) {

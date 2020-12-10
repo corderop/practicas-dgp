@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -39,7 +40,7 @@ public class unaTareaActivity extends AppCompatActivity {
     int cod_usuario;
 
     TextView tvTime, tvDuration;
-    SeekBar seekBarTime, seekBarVolume;
+    SeekBar seekBarTime;
     Button btnPlay;
     MediaPlayer mp;
 
@@ -75,6 +76,13 @@ public class unaTareaActivity extends AppCompatActivity {
         setContentView(R.layout.pantalla_tarea);
         TextView titulo = this.findViewById(R.id.tituloTarea);
         titulo.setText(this.tarea.getTitulo());
+
+
+        TextView descripcion = this.findViewById(R.id.descripcion);
+        if(this.tarea.getDescripcion() != null){
+            descripcion.setText(this.tarea.getDescripcion());
+            descripcion.setVisibility(View.VISIBLE);
+        }
 
         if(tarea.getMultimedia().endsWith("webp") || tarea.getMultimedia().endsWith("png") || tarea.getMultimedia().endsWith("jpg") || tarea.getMultimedia().endsWith("jpeg")){
             cargarImagen();
@@ -155,6 +163,10 @@ public class unaTareaActivity extends AppCompatActivity {
         try {
             mp.setDataSource("http://test.dgp.esy.es/"+ tarea.getMultimedia());
             mp.prepare();
+
+            LinearLayout audio = findViewById(R.id.audio);
+            audio.setVisibility(View.VISIBLE);
+
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {

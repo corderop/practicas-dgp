@@ -2,6 +2,7 @@ package com.example.vality;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
@@ -143,14 +145,16 @@ public class Usuario {
                                 aux.setCalificacion(tarea_Aux.getInt("calificacion"));
                             }
 
-                            tareas.add(aux);
-                            System.out.println("Añadida tarea " + aux.toString());
+                            if ( !aux.getRealizada()) {
+                                tareas.add(aux);
+                                System.out.println("Añadida tarea " + aux.toString());
+                            }
 
                             contador++;
                             terminado = response.isNull(contador+"");
                         }
                         contador--;
-                        System.out.println("La lista contenía " + contador + "tareas, que son: ");
+                        System.out.println("La lista contenía " + contador + "tareas no realizadas, que son: ");
                         System.out.println(tareas.toString());
                         System.out.println("pasamos a crear la interfaz de tareas");
 
@@ -179,13 +183,7 @@ public class Usuario {
                                     }
 
                                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                                    if(imagen_entrada !=null){
-                                        if (((Tarea) entrada).getRealizada()) {
-                                            imagen_entrada.setImageResource(R.drawable.bien);
-                                        } else {
-                                            imagen_entrada.setImageResource(R.drawable.trabajar);
-                                        }
-                                    }
+                                    cargarImagen(imagen_entrada, ((Tarea)entrada).getObjetivo(), queue);
                                 }
                             }
                         });
@@ -231,6 +229,24 @@ public class Usuario {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void cargarImagen(ImageView cuadroImagen, String multimedia, RequestQueue queue){
+        String url="http://test.dgp.esy.es/"+ multimedia;
+        System.out.println("Creamos mensaje para pedir imagen: "+ multimedia);
+
+        ImageRequest imageRequest = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        cuadroImagen.setImageBitmap(response);
+                    }
+                }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("ERROR: "+ error);
+            }
+        });
+        queue.add(imageRequest);
     }
 
     public String getNombre() {

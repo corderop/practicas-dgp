@@ -19,7 +19,7 @@
             if($contador != 0 ){
                 $respuesta = $respuesta . ",";
             }
-            $respuesta = $respuesta . '"' . $contador . '"' . ":" . json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "realizada" => $tarea["realizada"], "calificacion" => $tarea["calificacion"]));
+            $respuesta = $respuesta . '"' . $contador . '"' . ":" . json_encode(array("cod_tarea" => $tarea["cod_tarea"], "cod_facilitador" => $tarea["crea"], "titulo" => $tarea["titulo"], "descripcion" => $tarea["descripcion"], "fecha_limite" => $tarea["fecha_limite"], "objetivo" => $tarea["objetivo"], "multimedia" => $tarea["multimedia"], "realizada" => $tarea["realizada"], "calificacion" => $tarea["calificacion"], "pictograma" => $tarea["pictograma"]));
             $contador = $contador + 1;
         }
         $respuesta = $respuesta . "}";

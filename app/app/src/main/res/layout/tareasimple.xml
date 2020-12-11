@@ -10,7 +10,6 @@
         android:layout_height="80dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:contentDescription="Descripción del contenido de la imagen"
         android:src="@android:drawable/ic_menu_gallery" />
 
     <LinearLayout

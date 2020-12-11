@@ -154,14 +154,15 @@
         app:srcCompat="@drawable/telefono"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
         android:id="@+id/tituloPantalla"
-        android:layout_width="274dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="277dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="5dp"
+        android:autoSizeMinTextSize="20sp"
         android:autoSizeTextType="uniform"
-        android:gravity="center"
         android:text="Inicio de sesión"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"

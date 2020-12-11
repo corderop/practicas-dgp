@@ -65,7 +65,8 @@ public class unaTareaActivity extends AppCompatActivity {
                 getIntent().getStringExtra("objetivo"),
                 getIntent().getStringExtra("multimedia"),
                 Boolean.parseBoolean(getIntent().getStringExtra("realizada")),
-                Integer.parseInt(getIntent().getStringExtra("calificacion"))
+                Integer.parseInt(getIntent().getStringExtra("calificacion")),
+                getIntent().getStringExtra("pictograma")
 
         );
 

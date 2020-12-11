@@ -18,10 +18,24 @@
             android:id="@+id/texto_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo"
+            android:background="@drawable/bocadillo_enviado"
             android:maxWidth="240dp"
             android:padding="8dp"
             android:textColor="#ffffff"/>
+
+        <ImageView
+            android:id="@+id/imagen_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bocadillo_enviado"
+            android:visibility="gone"/>
+
+        <VideoView
+            android:id="@+id/video_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bocadillo_enviado"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/fecha_mensaje"
@@ -29,5 +43,5 @@
             android:layout_height="wrap_content"
             android:textSize="10sp"/>
 
-    </LinearLayout>>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

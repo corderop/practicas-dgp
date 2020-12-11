@@ -1,13 +1,19 @@
 package com.example.vality;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,12 +21,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,99 +50,143 @@ public class Chat extends AppCompatActivity {
 
         setContentView(R.layout.chat);
 
-        pedir_mensajes(this);
-
-        /*
-        Date fecha = new Date(2020, 12, 7);
-        Mensaje msj1 = new Mensaje(1, fecha, "qoeupwhvqe9puhvpeqiuhvreipurhverpviuohqepiuvewrvergeqrgergqer", "", false, 1);
-        Mensaje msj2 = new Mensaje(1, fecha, "Bien, ¿y tú?", "", false, 2);
-
-        mensajes.add(msj1);
-        mensajes.add(msj2);
-        */
+        pedirMensajes(this);
     }
 
-    private void pedir_mensajes(Chat context){
+    private void cargarImagen(String ruta){
+        String url = "http://test.dgp.esy.es/" + ruta;
+        ImageView imagen = this.findViewById(R.id.imagen_mensaje);
+        imagen.setVisibility(View.VISIBLE);
+
+        System.out.println("Creamos mensaje para pedir imagen: " + url);
+
+        ImageRequest imageRequest = new ImageRequest(url,
+            new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap response) {
+                        imagen.setImageBitmap(response);
+                    }
+            }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println("ERROR: "+ error);
+                }
+            }
+        );
+        queue.add(imageRequest);
+    }
+
+    private void cargarVideo(String ruta) {
+        VideoView videoView = this.findViewById(R.id.video_mensaje);
+        MediaController mediaController = new MediaController(this);
+
+        videoView.setVisibility(View.VISIBLE);
+
+        Uri uri = Uri.parse("http://test.dgp.esy.es/" + ruta);
+        System.out.println("Creamos mensaje para pedir video: " + uri);
+
+        videoView.setVideoURI(uri);
+        videoView.requestFocus();
+
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoView.start();
+                mediaController.show();
+            }
+        });
+
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                System.out.println("Ha ocurrido un problema con el vídeo");
+                return false;
+            }
+        });
+    }
+
+    private void pedirMensajes(Chat context){
         queue = Volley.newRequestQueue(context);
         String url = "http://test.dgp.esy.es/app/mensajes.php?cod_tarea="+this.cod_tarea;
 
-            try {
-                JSONObject jsonBody = new JSONObject();
-                jsonBody.put("cod_tarea", cod_tarea);
+        try {
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("cod_tarea", cod_tarea);
 
-                System.out.println("Creando JSON para pedir mensaejes, cod_tarea: " + cod_tarea);
+            System.out.println("Creando JSON para pedir mensaejes, cod_tarea: " + cod_tarea);
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            System.out.println("Ha llegado la lista con los mensajes");
-                            Mensaje aux = new Mensaje();
-                            JSONObject mensaje_Aux = null;
-                            int contador =0;
-                            boolean terminado = response.isNull(contador+"");
-                            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-                            while(!terminado){
-                                mensaje_Aux = response.getJSONObject(contador+"");
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        System.out.println("Ha llegado la lista con los mensajes");
+                        Mensaje aux = new Mensaje();
+                        JSONObject mensaje_Aux = null;
+                        int contador =0;
+                        boolean terminado = response.isNull(contador+"");
+                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                        while(!terminado){
+                            mensaje_Aux = response.getJSONObject(contador+"");
 
-                                if(mensaje_Aux != null){
-                                    System.out.println("Leemos  JSON " + contador);
-                                }else{
-                                    System.out.println("Error el valor del JSON " + contador + " está vacío.");
-                                }
-
-                                aux.setCod_mensaje(mensaje_Aux.getInt("cod_mensaje"));
-                                try {
-                                    aux.setFecha(formatoFecha.parse(mensaje_Aux.getString("fecha")));
-                                }catch (ParseException ex){
-                                    System.out.println(ex);
-                                }
-                                aux.setContenido(mensaje_Aux.getString("contenido"));
-                                aux.setMultimedia(mensaje_Aux.getString("multimedia"));
-                                if(mensaje_Aux.getInt("leido") == 0){
-                                    aux.setLeido(false);
-                                }else{
-                                    aux.setLeido(true);
-                                }
-                                aux.setCod_emisor(mensaje_Aux.getInt("envia"));
-
-                                mensajes.add(aux);
-                                System.out.println("Añadido mensaje " + aux.toString());
-                                System.out.println("Añadido mensaje " + mensaje_Aux.toString());
-
-                                aux=new Mensaje();
-
-
-                                contador++;
-                                terminado = response.isNull(contador+"");
+                            if(mensaje_Aux != null){
+                                System.out.println("Leemos  JSON " + contador);
+                            }
+                            else {
+                                System.out.println("Error el valor del JSON " + contador + " está vacío.");
                             }
 
-                            System.out.println("La lista contenía " + contador + " mensajes");
-                            System.out.println("Lista final de mensajes " + mensajes);
+                            aux.setCod_mensaje(mensaje_Aux.getInt("cod_mensaje"));
+                            try {
+                                aux.setFecha(formatoFecha.parse(mensaje_Aux.getString("fecha")));
+                            }catch (ParseException ex){
+                                System.out.println(ex);
+                            }
+                            aux.setContenido(mensaje_Aux.getString("contenido"));
+                            aux.setMultimedia(mensaje_Aux.getString("multimedia"));
+                            if(mensaje_Aux.getInt("leido") == 0){
+                                aux.setLeido(false);
+                            }else{
+                                aux.setLeido(true);
+                            }
+                            aux.setCod_emisor(mensaje_Aux.getInt("envia"));
 
-                            listView = (ListView) context.findViewById(R.id.list);
-                            listView.setAdapter(new AdaptadorChat(context, R.layout.mensaje_enviado, mensajes, cod_usuario));
+                            mensajes.add(aux);
+                            System.out.println("Añadido mensaje " + aux.toString());
+                            System.out.println("Añadido mensaje " + mensaje_Aux.toString());
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            aux=new Mensaje();
+
+
+                            contador++;
+                            terminado = response.isNull(contador+"");
                         }
-                    }
-                }, new Response.ErrorListener() {
 
+                        System.out.println("La lista contenía " + contador + " mensajes");
+                        System.out.println("Lista final de mensajes " + mensajes);
+
+                        listView = (ListView) context.findViewById(R.id.list);
+                        listView.setAdapter(new AdaptadorChat(context, R.layout.mensaje_enviado, mensajes, cod_usuario));
+
+                    } catch (JSONException e) {
+                            e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
                         System.out.println("ERROR: "+ error);
                     }
-                });
-
-
-
+            });
                 // Access the RequestQueue through your singleton class.
                 queue.add(jsonObjectRequest);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     class AdaptadorChat extends ArrayAdapter <Mensaje>{
@@ -183,12 +235,35 @@ public class Chat extends AppCompatActivity {
             return posicion;
         }
 
-        public void onEntrada(Object entrada, View view) {
-            TextView miTexto = view.findViewById(R.id.texto_mensaje);
-            TextView miFecha = view.findViewById(R.id.fecha_mensaje);
+        public void onEntrada(Mensaje entrada, View view) {
+            System.out.println(entrada.getContenido());
+            System.out.println(entrada.getMultimedia());
 
-            miTexto.setText(((Mensaje)entrada).getContenido());
-            miFecha.setText(((Mensaje)entrada).getFecha().toString());
+            if (entrada.getContenido() == null) {
+                System.out.println("Soy null");
+            }
+
+            if (entrada.getContenido() != "null") {
+                //System.out.println("Vamos a cargar el texto:");
+                TextView miTexto = view.findViewById(R.id.texto_mensaje);
+                miTexto.setText(entrada.getContenido());
+            }
+            else if (entrada.getMultimedia() != "null") {
+                if (entrada.getMultimedia().endsWith(".png") ||
+                    entrada.getMultimedia().endsWith(".jpg") ||
+                    entrada.getMultimedia().endsWith(".jpeg") ||
+                    entrada.getMultimedia().endsWith(".webm")) {
+                    //System.out.println("Vamos a cargar la imagen:");
+                    cargarImagen(entrada.getMultimedia());
+                }
+                else if (entrada.getMultimedia().endsWith(".mp4")) {
+                    cargarVideo(entrada.getMultimedia());
+                }
+            }
+
+            DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            TextView miFecha = view.findViewById(R.id.fecha_mensaje);
+            miFecha.setText(formatoFecha.format(entrada.getFecha()));
         }
     }
 }

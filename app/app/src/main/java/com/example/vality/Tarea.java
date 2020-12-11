@@ -27,6 +27,7 @@ public class Tarea {
     private String multimedia;
     private boolean realizada;
     private int calificacion;
+    private String pictograma;
 /*
     // Constructor
     public Tarea(String url, RequestQueue queue, TextView tv){
@@ -79,7 +80,7 @@ public class Tarea {
     public Tarea(){
     }
 
-    public Tarea(int cod_tarea, int cod_facilitador, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, boolean realizada, int calificacion) {
+    public Tarea(int cod_tarea, int cod_facilitador, String titulo, String descripcion, Date fecha_limite, String objetivo, String multimedia, boolean realizada, int calificacion, String pictograma) {
         this.cod_tarea = cod_tarea;
         this.cod_facilitador = cod_facilitador;
         this.titulo = titulo;
@@ -89,6 +90,7 @@ public class Tarea {
         this.multimedia = multimedia;
         this.realizada = realizada;
         this.calificacion = calificacion;
+        this.pictograma=pictograma;
     }
 
     // ---------------------------------
@@ -167,8 +169,24 @@ public class Tarea {
         this.calificacion = calificacion;
     }
 
+    public void setCod_tarea(int cod_tarea) {
+        this.cod_tarea = cod_tarea;
+    }
+
+    public boolean isRealizada() {
+        return realizada;
+    }
+
+    public String getPictograma() {
+        return pictograma;
+    }
+
+    public void setPictograma(String pictograma) {
+        this.pictograma = pictograma;
+    }
+
     @Override
     public String toString(){
-        return "Título: " + this.getTitulo() + " imagen: "+ this.getRealizada() + " descripción: " + this.getDescripcion()+ " multimedia: " + this.getMultimedia() + " objetivo: " + this.getObjetivo();
+        return "Título: " + this.getTitulo() + " imagen: "+ this.getRealizada() + " descripción: " + this.getDescripcion()+ " multimedia: " + this.getMultimedia() + " objetivo: " + this.pictograma;
     }
 }

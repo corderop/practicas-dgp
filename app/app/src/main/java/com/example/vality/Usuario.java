@@ -144,6 +144,7 @@ public class Usuario {
                             }else{
                                 aux.setCalificacion(tarea_Aux.getInt("calificacion"));
                             }
+                            aux.setPictograma(tarea_Aux.getString("pictograma"));
 
                             if ( !aux.getRealizada()) {
                                 tareas.add(aux);
@@ -183,7 +184,7 @@ public class Usuario {
                                     }
 
                                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                                    cargarImagen(imagen_entrada, ((Tarea)entrada).getObjetivo(), queue);
+                                    cargarImagen(imagen_entrada, ((Tarea)entrada).getPictograma(), queue);
                                 }
                             }
                         });
@@ -205,6 +206,7 @@ public class Usuario {
                                 i.putExtra("realizada", elegida.getRealizada()+"");
                                 i.putExtra("calificacion", elegida.getCalificacion()+"");
                                 i.putExtra("cod_usuario", cod_usuario+"");
+                                i.putExtra("pictograma", elegida.getPictograma()+"");
                                 general.startActivity(i);
                             }
                         });

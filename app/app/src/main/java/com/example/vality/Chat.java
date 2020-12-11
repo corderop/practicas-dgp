@@ -239,10 +239,6 @@ public class Chat extends AppCompatActivity {
             System.out.println(entrada.getContenido());
             System.out.println(entrada.getMultimedia());
 
-            if (entrada.getContenido() == null) {
-                System.out.println("Soy null");
-            }
-
             if (entrada.getContenido() != "null") {
                 //System.out.println("Vamos a cargar el texto:");
                 TextView miTexto = view.findViewById(R.id.texto_mensaje);
@@ -265,5 +261,12 @@ public class Chat extends AppCompatActivity {
             TextView miFecha = view.findViewById(R.id.fecha_mensaje);
             miFecha.setText(formatoFecha.format(entrada.getFecha()));
         }
+    }
+
+    private static class MensajeHolder {
+        TextView texto_mensaje;
+        ImageView imagen_mensaje;
+        VideoView video_mensaje;
+        TextView fecha_mensaje;
     }
 }

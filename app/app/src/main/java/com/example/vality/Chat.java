@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,28 +54,7 @@ public class Chat extends AppCompatActivity {
         pedirMensajes(this);
     }
 
-    private void cargarImagen(String ruta){
-        String url = "http://test.dgp.esy.es/" + ruta;
-        ImageView imagen = this.findViewById(R.id.imagen_mensaje);
-        imagen.setVisibility(View.VISIBLE);
 
-        System.out.println("Creamos mensaje para pedir imagen: " + url);
-
-        ImageRequest imageRequest = new ImageRequest(url,
-            new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap response) {
-                        imagen.setImageBitmap(response);
-                    }
-            }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("ERROR: "+ error);
-                }
-            }
-        );
-        queue.add(imageRequest);
-    }
 
     private void cargarVideo(String ruta) {
         VideoView videoView = this.findViewById(R.id.video_mensaje);
@@ -245,15 +225,18 @@ public class Chat extends AppCompatActivity {
                 miTexto.setText(entrada.getContenido());
             }
             else if (entrada.getMultimedia() != "null") {
+                String ruta = entrada.getMultimedia();
                 if (entrada.getMultimedia().endsWith(".png") ||
                     entrada.getMultimedia().endsWith(".jpg") ||
                     entrada.getMultimedia().endsWith(".jpeg") ||
                     entrada.getMultimedia().endsWith(".webm")) {
-                    //System.out.println("Vamos a cargar la imagen:");
-                    cargarImagen(entrada.getMultimedia());
+                    String url = "http://test.dgp.esy.es/" + ruta;
+                    ImageView imagen = Chat.this.findViewById(R.id.imagen_mensaje);
+                    Picasso.get().load(url).into(imagen);
+                    //cargarImagen(imagen, ruta);
                 }
                 else if (entrada.getMultimedia().endsWith(".mp4")) {
-                    cargarVideo(entrada.getMultimedia());
+                    cargarVideo(ruta);
                 }
             }
 
@@ -263,10 +246,26 @@ public class Chat extends AppCompatActivity {
         }
     }
 
-    private static class MensajeHolder {
-        TextView texto_mensaje;
-        ImageView imagen_mensaje;
-        VideoView video_mensaje;
-        TextView fecha_mensaje;
+    private void cargarImagen(ImageView imagen, String ruta){
+        String url = "http://test.dgp.esy.es/" + ruta;
+        imagen.setVisibility(View.VISIBLE);
+
+        System.out.println("Creamos mensaje para pedir imagen: " + url);
+
+
+        ImageRequest imageRequest = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        imagen.setImageBitmap(response);
+                    }
+                }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("ERROR: "+ error);
+            }
+        }
+        );
+        queue.add(imageRequest);
     }
 }

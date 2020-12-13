@@ -47,6 +47,7 @@ public class unaTareaActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         Date aux = new Date();
         mp = new MediaPlayer();
@@ -271,5 +272,11 @@ public class unaTareaActivity extends AppCompatActivity {
         i.putExtra("cod_usuario", cod_usuario+"");
         i.putExtra("cod_tarea", tarea.getCod_tarea()+"");
         this.startActivity(i);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
 }

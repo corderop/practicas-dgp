@@ -20,7 +20,7 @@
                 android:layout_marginTop="16dp"
                 android:autoSizeMinTextSize="20sp"
                 android:autoSizeTextType="uniform"
-                android:text="Lista de tareas"
+                android:text="Calendario"
                 android:textColor="@color/black" />
 
             <ImageView
@@ -29,15 +29,7 @@
                 android:layout_height="80dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/trabajar" />
-
-            <Button
-                android:id="@+id/abrirCalendario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="pulsadoCalendario"
-                android:text="Button" />
+                android:src="@drawable/calendario" />
         </LinearLayout>
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"

@@ -96,7 +96,7 @@ public class Usuario {
 
     }
 
-    public void obtenerTareas(String url, RequestQueue queue, tareasActivity general){
+    public void obtenerTareas(String url, RequestQueue queue, AppCompatActivity general, String formato){
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("cod_usuario", cod_usuario);
@@ -157,14 +157,16 @@ public class Usuario {
                         contador--;
                         System.out.println("La lista contenía " + contador + "tareas no realizadas, que son: ");
                         System.out.println(tareas.toString());
-                        System.out.println("pasamos a crear la interfaz de tareas");
 
-                        lista = (ListView) general.findViewById(R.id.ListView_listado);
-                        lista.setAdapter(new listaAdaptador(general, R.layout.tareasimple, tareas){
-                            @Override
-                            public void onEntrada(Object entrada, View view) {
-                                if (entrada != null) {
-                                    System.out.println(((Tarea) entrada).toString());
+                        if(formato=="LISTA") {
+                            System.out.println("pasamos a crear la interfaz de tareas");
+
+                            lista = (ListView) general.findViewById(R.id.ListView_listado);
+                            lista.setAdapter(new listaAdaptador(general, R.layout.tareasimple, tareas) {
+                                @Override
+                                public void onEntrada(Object entrada, View view) {
+                                    if (entrada != null) {
+                                        System.out.println(((Tarea) entrada).toString());
                                     /*System.out.print("Creamos una tarea en la interfaz de lista de tareas con valores titulo: " + ((Tarea) entrada).getTitulo() + " e imagen:");
                                     if (((Tarea) entrada).isRealizada()) {
                                         System.out.println(" bien");
@@ -173,44 +175,44 @@ public class Usuario {
                                     }
                                     */
 
-                                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
-                                    if (texto_superior_entrada != null){
-                                        texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
-                                    }
+                                        TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                                        if (texto_superior_entrada != null) {
+                                            texto_superior_entrada.setText(((Tarea) entrada).getTitulo());
+                                        }
 
-                                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
-                                    if (texto_inferior_entrada != null){
-                                        texto_inferior_entrada.setText("Pulse para acceder a la tarea");
-                                    }
+                                        TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                                        if (texto_inferior_entrada != null) {
+                                            texto_inferior_entrada.setText("Pulse para acceder a la tarea");
+                                        }
 
-                                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                                    cargarImagen(imagen_entrada, ((Tarea)entrada).getPictograma(), queue);
+                                        ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
+                                        cargarImagen(imagen_entrada, ((Tarea) entrada).getPictograma(), queue);
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                                Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
+                            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                                    Tarea elegida = (Tarea) pariente.getItemAtPosition(posicion);
 
-                                Intent i = new Intent(general, unaTareaActivity.class);
+                                    Intent i = new Intent(general, unaTareaActivity.class);
 
-                                i.putExtra("cod_tarea", elegida.getCod_tarea()+"");
-                                i.putExtra("cod_facilitador", elegida.getCod_facilitador()+"");
-                                i.putExtra("titulo", elegida.getTitulo()+"");
-                                i.putExtra("descripcion", elegida.getDescripcion()+"");
-                                i.putExtra("fecha_limite", elegida.getFecha_limite()+"");
-                                i.putExtra("objetivo", elegida.getObjetivo()+"");
-                                i.putExtra("multimedia", elegida.getMultimedia()+"");
-                                i.putExtra("realizada", elegida.getRealizada()+"");
-                                i.putExtra("calificacion", elegida.getCalificacion()+"");
-                                i.putExtra("cod_usuario", cod_usuario+"");
-                                i.putExtra("pictograma", elegida.getPictograma()+"");
-                                general.startActivity(i);
-                            }
-                        });
-
+                                    i.putExtra("cod_tarea", elegida.getCod_tarea() + "");
+                                    i.putExtra("cod_facilitador", elegida.getCod_facilitador() + "");
+                                    i.putExtra("titulo", elegida.getTitulo() + "");
+                                    i.putExtra("descripcion", elegida.getDescripcion() + "");
+                                    i.putExtra("fecha_limite", elegida.getFecha_limite() + "");
+                                    i.putExtra("objetivo", elegida.getObjetivo() + "");
+                                    i.putExtra("multimedia", elegida.getMultimedia() + "");
+                                    i.putExtra("realizada", elegida.getRealizada() + "");
+                                    i.putExtra("calificacion", elegida.getCalificacion() + "");
+                                    i.putExtra("cod_usuario", cod_usuario + "");
+                                    i.putExtra("pictograma", elegida.getPictograma() + "");
+                                    general.startActivity(i);
+                                }
+                            });
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

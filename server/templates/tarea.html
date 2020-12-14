@@ -120,8 +120,8 @@
 				{% if usuario['tipo'] == "USUARIO" %}
 				<input type="file" id="multimedia-envio" name="multimedia" accept="image/*, video/*, audio/*" class="sr-only"
 					aria-label="Añadir un archivo para enviar">
-			 	<label for="multimedia-envio" class="ui label foto-input-label botones-usuario label-tarea botones-usuario"
-					aria-hidden="true">Haz click aquí para añadir un archivo</label>
+			 	<label for="multimedia-envio" class="ui label foto-input-label label-tarea botones-usuario" id="boton-archivo-tarea"
+					aria-hidden="true" style="background-image: url('img/pictogramas/foto.png');">Haz click aquí para añadir un archivo</label>
 				{% else %}
 				<input class="foto-input" aria-label="Multimedia" id="multimedia-envio" type="file" name="multimedia" accept="image/*, video/*, audio/*">
 				<label for="multimedia-envio" class="ui label foto-input-label label-tarea" id="label-tarea-tutor">Pulsa aquí para añadir un archivo</label>
@@ -130,7 +130,7 @@
 					<input type="text" placeholder="Escribe el mensaje a enviar" id="mensaje-envio" name="mensaje">
 				</div>
 				{% if usuario['tipo'] == "USUARIO" %}
-				<button class="ui primary button boton-enviar-mensaje botones-usuario" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
+				<button class="ui primary button boton-enviar-mensaje botones-usuario" id="boton-mensaje" data-bcup-haslogintext="no" value="Submit" style="background-image: url('img/pictogramas/si.png');">Enviar mensaje</button>
 				{% else %}
 				<button class="ui primary button boton-enviar-mensaje" data-bcup-haslogintext="no" value="Submit">Enviar mensaje</button>
 				{% endif %}

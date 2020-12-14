@@ -155,6 +155,12 @@ footer{
     }
 }
 
+@media screen and (max-width: 800px) {
+    .received_withd_msg, .sent_msg{
+        width: 90% !important;
+    }
+}
+
 .seccion-tarea{
     border: 1px solid black;
     border-radius: 5px;

@@ -215,6 +215,10 @@ public class Chat extends AppCompatActivity {
                 }
             }
 
+            DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            TextView fecha = view.findViewById(R.id.fecha_mensaje);
+            fecha.setText(formatoFecha.format(mensaje.getFecha()));
+
             return view;
         }
 

@@ -1,27 +1,27 @@
 package com.example.vality;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.MediaController;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
@@ -29,11 +29,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Chat extends AppCompatActivity {
     ListView listView;
@@ -41,6 +41,11 @@ public class Chat extends AppCompatActivity {
     int cod_usuario;
     int cod_tarea;
     RequestQueue queue;
+
+    MediaPlayer mp = new MediaPlayer();
+    TextView tiempoAudio, duracionAudio;
+    SeekBar barraAudio;
+    Button botonAudio;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,40 +57,6 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.chat);
 
         pedirMensajes(this);
-    }
-
-
-
-    private void cargarVideo(String ruta) {
-        VideoView videoView = this.findViewById(R.id.video_mensaje);
-        MediaController mediaController = new MediaController(this);
-
-        videoView.setVisibility(View.VISIBLE);
-
-        Uri uri = Uri.parse("http://test.dgp.esy.es/" + ruta);
-        System.out.println("Creamos mensaje para pedir video: " + uri);
-
-        videoView.setVideoURI(uri);
-        videoView.requestFocus();
-
-        mediaController.setAnchorView(videoView);
-        videoView.setMediaController(mediaController);
-
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.start();
-                mediaController.show();
-            }
-        });
-
-        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                System.out.println("Ha ocurrido un problema con el vídeo");
-                return false;
-            }
-        });
     }
 
     private void pedirMensajes(Chat context){
@@ -148,7 +119,7 @@ public class Chat extends AppCompatActivity {
                         System.out.println("Lista final de mensajes " + mensajes);
 
                         listView = (ListView) context.findViewById(R.id.list);
-                        listView.setAdapter(new AdaptadorChat(context, R.layout.mensaje_enviado, mensajes, cod_usuario));
+                        listView.setAdapter(new AdaptadorChat(context, R.layout.texto_enviado, mensajes, cod_usuario));
 
                     } catch (JSONException e) {
                             e.printStackTrace();
@@ -169,35 +140,82 @@ public class Chat extends AppCompatActivity {
         }
     }
 
+    public void playAudio (View v){
+        if(v.getId() == R.id.boton_audio) {
+            if(mp.isPlaying()) {
+                // is playing
+                mp.pause();
+                botonAudio.setBackgroundResource(R.drawable.ic_play);
+            } else {
+                // on pause
+                mp.start();
+                botonAudio.setBackgroundResource(R.drawable.ic_pause);
+            }
+        }
+    }
+
     class AdaptadorChat extends ArrayAdapter <Mensaje>{
         private Context contexto;
-        private int R_layout_IdView;
         private ArrayList<Mensaje> mensajes;
         private int cod_usuario;
 
         public AdaptadorChat( Context context, int resource, ArrayList<Mensaje> msj, int cod_usuario) {
             super(context, resource);
             this.contexto = context;
-            this.R_layout_IdView = resource;
             this.mensajes = new ArrayList<>(msj);
             this.cod_usuario=cod_usuario;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                LayoutInflater vi = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                if(mensajes.get(position).getCod_emisor() != this.cod_usuario){
-                    System.out.println("Mostramos un mensaje recibido");
-                    R_layout_IdView = R.layout.mensaje_recibido;
-                }else{
-                    System.out.println("Mostramos un mensaje enviado");
-                    R_layout_IdView = R.layout.mensaje_enviado;
-                }
-                convertView = vi.inflate(R_layout_IdView, null);
+            View view = convertView;
+
+            LayoutInflater inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            Mensaje mensaje = mensajes.get(position);
+
+            int layout_texto, layout_imagen, layout_audio;
+
+            if (mensaje.getCod_emisor() != this.cod_usuario){
+                System.out.println("Mensaje recibido");
+                layout_texto = R.layout.texto_recibido;
+                layout_imagen = R.layout.imagen_recibida;
+                layout_audio = R.layout.audio_recibido;
             }
-            onEntrada (mensajes.get(position), convertView);
-            return convertView;
+            else {
+                System.out.println("Mensaje enviado");
+                layout_texto = R.layout.texto_enviado;
+                layout_imagen = R.layout.imagen_enviada;
+                layout_audio = R.layout.audio_enviado;
+            }
+
+            if (mensaje.getContenido() != "null") {
+                view = inflater.inflate(layout_texto, null);
+                TextView texto = view.findViewById(R.id.texto_mensaje);
+                texto.setText(mensaje.getContenido());
+            }
+            else if (mensaje.getMultimedia() != "null") {
+                String ruta = mensaje.getMultimedia();
+                String url = "http://test.dgp.esy.es/" + ruta;
+                if (ruta.endsWith(".png") ||
+                    ruta.endsWith(".jpg") ||
+                    ruta.endsWith(".jpeg") ||
+                    ruta.endsWith(".webm")) {
+                    view = inflater.inflate(layout_imagen, null);
+                    ImageView imagen = view.findViewById(R.id.imagen_mensaje);
+                    Picasso.get().load(url).into(imagen);
+                }
+                else if (ruta.endsWith(".mp4")) {
+                    view = inflater.inflate(layout_imagen, null);
+                    cargarVideo(view, url);
+                }
+                else if (ruta.endsWith(".ogg")) {
+                    view = inflater.inflate(layout_audio, null);
+                    cargarAudio(view, url);
+                }
+            }
+
+            return view;
         }
 
         @Override
@@ -216,56 +234,140 @@ public class Chat extends AppCompatActivity {
         }
 
         public void onEntrada(Mensaje entrada, View view) {
-            System.out.println(entrada.getContenido());
-            System.out.println(entrada.getMultimedia());
+            TextView texto = view.findViewById(R.id.texto_mensaje);
 
             if (entrada.getContenido() != "null") {
-                //System.out.println("Vamos a cargar el texto:");
-                TextView miTexto = view.findViewById(R.id.texto_mensaje);
-                miTexto.setText(entrada.getContenido());
+                texto.setText(entrada.getContenido());
             }
             else if (entrada.getMultimedia() != "null") {
+                //texto.setVisibility(View.GONE);
                 String ruta = entrada.getMultimedia();
+                String url = "http://test.dgp.esy.es/" + ruta;
                 if (entrada.getMultimedia().endsWith(".png") ||
                     entrada.getMultimedia().endsWith(".jpg") ||
                     entrada.getMultimedia().endsWith(".jpeg") ||
                     entrada.getMultimedia().endsWith(".webm")) {
-                    String url = "http://test.dgp.esy.es/" + ruta;
-                    ImageView imagen = Chat.this.findViewById(R.id.imagen_mensaje);
+                    ImageView imagen = view.findViewById(R.id.imagen_mensaje);
+                    imagen.setVisibility(View.VISIBLE);
                     Picasso.get().load(url).into(imagen);
-                    //cargarImagen(imagen, ruta);
                 }
                 else if (entrada.getMultimedia().endsWith(".mp4")) {
-                    cargarVideo(ruta);
+                    cargarVideo(view, url);
+                }
+                else if (entrada.getMultimedia().endsWith(".ogg")) {
+                    cargarAudio(view, url);
                 }
             }
 
             DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            TextView miFecha = view.findViewById(R.id.fecha_mensaje);
-            miFecha.setText(formatoFecha.format(entrada.getFecha()));
+            TextView fecha = view.findViewById(R.id.fecha_mensaje);
+            fecha.setText(formatoFecha.format(entrada.getFecha()));
         }
-    }
 
-    private void cargarImagen(ImageView imagen, String ruta){
-        String url = "http://test.dgp.esy.es/" + ruta;
-        imagen.setVisibility(View.VISIBLE);
+        private void cargarVideo(View view, String url) {
+            ImageView imagen = view.findViewById(R.id.imagen_mensaje);
+            imagen.setImageResource(R.drawable.ic_play);
+            imagen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Chat.this, VideoActivity.class);
+                    intent.putExtra("url", url);
+                    Chat.this.startActivity(intent);
+                }
+            });
+        }
 
-        System.out.println("Creamos mensaje para pedir imagen: " + url);
+        private void cargarAudio(View view, String url){
+            try {
+                mp.reset();
+                mp.setDataSource(url);
+                mp.prepare();
 
+                LinearLayout audio = view.findViewById(R.id.audio_mensaje);
+                audio.setVisibility(View.VISIBLE);
 
-        ImageRequest imageRequest = new ImageRequest(url,
-                new Response.Listener<Bitmap>() {
+                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
-                    public void onResponse(Bitmap response) {
-                        imagen.setImageBitmap(response);
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        // hide the actionbar
+                        getSupportActionBar().hide();
+
+                        tiempoAudio = findViewById(R.id.tiempo_audio);
+                        duracionAudio = findViewById(R.id.duracion_audio);
+                        barraAudio = findViewById(R.id.barra_audio);
+                        botonAudio = findViewById(R.id.boton_audio);
+                        botonAudio.setBackgroundResource(R.drawable.ic_play);
+
+                        mp.setLooping(false);
+                        mp.seekTo(0);
+                        mp.setVolume(0.5f, 0.5f);
+
+                        String duration = millisecondsToString(mp.getDuration());
+                        duracionAudio.setText(duration);
+
+                        barraAudio.setMax(mp.getDuration());
+                        barraAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                            @Override
+                            public void onProgressChanged(SeekBar seekBar, int progress, boolean isFromUser) {
+                                if(isFromUser) {
+                                    mp.seekTo(progress);
+                                    seekBar.setProgress(progress);
+                                }
+                            }
+
+                            @Override
+                            public void onStartTrackingTouch(SeekBar seekBar) {
+
+                            }
+
+                            @Override
+                            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                            }
+                        });
+
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                while (mp != null) {
+                                    if(mp.isPlaying()) {
+                                        try {
+                                            final double current = mp.getCurrentPosition();
+                                            final String elapsedTime = millisecondsToString((int) current);
+
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    tiempoAudio.setText(elapsedTime);
+                                                    barraAudio.setProgress((int) current);
+                                                }
+                                            });
+
+                                            Thread.sleep(500);
+                                        }catch (InterruptedException e) {}
+                                    }
+                                }
+                            }
+                        }).start();
                     }
-                }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("ERROR: "+ error);
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        );
-        queue.add(imageRequest);
+
+        public String millisecondsToString(int time) {
+            String elapsedTime = "";
+            int minutes = time / 1000 / 60;
+            int seconds = time / 1000 % 60;
+            elapsedTime = minutes+":";
+            if(seconds < 10) {
+                elapsedTime += "0";
+            }
+            elapsedTime += seconds;
+
+            return  elapsedTime;
+        }
     }
 }

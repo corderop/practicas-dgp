@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,31 +10,18 @@
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         tools:ignore="MissingConstraints"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/texto_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo_recibido"
+            android:background="@drawable/bocadillo_enviado"
             android:maxWidth="240dp"
             android:padding="8dp"
-            android:textColor="#ffffff"
-            tools:ignore="MissingConstraints" />
-
-        <ImageView
-            android:id="@+id/imagen_mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo_recibido"
-            android:visibility="gone"/>
-
-        <VideoView
-            android:id="@+id/video_mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo_recibido"
-            android:visibility="gone"/>
+            android:textColor="#ffffff"/>
 
         <TextView
             android:id="@+id/fecha_mensaje"

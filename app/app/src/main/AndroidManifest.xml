@@ -42,6 +42,12 @@
 
             </intent-filter>
         </activity>
+        <activity android:name=".VideoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+            </intent-filter>
+        </activity>
 
     </application>
 

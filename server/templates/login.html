@@ -49,7 +49,7 @@
         </form>
         <form action="_login.php" method="post" id="login-fotos">
             <h2 tabindex="0" class="text-center">Pulsa sobre las imágenes en orden</h2>
-            <button type="button" onclick="borrarContrasena()" class="ui primary fluid button botones-usuario" data-bcup-haslogintext="no">Pulsa aquí para empezar de nuevo</button>
+            <button type="button" onclick="borrarContrasena()" class="ui primary fluid button botones-usuario" id="login-usuario-borrar" data-bcup-haslogintext="no" style="background-image: url('img/pictogramas/no.png');">Pulsa aquí para empezar de nuevo</button>
             <input type="hidden" name="fotos" id="input-fotos" value="">
             <div id="grid-imagenes">
                 <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'arbol')" src="../img/pictogramas/arbol.png" alt="árbol" data-seleccionada="no">
@@ -62,7 +62,7 @@
                 <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'ordenador')" src="../img/pictogramas/ordenador.png" alt="ordenador" data-seleccionada="no">
                 <img tabindex="0" class="imagen-selector" onclick="aniadirContrasena(this, 'enchufe')" src="../img/pictogramas/enchufe.png" alt="enchufe" data-seleccionada="no">
             </div>
-            <button type="submit" class="ui primary fluid button botones-usuario" data-bcup-haslogintext="no">Iniciar sesión</button>
+            <button type="submit" class="ui primary fluid button botones-usuario" id="login-usuario-submit"  data-bcup-haslogintext="no" style="background-image: url('img/pictogramas/si.png');">Iniciar sesión</button>
         </form>
         <p class="text-center" id="texto-cambio"><a href="#" id="link-cambio" onclick="cambiar(this, false);">Iniciar sesión como administrador o facilitador</a></p>
     </div>

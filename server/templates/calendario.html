@@ -371,21 +371,29 @@
       {% endif %}
 
       {% if not dias['lunes'] and not dias['martes'] and not dias['miercoles'] and not dias['jueves'] and not dias['viernes'] and not dias['sabado'] and not dias['domingo'] %}
-        <h3 tabindex="0" id="no-actividad-semana">No hay ninguna actividad programada en la semana</h3>
+        <div class="imagen-titulo-div">
+          <img class="imagen-titulo" src="img/pictogramas/tiempo-libre.png" alt="Pictograma de tareas">
+          <h1 tabindex="0" class="titulo-pagina">
+            No hay ninguna actividad programada en la semana
+          </h1>
+        </div>
       {% else %}
-      <h3 tabindex="0" id="no-actividad-semana">
-        {% if semana == 0 %}
-          Ya has visto todas las tareas de la semana actual
-        {% elseif semana == -1 %}
-          Ya has visto todas las tareas de la semana pasada
-        {% elseif semana == 1 %}
-          Ya has visto todas las tareas de la semana siguiente
-        {% elseif semana > 1 %}
-          Ya has visto todas las tareas de dentro de {{ semana }} semanas
-        {% elseif semana < -1 %}
-          Ya has visto todas las tareas de hace {{ semana|abs }} semanas
-        {% endif %}
-      </h3>
+        <div class="imagen-titulo-div">
+          <img class="imagen-titulo" src="img/pictogramas/final.png" alt="Pictograma de tareas">
+          <h1 tabindex="0" class="titulo-pagina">
+            {% if semana == 0 %}
+              Ya has visto todas las tareas de la semana actual
+            {% elseif semana == -1 %}
+              Ya has visto todas las tareas de la semana pasada
+            {% elseif semana == 1 %}
+              Ya has visto todas las tareas de la semana siguiente
+            {% elseif semana > 1 %}
+              Ya has visto todas las tareas de dentro de {{ semana }} semanas
+            {% elseif semana < -1 %}
+              Ya has visto todas las tareas de hace {{ semana|abs }} semanas
+            {% endif %}
+          </h1>
+        </div>
       {% endif %}
     </div>
   </div>

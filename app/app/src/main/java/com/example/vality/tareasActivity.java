@@ -3,6 +3,9 @@ package com.example.vality;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +34,7 @@ public class tareasActivity extends AppCompatActivity {
         finishAffinity();
     }
 
-    public void pulsadoCalendario(View v){
+    public void pulsadoCalendario(){
         Intent i = new Intent(this, calendarioActivity.class);
         i.putExtra("nombre", usuario.getNombre());
         i.putExtra("contrasena", usuario.getContrasena());
@@ -39,4 +42,23 @@ public class tareasActivity extends AppCompatActivity {
         this.startActivity(i);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_calendario:
+                pulsadoCalendario();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

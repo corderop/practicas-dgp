@@ -35,8 +35,8 @@ public class calendarioActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        finishAffinity();
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
-
 }

@@ -22,3 +22,15 @@
     margin: 5px;
     padding: 5px;
 }
+
+#login-usuario-borrar{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 5px;
+}
+
+#login-usuario-submit{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 5px;
+}

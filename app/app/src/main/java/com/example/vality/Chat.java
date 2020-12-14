@@ -16,7 +16,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,6 +39,7 @@ public class Chat extends AppCompatActivity {
     ArrayList<Mensaje> mensajes = new ArrayList<>();
     int cod_usuario;
     int cod_tarea;
+    String titulo_tarea;
     RequestQueue queue;
 
     MediaPlayer mp = new MediaPlayer();
@@ -50,11 +50,16 @@ public class Chat extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cod_usuario = Integer.parseInt(getIntent().getStringExtra("cod_usuario"));
         cod_tarea = Integer.parseInt(getIntent().getStringExtra("cod_tarea"));
+        titulo_tarea = getIntent().getStringExtra("titulo_tarea");
 
         setContentView(R.layout.chat);
+
+        TextView tituloView = this.findViewById(R.id.titulo_chat);
+        tituloView.setText(titulo_tarea.toUpperCase());
 
         pedirMensajes(this);
     }

@@ -1,16 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Chat">
+
+        <TextView
+            android:id="@+id/titulo_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:padding="15dp"
+            tools:ignore="MissingConstraints" />
 
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:divider="@null"
             android:dividerHeight="0dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintBottom_toTopOf="@+id/caja_enviar"
+            app:layout_constraintTop_toBottomOf="@id/titulo_chat"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/caja_enviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/boton_adjuntar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADJUNTAR"
+                app:layout_constraintEnd_toStartOf="@+id/texto_enviar"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <EditText
+                android:id="@+id/texto_enviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Escribe tu mensaje aquí..."
+                app:layout_constraintEnd_toStartOf="@+id/boton_enviar"
+                app:layout_constraintStart_toEndOf="@+id/boton_adjuntar"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="6dp" />
+
+            <Button
+                android:id="@+id/boton_enviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENVIAR"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/texto_enviar"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="3dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

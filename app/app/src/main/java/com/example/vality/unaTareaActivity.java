@@ -271,6 +271,7 @@ public class unaTareaActivity extends AppCompatActivity {
         Intent i = new Intent(this, Chat.class);
         i.putExtra("cod_usuario", cod_usuario+"");
         i.putExtra("cod_tarea", tarea.getCod_tarea()+"");
+        i.putExtra("titulo_tarea", tarea.getTitulo());
         this.startActivity(i);
     }
 

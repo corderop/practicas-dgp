@@ -142,16 +142,16 @@
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/botonImagenTelefono"
+        android:id="@+id/botonImagenEnchufe"
         android:layout_width="114dp"
         android:layout_height="130dp"
         android:layout_marginStart="280dp"
         android:layout_marginTop="348dp"
-        android:onClick="pulsadoTelefono"
+        android:onClick="pulsadoEnchufe"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/telefono"
+        app:srcCompat="@drawable/enchufe"
         tools:ignore="MissingConstraints" />
 
 

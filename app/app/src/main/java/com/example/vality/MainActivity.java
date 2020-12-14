@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         v.setClickable(false);
     }
 
-    public void pulsadoTelefono(View v){
-        contrasenaIntroducida = contrasenaIntroducida + "telefono";
+    public void pulsadoEnchufe(View v){
+        contrasenaIntroducida = contrasenaIntroducida + "enchufe";
         v.setBackgroundColor(Color.GREEN);
         v.setClickable(false);
     }
@@ -142,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
         ordenador.setBackgroundColor(Color.WHITE);
         ordenador.setClickable(true);
 
-        ImageButton telefono=(ImageButton)findViewById(R.id.botonImagenTelefono);
-        telefono.setBackgroundColor(Color.WHITE);
-        telefono.setClickable(true);
+        ImageButton enchufe=(ImageButton)findViewById(R.id.botonImagenEnchufe);
+        enchufe.setBackgroundColor(Color.WHITE);
+        enchufe.setClickable(true);
     }
 
     /*

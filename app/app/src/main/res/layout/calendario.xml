@@ -14,19 +14,44 @@
 
             <TextView
                 android:id="@+id/tituloPantalla"
-                android:layout_width="243dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="16dp"
+
+                android:layout_width="wrap_content"
+                android:minWidth="200dp"
+                android:layout_height="match_parent"
+
+                app:layout_constraintEnd_toStartOf="@+id/imagenCalendario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+
+                android:maxLines="1"
+                android:gravity="center"
                 android:autoSizeMinTextSize="20sp"
                 android:autoSizeTextType="uniform"
+
                 android:text="Calendario"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:id="@+id/imagenListaTareas"
+                android:id="@+id/imagenCalendario"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+
+                app:layout_constraintStart_toStartOf="@+id/tituloPantalla"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/calendario" />

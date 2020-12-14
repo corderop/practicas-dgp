@@ -15,45 +15,75 @@
 
         <TextView
             android:id="@+id/tituloTarea"
-            android:layout_width="277dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
-            android:autoSizeTextType="uniform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"/>
 
         <ImageView
             android:id="@+id/imagenTarea"
-            android:layout_width="327dp"
-            android:layout_height="213dp"
-            android:layout_marginStart="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="200dp"
+            android:minHeight="200dp"
             android:visibility="gone"
+
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+            app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+
             tools:srcCompat="@tools:sample/avatars" />
 
         <VideoView
             android:id="@+id/videoTarea"
-            android:layout_width="267dp"
-            android:layout_height="220dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="4dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="200dp"
+            android:minHeight="200dp"
+            android:maxHeight="200dp"
             android:visibility="gone"
+
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagenTarea" />
+            app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+            app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:id="@+id/audio"
-            android:layout_width="410dp"
-            android:layout_height="651dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:visibility="gone"
+
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+            app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+
+            android:visibility="gone"
             tools:ignore="MissingConstraints">
 
             <SeekBar
@@ -101,20 +131,25 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/text_back"
         android:padding="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/parte_superior"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/botonChat"
-        android:layout_width="121dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+
+
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:onClick="abrir_chat"
         android:text="Chat"
         android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descripcion"
         tools:ignore="MissingConstraints" />

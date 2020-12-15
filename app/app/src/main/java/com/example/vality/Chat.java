@@ -310,7 +310,7 @@ public class Chat extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Elige el archivo"), 1);
     }
 
-    
+
 
     public void playAudio (View v){
         if(v.getId() == R.id.boton_audio) {

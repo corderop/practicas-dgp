@@ -34,37 +34,44 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
 
-            <Button
+            <ImageView
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 android:id="@+id/boton_adjuntar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/fondo_boton_chat"
                 android:onClick="adjuntarArchivo"
-                android:text="ADJUNTAR"
+                android:orientation="horizontal"
+                android:src="@drawable/foto"
                 app:layout_constraintEnd_toStartOf="@+id/texto_enviar"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout_editor_absoluteY="0dp">
+
+            </ImageView>
 
             <EditText
                 android:id="@+id/texto_enviar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Escribe tu mensaje aquí..."
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/boton_enviar"
                 app:layout_constraintStart_toEndOf="@+id/boton_adjuntar"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="6dp" />
+                tools:ignore="MissingConstraints" />
 
-            <Button
+            <ImageView
                 android:id="@+id/boton_enviar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/si"
+                android:background="@drawable/fondo_boton_chat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:onClick="enviarMensaje"
-                android:text="ENVIAR"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/texto_enviar"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteY="3dp" />
 

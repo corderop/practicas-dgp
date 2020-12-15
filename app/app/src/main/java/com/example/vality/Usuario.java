@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -212,6 +214,15 @@ public class Usuario {
                                     general.startActivity(i);
                                 }
                             });
+                        }else{                  //Estamos desde el calendario
+                            System.out.println("Pasamos a crear la lista de la semana");
+                            System.out.println("Creamos lista del lunes");
+                            RecyclerView recyclerView = general.findViewById(R.id.listaTareasLunes);
+                            LinearLayoutManager horizontalLayoutManager
+                                    = new LinearLayoutManager(general, LinearLayoutManager.HORIZONTAL, false);
+                            recyclerView.setLayoutManager(horizontalLayoutManager);
+                            //adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
+                            recyclerView.setAdapter(new MyRecyclerViewAdapter(general, tareas, queue));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

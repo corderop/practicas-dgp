@@ -221,8 +221,10 @@ public class Usuario {
                             LinearLayoutManager horizontalLayoutManager
                                     = new LinearLayoutManager(general, LinearLayoutManager.HORIZONTAL, false);
                             recyclerView.setLayoutManager(horizontalLayoutManager);
-                            //adapter.setClickListener((MyRecyclerViewAdapter.ItemClickListener) this);
-                            recyclerView.setAdapter(new MyRecyclerViewAdapter(general, tareas, queue));
+
+                            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(general, tareas, queue, (calendarioActivity)general, cod_usuario);   //Lunes
+                            ((calendarioActivity)general).setAdapterDia(adapter, tareas);
+                            recyclerView.setAdapter(adapter);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

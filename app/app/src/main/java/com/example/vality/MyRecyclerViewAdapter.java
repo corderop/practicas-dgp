@@ -1,10 +1,12 @@
 package com.example.vality;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,14 +27,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     ArrayList<Tarea> tareas;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
     RequestQueue queue;
+    private int diaSemana;
+    private calendarioActivity general;
+    int cod_usuario;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, ArrayList<Tarea> tareas, RequestQueue queue) {
+    MyRecyclerViewAdapter(Context context, ArrayList<Tarea> tareas, RequestQueue queue, calendarioActivity general, int cod_usuario) {
         this.mInflater = LayoutInflater.from(context);
         this.tareas = tareas;
         this.queue=queue;
+        this.general=general;
+        this.cod_usuario=cod_usuario;
     }
 
     // inflates the row layout from xml when needed
@@ -48,6 +54,53 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         cargarImagen(holder.imagen, tareas.get(position).getPictograma(), queue);
         holder.titulo.setText(tareas.get(position).getTitulo());
+        holder.tarea=tareas.get(position);
+
+        holder.imagen.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                System.out.println("Has clickado " + tareas.get(position));
+                Tarea elegida = tareas.get(position);
+
+                Intent i = new Intent(general, unaTareaActivity.class);
+
+                i.putExtra("cod_tarea", elegida.getCod_tarea() + "");
+                i.putExtra("cod_facilitador", elegida.getCod_facilitador() + "");
+                i.putExtra("titulo", elegida.getTitulo() + "");
+                i.putExtra("descripcion", elegida.getDescripcion() + "");
+                i.putExtra("fecha_limite", elegida.getFecha_limite() + "");
+                i.putExtra("objetivo", elegida.getObjetivo() + "");
+                i.putExtra("multimedia", elegida.getMultimedia() + "");
+                i.putExtra("realizada", elegida.getRealizada() + "");
+                i.putExtra("calificacion", elegida.getCalificacion() + "");
+                i.putExtra("cod_usuario", cod_usuario + "");
+                i.putExtra("pictograma", elegida.getPictograma() + "");
+                general.startActivity(i);
+            }
+        });
+
+        holder.titulo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                System.out.println("Has clickado " + tareas.get(position));
+                Tarea elegida = tareas.get(position);
+
+                Intent i = new Intent(general, unaTareaActivity.class);
+
+                i.putExtra("cod_tarea", elegida.getCod_tarea() + "");
+                i.putExtra("cod_facilitador", elegida.getCod_facilitador() + "");
+                i.putExtra("titulo", elegida.getTitulo() + "");
+                i.putExtra("descripcion", elegida.getDescripcion() + "");
+                i.putExtra("fecha_limite", elegida.getFecha_limite() + "");
+                i.putExtra("objetivo", elegida.getObjetivo() + "");
+                i.putExtra("multimedia", elegida.getMultimedia() + "");
+                i.putExtra("realizada", elegida.getRealizada() + "");
+                i.putExtra("calificacion", elegida.getCalificacion() + "");
+                i.putExtra("cod_usuario", cod_usuario + "");
+                i.putExtra("pictograma", elegida.getPictograma() + "");
+                general.startActivity(i);
+            }
+        });
     }
 
     // total number of rows
@@ -57,20 +110,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imagen;
         TextView titulo;
+        Tarea tarea;
 
         ViewHolder(View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.ImagenTarea);
             titulo = itemView.findViewById(R.id.tituloTarea);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
@@ -78,17 +126,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public Tarea getItem(int id) {
         return tareas.get(id);
     }
-
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
 
     private void cargarImagen(ImageView cuadroImagen, String multimedia, RequestQueue queue){
         String url="http://test.dgp.esy.es/"+ multimedia;

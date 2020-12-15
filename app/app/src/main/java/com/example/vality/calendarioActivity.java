@@ -1,6 +1,8 @@
 package com.example.vality;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import java.util.Date;
 public class calendarioActivity extends AppCompatActivity {
     Usuario usuario;
     RequestQueue queue;
+    private MyRecyclerViewAdapter adaptadorLunes;
     int diaActual;
 
     @Override
@@ -34,6 +37,10 @@ public class calendarioActivity extends AppCompatActivity {
         diaActual = c1.get(Calendar.DATE);
         System.out.println("Fecha actual: "+ diaActual);
          */
+    }
+
+    public void setAdapterDia(MyRecyclerViewAdapter nuevoAdapter, ArrayList<Tarea> tareas){
+        this.adaptadorLunes=nuevoAdapter;
     }
 
     @Override

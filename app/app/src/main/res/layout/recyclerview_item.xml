@@ -15,8 +15,15 @@
 
     <TextView
         android:id="@+id/tituloTarea"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/diaSemana"
+        android:visibility="gone"
+        android:layout_height="1dp"
+        android:layout_width="1dp" />
 
 </LinearLayout>

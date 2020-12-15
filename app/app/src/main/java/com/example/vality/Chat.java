@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +30,12 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -147,6 +154,144 @@ public class Chat extends AppCompatActivity {
 
     public void enviarMensaje (View v) {
         /*
+        String rutaArchivo = null;
+        String nombreArchivo = rutaArchivo;
+
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        int respuestaServidor = 0;
+
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+
+        File archivo = new File(rutaArchivo);
+
+        if (!archivo.isFile()) {
+
+            Log.e("uploadFile", "Source File not exist : " + rutaArchivo);
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    //messageText.setText("Source File not exist :" + uploadFilePath + "" + uploadFileName);
+                }
+            });
+
+            //return 0;
+
+        }
+        else
+        {
+            try {
+
+                // open a URL connection to the Servlet
+                FileInputStream fileInputStream = new FileInputStream(archivo);
+                URL url = new URL("test.dgp.esy.es/app/mensaje.php");
+
+                // Open a HTTP  connection to  the URL
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true); // Allow Inputs
+                conn.setDoOutput(true); // Allow Outputs
+                conn.setUseCaches(false); // Don't use a Cached Copy
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Connection", "Keep-Alive");
+                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                conn.setRequestProperty("uploaded_file", nombreArchivo);
+
+                dos = new DataOutputStream(conn.getOutputStream());
+
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=uploaded_file;filename="+ nombreArchivo + "" + lineEnd);
+
+                   dos.writeBytes(lineEnd);
+
+                   // create a buffer of  maximum size
+                   bytesAvailable = fileInputStream.available();
+
+                   bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                   buffer = new byte[bufferSize];
+
+                   // read file and write it into form...
+                   bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                   while (bytesRead > 0) {
+
+                     dos.write(buffer, 0, bufferSize);
+                     bytesAvailable = fileInputStream.available();
+                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                    }
+
+                   // send multipart form data necesssary after file data...
+                   dos.writeBytes(lineEnd);
+                   dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                   // Responses from the server (code and message)
+                respuestaServidor = conn.getResponseCode();
+                   String serverResponseMessage = conn.getResponseMessage();
+
+                   Log.i("uploadFile", "HTTP Response is : "
+                           + serverResponseMessage + ": " + respuestaServidor);
+
+                   // Éxito
+                   if(respuestaServidor == 200) {
+
+                       runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
+                                              +" http://www.androidexample.com/media/uploads/"
+                                              +uploadFileName;
+
+                                //messageText.setText(msg);
+                                Toast.makeText(Chat.this, "File Upload Complete.",
+                                             Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                   }
+
+                   //close the streams //
+                   fileInputStream.close();
+                   dos.flush();
+                   dos.close();
+
+              } catch (MalformedURLException ex) {
+                  ex.printStackTrace();
+
+                  runOnUiThread(new Runnable() {
+                      public void run() {
+                          messageText.setText("MalformedURLException Exception : check script url.");
+                          Toast.makeText(UploadToServer.this, "MalformedURLException",
+                                                              Toast.LENGTH_SHORT).show();
+                      }
+                  });
+
+                  Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+              } catch (Exception e) {
+                  e.printStackTrace();
+
+                  runOnUiThread(new Runnable() {
+                      public void run() {
+                          messageText.setText("Got Exception : see logcat ");
+                          Toast.makeText(UploadToServer.this, "Got Exception : see logcat ",
+                                  Toast.LENGTH_SHORT).show();
+                      }
+                  });
+                  Log.e("Upload file to server Exception", "Exception : "
+                                                   + e.getMessage(), e);
+              }
+              // return respuestaServidor;
+
+           } // End else block
+        */
+
+        /*
         httppost = new HttpPost(URL);
         MultipartEntity entity = new MultipartEntity();
         entity.addPart("title", new StringBody("position.csv", Charset.forName("UTF-8")));
@@ -159,8 +304,13 @@ public class Chat extends AppCompatActivity {
     }
 
     public void adjuntarArchivo (View v) {
-
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(Intent.createChooser(intent, "Elige el archivo"), 1);
     }
+
+    
 
     public void playAudio (View v){
         if(v.getId() == R.id.boton_audio) {

@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
@@ -30,7 +29,6 @@
 
             android:maxLines="1"
             android:gravity="center"
-            android:autoSizeMinTextSize="20sp"
             android:autoSizeTextType="uniform"
             android:text="Lista de tareas"
             android:textColor="@color/black" />
@@ -52,7 +50,8 @@
 
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/trabajar" />
+            android:src="@drawable/trabajar"
+            android:contentDescription="Persona haciendo trabajos escritos" />
 
     </LinearLayout>
 

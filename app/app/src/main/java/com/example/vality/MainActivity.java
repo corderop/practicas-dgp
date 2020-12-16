@@ -111,39 +111,39 @@ public class MainActivity extends AppCompatActivity {
     public void borrarContrasena(){
         contrasenaIntroducida = "";
         ImageButton arbol=(ImageButton)findViewById(R.id.botonImagenArbol);
-        arbol.setBackgroundColor(Color.WHITE);
+        arbol.setBackgroundColor(Color.parseColor("#C3C2C2"));
         arbol.setClickable(true);
 
         ImageButton avion=(ImageButton)findViewById(R.id.botonImagenAvion);
-        avion.setBackgroundColor(Color.WHITE);
+        avion.setBackgroundColor(Color.parseColor("#C3C2C2"));
         avion.setClickable(true);
 
         ImageButton balon=(ImageButton)findViewById(R.id.botonImagenBalon);
-        balon.setBackgroundColor(Color.WHITE);
+        balon.setBackgroundColor(Color.parseColor("#C3C2C2"));
         balon.setClickable(true);
 
         ImageButton botella=(ImageButton)findViewById(R.id.botonImagenBotella);
-        botella.setBackgroundColor(Color.WHITE);
+        botella.setBackgroundColor(Color.parseColor("#C3C2C2"));
         botella.setClickable(true);
 
         ImageButton coche=(ImageButton)findViewById(R.id.botonImagenCoche);
-        coche.setBackgroundColor(Color.WHITE);
+        coche.setBackgroundColor(Color.parseColor("#C3C2C2"));
         coche.setClickable(true);
 
         ImageButton leon=(ImageButton)findViewById(R.id.botonImagenLeon);
-        leon.setBackgroundColor(Color.WHITE);
+        leon.setBackgroundColor(Color.parseColor("#C3C2C2"));
         leon.setClickable(true);
 
         ImageButton moto=(ImageButton)findViewById(R.id.botonImagenMoto);
-        moto.setBackgroundColor(Color.WHITE);
+        moto.setBackgroundColor(Color.parseColor("#C3C2C2"));
         moto.setClickable(true);
 
         ImageButton ordenador=(ImageButton)findViewById(R.id.botonImagenOrdenador);
-        ordenador.setBackgroundColor(Color.WHITE);
+        ordenador.setBackgroundColor(Color.parseColor("#C3C2C2"));
         ordenador.setClickable(true);
 
         ImageButton enchufe=(ImageButton)findViewById(R.id.botonImagenEnchufe);
-        enchufe.setBackgroundColor(Color.WHITE);
+        enchufe.setBackgroundColor(Color.parseColor("#C3C2C2"));
         enchufe.setClickable(true);
     }
 

@@ -18,60 +18,10 @@
             android:id="@+id/imagen_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo_enviado"
-            android:visibility="gone"/>
-
-        <VideoView
-            android:id="@+id/video_mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bocadillo_enviado"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/audio_mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:visibility="gone"
-            android:background="@drawable/bocadillo_enviado"
-            tools:ignore="MissingConstraints">
-
-            <SeekBar
-                android:id="@+id/barra_audio"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content" />
-
-            <RelativeLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tiempo_audio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00:00" />
-
-                <TextView
-                    android:id="@+id/duracion_audio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="00:00" />
-
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/boton_audio"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/ic_play"
-                android:onClick="playAudio" />
-
-        </LinearLayout>
+            android:maxHeight="200dp"
+            android:maxWidth="200dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bocadillo_enviado"/>
 
         <TextView
             android:id="@+id/fecha_mensaje"

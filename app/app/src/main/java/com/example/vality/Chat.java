@@ -1,15 +1,24 @@
 package com.example.vality;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,7 +51,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Chat extends AppCompatActivity {
+    private static final int FILE_SELECT_CODE = 0;
     ListView listView;
+    AdaptadorChat adaptador;
     ArrayList<Mensaje> mensajes = new ArrayList<>();
     int cod_usuario;
     int cod_tarea;
@@ -53,6 +64,8 @@ public class Chat extends AppCompatActivity {
     TextView tiempoAudio, duracionAudio;
     SeekBar barraAudio;
     Button botonAudio;
+
+    Uri ubicacion_archivo = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,7 +144,8 @@ public class Chat extends AppCompatActivity {
                         System.out.println("Lista final de mensajes " + mensajes);
 
                         listView = (ListView) context.findViewById(R.id.list);
-                        listView.setAdapter(new AdaptadorChat(context, R.layout.texto_enviado, mensajes, cod_usuario));
+                        adaptador = new AdaptadorChat(context, R.layout.texto_enviado, mensajes, cod_usuario);
+                        listView.setAdapter(adaptador);
 
                     } catch (JSONException e) {
                             e.printStackTrace();
@@ -152,9 +166,45 @@ public class Chat extends AppCompatActivity {
         }
     }
 
-    public void enviarMensaje (View v) {
+    public void enviarMensaje (View v) throws JSONException {
+        Chat contexto = this;
+        EditText editText = this.findViewById(R.id.texto_enviar);
+        String textoMensaje = editText.getText().toString();
+        System.out.println("Mensaje a enviar: " + textoMensaje);
+
+        if (!textoMensaje.equals("")) {
+            editText.getText().clear();
+            Log.i("Enviar mensaje", "Se va crear el mensaje para enviar");
+            String url = "http://test.dgp.esy.es/app/mensaje.php";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("mensaje", textoMensaje);
+            jsonBody.put("multimedia", null);
+            jsonBody.put("cod_tarea", cod_tarea);
+            jsonBody.put("cod_usuario", cod_usuario);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("Enviar mensaje", "Se ha enviado el mensaje");
+                    contexto.mensajes.clear();
+                    contexto.pedirMensajes(contexto);
+                    contexto.adaptador.notifyDataSetChanged();
+                    Log.i("Enviar mensaje", "Actualizamos los mensajes");
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO: Handle error
+                    System.out.println("ERROR: "+ error);
+                }
+            });
+
+            queue.add(jsonObjectRequest);
+        }
+
         /*
-        String rutaArchivo = null;
+        String rutaArchivo = getPath(this, ubicacion_archivo);
+        System.out.println(rutaArchivo);
         String nombreArchivo = rutaArchivo;
 
         HttpURLConnection conn = null;
@@ -170,10 +220,10 @@ public class Chat extends AppCompatActivity {
         int maxBufferSize = 1 * 1024 * 1024;
 
         File archivo = new File(rutaArchivo);
-
         if (!archivo.isFile()) {
 
             Log.e("uploadFile", "Source File not exist : " + rutaArchivo);
+
 
             runOnUiThread(new Runnable() {
                 public void run() {
@@ -184,6 +234,10 @@ public class Chat extends AppCompatActivity {
             //return 0;
 
         }
+        else {
+            System.out.println("Se pudo abrir el archivo: " + rutaArchivo);
+        }
+
         else
         {
             try {
@@ -307,10 +361,118 @@ public class Chat extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(intent, "Elige el archivo"), 1);
+        startActivityForResult(Intent.createChooser(intent, "Elige el archivo"), FILE_SELECT_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == FILE_SELECT_CODE && resultCode == RESULT_OK) {
+            ubicacion_archivo = result.getData();
+            Log.i("adjuntarArchivo", "Ubicación del archivo: " + ubicacion_archivo.toString());
+        }
 
+        super.onActivityResult(requestCode, resultCode, result);
+    }
+
+    public static String getPath(Context context, Uri uri) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // DocumentProvider
+            if (DocumentsContract.isDocumentUri(context, uri)) {
+                // ExternalStorageProvider
+                if (isExternalStorageDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+
+                    if ("primary".equalsIgnoreCase(type)) {
+                        return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    }
+                    // TODO handle non-primary volumes
+                }
+                // DownloadsProvider
+                else if (isDownloadsDocument(uri)) {
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                    return getDataColumn(context, contentUri, null, null);
+                }
+                // MediaProvider
+                else if (isMediaDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+                    Uri contentUri = null;
+                    if ("image".equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("video".equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("audio".equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
+                    final String selection = "_id=?";
+                    final String[] selectionArgs = new String[]{split[1]};
+                    return getDataColumn(context, contentUri, selection, selectionArgs);
+                }
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
 
     public void playAudio (View v){
         if(v.getId() == R.id.boton_audio) {
@@ -488,6 +650,7 @@ public class Chat extends AppCompatActivity {
                                 if(isFromUser) {
                                     mp.seekTo(progress);
                                     seekBar.setProgress(progress);
+                                    AdaptadorChat.this.notifyDataSetChanged();
                                 }
                             }
 
@@ -519,7 +682,6 @@ public class Chat extends AppCompatActivity {
                                                     barraAudio.setProgress((int) current);
                                                 }
                                             });
-
                                             Thread.sleep(500);
                                         }catch (InterruptedException e) {}
                                     }

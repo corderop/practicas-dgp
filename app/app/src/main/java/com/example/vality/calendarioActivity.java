@@ -19,7 +19,8 @@ public class calendarioActivity extends AppCompatActivity {
     Usuario usuario;
     RequestQueue queue;
     private MyRecyclerViewAdapter adaptadorLunes;
-    int diaActual;
+    int semanaActual;
+    ArrayList<Tarea> tareas;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -30,6 +31,7 @@ public class calendarioActivity extends AppCompatActivity {
         usuario.setContrasena(getIntent().getStringExtra("contrasena"));
         usuario.setCod_usuario(Integer.parseInt(getIntent().getStringExtra("cod_usuario")));
         setContentView(R.layout.calendario);
+        tareas=new ArrayList<Tarea>();
         usuario.obtenerTareas("http://test.dgp.esy.es/app/tareas.php", queue, this, "NULL");
 
         /*
@@ -39,8 +41,137 @@ public class calendarioActivity extends AppCompatActivity {
          */
     }
 
-    public void setAdapterDia(MyRecyclerViewAdapter nuevoAdapter, ArrayList<Tarea> tareas){
+    private void setAdapterDia(MyRecyclerViewAdapter nuevoAdapter, ArrayList<Tarea> tareas){
         this.adaptadorLunes=nuevoAdapter;
+    }
+
+    public void actualizarAdaptadorDia(int dia, ArrayList<Tarea> tareasDia){
+        RecyclerView recyclerView = null;
+        if(dia==1) {
+            System.out.println("Creamos lista del lunes");
+            recyclerView = this.findViewById(R.id.listaTareasLunes);
+        }else{
+            if(dia==2) {
+                System.out.println("Creamos lista del martes");
+                recyclerView = this.findViewById(R.id.listaTareasMartes);
+            }else{
+                if(dia==3) {
+                    System.out.println("Creamos lista del miercoles");
+                    recyclerView = this.findViewById(R.id.listaTareasMiercoles);
+                }else{
+                    if(dia==4) {
+                        System.out.println("Creamos lista del Jueves");
+                        recyclerView = this.findViewById(R.id.listaTareasJueves);
+                    }else{
+                        if(dia==5) {
+                            System.out.println("Creamos lista del Viernes");
+                            recyclerView = this.findViewById(R.id.listaTareasViernes);
+                        }else{
+                            if(dia==6) {
+                                System.out.println("Creamos lista del Sabado");
+                                recyclerView = this.findViewById(R.id.listaTareasSabado);
+                            }else{
+                                if(dia==7) {
+                                    System.out.println("Creamos lista del Domingo");
+                                    recyclerView = this.findViewById(R.id.listaTareasDomingo);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(recyclerView !=null){
+            LinearLayoutManager horizontalLayoutManager
+                    = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(horizontalLayoutManager);
+
+            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, tareasDia, queue, (calendarioActivity)this, usuario.getCod_usuario());   //Lunes
+            ((calendarioActivity)this).setAdapterDia(adapter, tareasDia);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    public void setTareasSemana(ArrayList<Tarea> tareas, int semanaActual){
+        this.tareas=tareas;
+        this.semanaActual=semanaActual;
+    }
+
+    public void semanaAnterior(View v){
+        semanaActual= semanaActual -1;
+        if(semanaActual==0){
+            semanaActual=53;
+        }
+        actualizarSemana(semanaActual);
+    }
+
+    public void semanaSiguiente(View v){
+        semanaActual = semanaActual%53 +1;
+        actualizarSemana(semanaActual);
+    }
+
+    public void actualizarSemana(int semana){
+        Date diaActual = (Date) Calendar.getInstance().getTime();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek( Calendar.MONDAY);
+        calendar.setMinimalDaysInFirstWeek( 4 );
+        calendar.setTime(diaActual);
+        int semanaTarea;
+
+        System.out.println("Pasamos a crear la lista de la semana "+ semana);
+        ArrayList<Tarea> tareasLunes = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasMartes = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasMiercoles = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasJueves = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasViernes = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasSabado = new ArrayList<Tarea>();
+        ArrayList<Tarea> tareasDomingo = new ArrayList<Tarea>();
+        for(Tarea tarea : tareas){
+            calendar.setTime(tarea.getFecha_limite());
+            semanaTarea = calendar.get(Calendar.WEEK_OF_YEAR);
+            System.out.println("Tarea "+ tarea.getTitulo()+ " pertenece a la semana: "+ semanaTarea);
+            if(semana == semanaTarea){
+                System.out.print("Añadimos tarea a la semana");
+                switch (calendar.get(Calendar.DAY_OF_WEEK)){
+                    case 1:
+                        System.out.println(" en domingo.");
+                        tareasDomingo.add(tarea);
+                        break;
+                    case 2:
+                        System.out.println(" en lunes.");
+                        tareasLunes.add(tarea);
+                        break;
+                    case 3:
+                        System.out.println(" en martes.");
+                        tareasMartes.add(tarea);
+                        break;
+                    case 4:
+                        System.out.println(" en miercoles.");
+                        tareasMiercoles.add(tarea);
+                        break;
+                    case 5:
+                        System.out.println(" en jueves.");
+                        tareasJueves.add(tarea);
+                        break;
+                    case 6:
+                        System.out.println(" en viernes.");
+                        tareasViernes.add(tarea);
+                        break;
+                    case 7:
+                        System.out.println(" en sabado.");
+                        tareasSabado.add(tarea);
+                        break;
+                }
+            }
+        }
+        actualizarAdaptadorDia(1,tareasLunes);
+        actualizarAdaptadorDia(2,tareasMartes);
+        actualizarAdaptadorDia(3,tareasMiercoles);
+        actualizarAdaptadorDia(4,tareasJueves);
+        actualizarAdaptadorDia(5,tareasViernes);
+        actualizarAdaptadorDia(6,tareasSabado);
+        actualizarAdaptadorDia(7,tareasDomingo);
     }
 
     @Override

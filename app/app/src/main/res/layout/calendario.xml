@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/cabecera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -20,7 +21,7 @@
                 android:layout_height="match_parent"
 
                 app:layout_constraintEnd_toStartOf="@+id/imagenCalendario"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintBottom_toTopOf="parent"
 
@@ -42,7 +43,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
 
-                app:layout_constraintStart_toStartOf="@+id/tituloPantalla"
+                app:layout_constraintStart_toEndOf="@+id/tituloPantalla"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintBottom_toTopOf="parent"
@@ -58,17 +59,738 @@
         </LinearLayout>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/botones"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/listaTareasLunes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cabecera"
+        app:layout_constraintBottom_toTopOf="@id/contenidoDias"
 
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
 
+        <Button
+            android:id="@+id/semanaAnterior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="0dp"
+            android:onClick="semanaAnterior"
+
+            android:text="Anterior Semana"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/semanaSiguiente"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/semanaSiguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="0dp"
+            android:onClick="semanaSiguiente"
+
+            android:text="Siguiente Semana"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/semanaSiguiente"
+            app:layout_constraintTop_toBottomOf="parent" />
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/contenidoDias"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botones"
+        app:layout_constraintBottom_toTopOf="parent"
+
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp">>
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+                <!--**********************Seccion lunes*******************************-->
+                <LinearLayout
+                    android:id="@+id/seccionLunes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tituloPantalla"
+                    app:layout_constraintBottom_toTopOf="@+id/seccionMartes"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/contenidoLunes"
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/borde"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/listaTareasLunes"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/imagenLunes"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/lunes"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/textoLunes"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                        <TextView
+                            android:id="@+id/textoLunes"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:text="Lunes"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imagenLunes"
+                            app:layout_constraintBottom_toTopOf="parent"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listaTareasLunes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="15dp"
+
+                        app:layout_constraintStart_toEndOf="@+id/contenidoLunes"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+                <!--**********************Seccion martes*******************************-->
+                <LinearLayout
+                    android:id="@+id/seccionMartes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seccionLunes"
+                    app:layout_constraintBottom_toTopOf="@+id/seccionMiercoles">
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="1dp"
+
+                    android:orientation="horizontal"
+
+                    <LinearLayout
+                        android:id="@+id/contenidoMartes"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/borde"
+                        android:gravity="center"
+                        android:orientation="vertical"
+
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/listaTareasMartes"
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imagenMartes"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="5dp"
+
+                            android:layout_marginBottom="0dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/martes"
+
+                            app:layout_constraintBottom_toTopOf="@+id/textoMartes"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textoMartes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="center"
+
+                            android:text="Martes"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imagenMartes" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listaTareasMartes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:dividerHeight="15dp"
+
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/contenidoMartes"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                </LinearLayout>
+                <!--**********************Seccion miercoles*******************************-->
+                <LinearLayout
+                    android:id="@+id/seccionMiercoles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seccionMartes"
+                    app:layout_constraintBottom_toTopOf="@+id/seccionJueves"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/contenidoMiercoles"
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/borde"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/listaTareasMartes"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/imagenMiercoles"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/miercoles"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/textoMiercoles"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                        <TextView
+                            android:id="@+id/textoMiercoles"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:text="Miercoles"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imagenMiercoles"
+                            app:layout_constraintBottom_toTopOf="parent"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listaTareasMiercoles"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="15dp"
+
+                        app:layout_constraintStart_toEndOf="@+id/contenidoMiercoles"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+                <!--**********************Seccion jueves*******************************-->
+                <LinearLayout
+                    android:id="@+id/seccionJueves"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seccionMiercoles"
+                    app:layout_constraintBottom_toTopOf="@+id/seccionViernes"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/contenidoJueves"
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/borde"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/listaTareasMiercoles"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/imagenJueves"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/jueves"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/textoJueves"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                        <TextView
+                            android:id="@+id/textoJueves"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:text="Jueves"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imagenJueves"
+                            app:layout_constraintBottom_toTopOf="parent"
+
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="0dp"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listaTareasJueves"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="15dp"
+
+                        app:layout_constraintStart_toEndOf="@+id/contenidoJueves"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+            <!--**********************Seccion viernes*******************************-->
+            <LinearLayout
+                android:id="@+id/seccionViernes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seccionJueves"
+                app:layout_constraintBottom_toTopOf="@+id/seccionSabado"
+
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/contenidoViernes"
+                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/borde"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/listaTareasJueves"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/imagenViernes"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/viernes"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/textoViernes"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                    <TextView
+                        android:id="@+id/textoViernes"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Viernes"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imagenViernes"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaTareasViernes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="15dp"
+
+                    app:layout_constraintStart_toEndOf="@+id/contenidoViernes"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <!--**********************Seccion sabado*******************************-->
+            <LinearLayout
+                android:id="@+id/seccionSabado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seccionViernes"
+                app:layout_constraintBottom_toTopOf="@+id/seccionDomingo"
+
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/contenidoSabado"
+                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/borde"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/listaTareasViernes"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/imagenSabado"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sabado"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/textoSabado"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                    <TextView
+                        android:id="@+id/textoSabado"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Sabado"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imagenSabado"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaTareasSabado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="15dp"
+
+                    app:layout_constraintStart_toEndOf="@+id/contenidoSabado"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <!--**********************Seccion domingo*******************************-->
+            <LinearLayout
+                android:id="@+id/seccionDomingo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seccionSabado"
+                app:layout_constraintBottom_toTopOf="parent"
+
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/contenidoDomingo"
+                    android:layout_height="match_parent"
+                    android:layout_width="100dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/borde"
+
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/listaTareasSabado"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/imagenDomingo"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/domingo"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/textoDomingo"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                    <TextView
+                        android:id="@+id/textoDomingo"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Domingo"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+
+                        app:layout_constraintStart_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imagenDomingo"
+                        app:layout_constraintBottom_toTopOf="parent"
+
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="0dp"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaTareasDomingo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="15dp"
+
+                    app:layout_constraintStart_toEndOf="@+id/contenidoDomingo"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

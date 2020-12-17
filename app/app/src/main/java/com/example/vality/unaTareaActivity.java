@@ -111,6 +111,7 @@ public class unaTareaActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Bitmap response) {
                         imagen.setImageBitmap(response);
+                        imagen.setContentDescription(tarea.getTitulo());
                     }
                 }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override

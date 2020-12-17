@@ -44,8 +44,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
 
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="Imagen de la tarea" />
+            tools:srcCompat="@tools:sample/avatars" />
 
         <VideoView
             android:id="@+id/videoTarea"

@@ -67,15 +67,12 @@ public class Usuario {
                         if(nombre != null){
                             tv.setText("Logueo realizado con éxito");
                             tv.setTextColor(Color.BLACK);
+                            tv.setBackgroundColor(Color.GREEN);
                             Intent i = new Intent(general, tareasActivity.class);
                             i.putExtra("nombre", nombre);
                             i.putExtra("contrasena", contrasena);
                             i.putExtra("cod_usuario", cod_usuario+"");
                             general.startActivity(i);
-                        }else {
-                            general.borrarContrasena();
-                            tv.setText("Credenciales inválidos");
-                            tv.setTextColor(Color.RED);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -87,6 +84,9 @@ public class Usuario {
                 public void onErrorResponse(VolleyError error) {
                     // TODO: Handle error
                     System.out.println("ERROR: "+ error);
+                    System.out.println("Credeciales inválidas");
+                    general.borrarContrasena();
+                    tv.setVisibility(View.VISIBLE);
                 }
             });
 

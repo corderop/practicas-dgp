@@ -5,239 +5,318 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/botonImagenEnchufe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/botonLogeo"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_marginStart="5dp"
+        <!--Título de la pantalla-->
+        <TextView
+            android:id="@+id/tituloPantalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="#FFEB3B"
-            android:onClick="logueo"
-            android:text="Iniciar sesión"
+            android:layout_marginTop="5dp"
+            android:textSize="30sp"
             android:textColor="@color/black"
-            android:textSize="13sp"
-            app:icon="@drawable/si"
-            app:iconSize="@android:dimen/app_icon_size"
-            app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/botonBorrar"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center_horizontal"
+            android:background="#FFFFFF"
+            android:text="Inicio de sesión"
+            app:layout_constraintBottom_toTopOf="@+id/seccionImagenes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/botonBorrar"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_gravity="right"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="#FFEB3B"
-            android:onClick="pulsadoBorrar"
-            android:text="Borrar contraseña"
-            android:textSize="13sp"
+        <!--Sección de las imágenes-->
+        <LinearLayout
+            android:id="@+id/seccionImagenes"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="0dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/seccionBotones"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloPantalla">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/primeraFila"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/segundaFila"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
+
+                <ImageButton
+                    android:id="@+id/botonImagenArbol"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#C3C2C2"
+                    android:contentDescription="Imagen pulsable de un arbol"
+                    android:onClick="pulsadoArbol"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/botonImagenAvion"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:srcCompat="@drawable/arbol"/>
+
+                    <ImageButton
+                        android:id="@+id/botonImagenAvion"
+                        android:layout_width="114dp"
+                        android:layout_height="130dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="#C3C2C2"
+                        android:contentDescription="Imagen pulsable de un avion"
+                        android:onClick="pulsadoAvion"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/botonImagenBalon"
+                        app:layout_constraintStart_toEndOf="@+id/botonImagenArbol"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:srcCompat="@drawable/avion"/>
+
+                    <ImageButton
+                        android:id="@+id/botonImagenBalon"
+                        android:layout_width="114dp"
+                        android:layout_height="130dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="#C3C2C2"
+                        android:onClick="pulsadoBalon"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/botonImagenAvion"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:srcCompat="@drawable/balon"
+                        android:contentDescription="Imagen pulsable de un balon" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/segundaFila"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/terceraFila"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/primeraFila">
+
+                <ImageButton
+                    android:id="@+id/botonImagenBotella"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#C3C2C2"
+                    android:onClick="pulsadoBotella"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/botonImagenCoche"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:srcCompat="@drawable/botella"
+                    android:contentDescription="Imagen pulsable de una botella" />
+
+                <ImageButton
+                    android:id="@+id/botonImagenCoche"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="#C3C2C2"
+                    android:layout_marginBottom="1dp"
+                    android:onClick="pulsadoCoche"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/botonImagenLeon"
+                    app:layout_constraintStart_toEndOf="@+id/botonImagenBotella"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:srcCompat="@drawable/coche"
+                    android:contentDescription="Imagen pulsable de un coche" />
+
+                <ImageButton
+                    android:id="@+id/botonImagenLeon"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#C3C2C2"
+                    android:onClick="pulsadoLeon"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/botonImagenCoche"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:srcCompat="@drawable/leon"
+                    android:contentDescription="Imagen pulsable de un leon" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/terceraFilaFila"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/seccionBotones"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/segundaFila">
+
+                <ImageButton
+                    android:id="@+id/botonImagenMoto"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="pulsadoMoto"
+                    android:scaleType="fitXY"
+                    android:background="#C3C2C2"
+                    app:layout_constraintEnd_toStartOf="@+id/botonImagenOrdenador"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:srcCompat="@drawable/moto"
+                    android:contentDescription="Imagen pulsable de una moto" />
+
+                <ImageButton
+                    android:id="@+id/botonImagenOrdenador"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="#C3C2C2"
+                    android:onClick="pulsadoOrdenador"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toStartOf="@+id/botonImagenEnchufe"
+                    app:layout_constraintStart_toEndOf="@+id/botonImagenMoto"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:srcCompat="@drawable/ordenador"
+                    android:contentDescription="Imagen pulsable de un ordenador" />
+
+                <ImageButton
+                    android:id="@+id/botonImagenEnchufe"
+                    android:layout_width="114dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:onClick="pulsadoEnchufe"
+                    android:background="#C3C2C2"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/botonImagenOrdenador"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:srcCompat="@drawable/enchufe"
+                    android:contentDescription="Imagen pulsable de un enchufe" />
+            </LinearLayout>
+        </LinearLayout>>
+
+        <!--Sección botones-->
+        <LinearLayout
+            android:id="@+id/seccionBotones"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/seccionImagenes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:id="@+id/botonLogeo"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#FFEB3B"
+                android:onClick="logueo"
+                android:text="Iniciar sesión"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:icon="@drawable/si"
+                app:iconSize="@android:dimen/app_icon_size"
+                app:iconTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/mensajeServer"
+                app:layout_constraintEnd_toStartOf="@+id/botonBorrar"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/botonBorrar"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_gravity="right"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#FFEB3B"
+                android:onClick="pulsadoBorrar"
+                android:text="Borrar contraseña"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                app:icon="@drawable/no"
+                app:iconSize="@android:dimen/app_icon_size"
+                app:iconTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/mensajeServer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/botonLogeo" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mensajeServer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="#F66565"
+            android:text="Credenciales incorrectos"
+            android:textAlignment="center"
+            android:visibility="invisible"
+
             android:textColor="@color/black"
-            app:icon="@drawable/no"
-            app:iconSize="@android:dimen/app_icon_size"
-            app:iconTint="@null"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/botonLogeo" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seccionBotones" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/mensajeServer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="664dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/botonImagenAvion"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#C3C2C2"
-        android:contentDescription="Imagen pulsable de un avion"
-        android:onClick="pulsadoAvion"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenCoche"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenBalon"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenArbol"
-        app:layout_constraintTop_toBottomOf="@+id/tituloPantalla"
-        app:srcCompat="@drawable/avion"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/botonImagenOrdenador"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:background="#C3C2C2"
-        android:onClick="pulsadoOrdenador"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenEnchufe"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenMoto"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenCoche"
-        app:srcCompat="@drawable/ordenador"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de un ordenador" />
-
-    <ImageButton
-        android:id="@+id/botonImagenMoto"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:onClick="pulsadoMoto"
-        android:scaleType="fitXY"
-        android:background="#C3C2C2"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenOrdenador"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenBotella"
-        app:srcCompat="@drawable/moto"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de una moto" />
-
-    <ImageButton
-        android:id="@+id/botonImagenBotella"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#C3C2C2"
-        android:onClick="pulsadoBotella"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenMoto"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenCoche"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenArbol"
-        app:srcCompat="@drawable/botella"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de una botella" />
-
-    <ImageButton
-        android:id="@+id/botonImagenArbol"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#C3C2C2"
-        android:contentDescription="Imagen pulsable de un arbol"
-        android:onClick="pulsadoArbol"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenBotella"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenAvion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloPantalla"
-        app:srcCompat="@drawable/arbol"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/botonImagenCoche"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:background="#C3C2C2"
-        android:layout_marginBottom="1dp"
-        android:onClick="pulsadoCoche"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenOrdenador"
-        app:layout_constraintEnd_toStartOf="@+id/botonImagenLeon"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenBotella"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenAvion"
-        app:srcCompat="@drawable/coche"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de un coche" />
-
-    <ImageButton
-        android:id="@+id/botonImagenLeon"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#C3C2C2"
-        android:onClick="pulsadoLeon"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenEnchufe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenCoche"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenBalon"
-        app:srcCompat="@drawable/leon"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de un leon" />
-
-    <ImageButton
-        android:id="@+id/botonImagenBalon"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#C3C2C2"
-        android:onClick="pulsadoBalon"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenLeon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenAvion"
-        app:layout_constraintTop_toBottomOf="@+id/tituloPantalla"
-        app:srcCompat="@drawable/balon"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de un balon" />
-
-    <ImageButton
-        android:id="@+id/botonImagenEnchufe"
-        android:layout_width="114dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:onClick="pulsadoEnchufe"
-        android:background="#C3C2C2"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/botonImagenOrdenador"
-        app:layout_constraintTop_toBottomOf="@+id/botonImagenLeon"
-        app:srcCompat="@drawable/enchufe"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="Imagen pulsable de un enchufe" />
-
-
-    <TextView
-        android:id="@+id/tituloPantalla"
-        android:layout_width="277dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="78dp"
-        android:autoSizeTextType="uniform"
-        android:text="Inicio de sesión"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/botonImagenAvion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

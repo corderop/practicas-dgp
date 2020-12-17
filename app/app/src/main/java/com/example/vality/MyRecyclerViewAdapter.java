@@ -52,7 +52,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        cargarImagen(holder.imagen, tareas.get(position).getPictograma(), queue);
+        cargarImagen(holder.imagen, tareas.get(position).getPictograma(), tareas.get(position).getTitulo(), queue);
         holder.titulo.setText(tareas.get(position).getTitulo());
         holder.tarea=tareas.get(position);
 
@@ -127,7 +127,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return tareas.get(id);
     }
 
-    private void cargarImagen(ImageView cuadroImagen, String multimedia, RequestQueue queue){
+    private void cargarImagen(ImageView cuadroImagen, String multimedia, String titulo, RequestQueue queue){
         String url="http://test.dgp.esy.es/"+ multimedia;
         System.out.println("Creamos mensaje para pedir imagen: "+ multimedia);
 
@@ -136,6 +136,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     @Override
                     public void onResponse(Bitmap response) {
                         cuadroImagen.setImageBitmap(response);
+                        cuadroImagen.setContentDescription(titulo);
                     }
                 }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override

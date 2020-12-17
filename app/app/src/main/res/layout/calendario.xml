@@ -196,7 +196,8 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="0dp"
-                            android:layout_marginTop="0dp"/>
+                            android:layout_marginTop="0dp"
+                            android:contentDescription="Lunes" />
 
                         <TextView
                             android:id="@+id/textoLunes"
@@ -291,7 +292,8 @@
                             app:layout_constraintBottom_toTopOf="@+id/textoMartes"
                             app:layout_constraintEnd_toStartOf="parent"
                             app:layout_constraintStart_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent" />
+                            app:layout_constraintTop_toBottomOf="parent"
+                            android:contentDescription="Martes" />
 
                         <TextView
                             android:id="@+id/textoMartes"
@@ -385,7 +387,8 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="0dp"
-                            android:layout_marginTop="0dp"/>
+                            android:layout_marginTop="0dp"
+                            android:contentDescription="Miercoles" />
 
                         <TextView
                             android:id="@+id/textoMiercoles"
@@ -480,7 +483,8 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="0dp"
-                            android:layout_marginTop="0dp"/>
+                            android:layout_marginTop="0dp"
+                            android:contentDescription="Jueves" />
 
                         <TextView
                             android:id="@+id/textoJueves"
@@ -575,7 +579,8 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_marginTop="0dp"/>
+                        android:layout_marginTop="0dp"
+                        android:contentDescription="Viernes" />
 
                     <TextView
                         android:id="@+id/textoViernes"
@@ -670,7 +675,8 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_marginTop="0dp"/>
+                        android:layout_marginTop="0dp"
+                        android:contentDescription="Sabado" />
 
                     <TextView
                         android:id="@+id/textoSabado"
@@ -765,7 +771,8 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_marginTop="0dp"/>
+                        android:layout_marginTop="0dp"
+                        android:contentDescription="Domingo" />
 
                     <TextView
                         android:id="@+id/textoDomingo"

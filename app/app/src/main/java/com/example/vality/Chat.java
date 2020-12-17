@@ -497,7 +497,7 @@ public class Chat extends AppCompatActivity {
             super(context, resource);
             this.contexto = context;
             this.mensajes = new ArrayList<>(msj);
-            this.cod_usuario=cod_usuario;
+            this.cod_usuario = cod_usuario;
         }
 
         @Override
@@ -571,37 +571,6 @@ public class Chat extends AppCompatActivity {
             return posicion;
         }
 
-        public void onEntrada(Mensaje entrada, View view) {
-            TextView texto = view.findViewById(R.id.texto_mensaje);
-
-            if (entrada.getContenido() != "null") {
-                texto.setText(entrada.getContenido());
-            }
-            else if (entrada.getMultimedia() != "null") {
-                //texto.setVisibility(View.GONE);
-                String ruta = entrada.getMultimedia();
-                String url = "http://test.dgp.esy.es/" + ruta;
-                if (entrada.getMultimedia().endsWith(".png") ||
-                    entrada.getMultimedia().endsWith(".jpg") ||
-                    entrada.getMultimedia().endsWith(".jpeg") ||
-                    entrada.getMultimedia().endsWith(".webm")) {
-                    ImageView imagen = view.findViewById(R.id.imagen_mensaje);
-                    imagen.setVisibility(View.VISIBLE);
-                    Picasso.get().load(url).into(imagen);
-                }
-                else if (entrada.getMultimedia().endsWith(".mp4")) {
-                    cargarVideo(view, url);
-                }
-                else if (entrada.getMultimedia().endsWith(".ogg")) {
-                    cargarAudio(view, url);
-                }
-            }
-
-            DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            TextView fecha = view.findViewById(R.id.fecha_mensaje);
-            fecha.setText(formatoFecha.format(entrada.getFecha()));
-        }
-
         private void cargarVideo(View view, String url) {
             ImageView imagen = view.findViewById(R.id.imagen_mensaje);
             imagen.setImageResource(R.drawable.ic_play);
@@ -622,7 +591,6 @@ public class Chat extends AppCompatActivity {
                 mp.prepare();
 
                 LinearLayout audio = view.findViewById(R.id.audio_mensaje);
-                audio.setVisibility(View.VISIBLE);
 
                 mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -630,10 +598,10 @@ public class Chat extends AppCompatActivity {
                         // hide the actionbar
                         getSupportActionBar().hide();
 
-                        tiempoAudio = findViewById(R.id.tiempo_audio);
-                        duracionAudio = findViewById(R.id.duracion_audio);
-                        barraAudio = findViewById(R.id.barra_audio);
-                        botonAudio = findViewById(R.id.boton_audio);
+                        tiempoAudio = view.findViewById(R.id.tiempo_audio);
+                        duracionAudio = view.findViewById(R.id.duracion_audio);
+                        barraAudio = view.findViewById(R.id.barra_audio);
+                        botonAudio = view.findViewById(R.id.boton_audio);
                         botonAudio.setBackgroundResource(R.drawable.ic_play);
 
                         mp.setLooping(false);
@@ -650,7 +618,7 @@ public class Chat extends AppCompatActivity {
                                 if(isFromUser) {
                                     mp.seekTo(progress);
                                     seekBar.setProgress(progress);
-                                    AdaptadorChat.this.notifyDataSetChanged();
+                                    adaptador.notifyDataSetChanged();
                                 }
                             }
 
@@ -707,5 +675,6 @@ public class Chat extends AppCompatActivity {
 
             return  elapsedTime;
         }
+
     }
 }

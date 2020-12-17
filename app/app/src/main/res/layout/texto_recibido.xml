@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         tools:ignore="MissingConstraints"
+        android:layout_marginStart="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,7 +20,7 @@
             android:background="@drawable/bocadillo_recibido"
             android:maxWidth="240dp"
             android:padding="8dp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             tools:ignore="MissingConstraints" />
 
         <TextView

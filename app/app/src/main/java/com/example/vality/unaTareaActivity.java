@@ -142,6 +142,7 @@ public class unaTareaActivity extends AppCompatActivity {
             public void onPrepared(MediaPlayer mediaPlayer) {
                 System.out.println("Iniciamos video");
                 videoView.start();
+                videoView.pause();
                 mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
                     @Override
                     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
@@ -182,7 +183,6 @@ public class unaTareaActivity extends AppCompatActivity {
                     btnPlay = findViewById(R.id.btnPlay);
                     btnPlay.setBackgroundResource(R.drawable.ic_play);
 
-                    mp.setLooping(true);
                     mp.seekTo(0);
                     mp.setVolume(0.5f, 0.5f);
 

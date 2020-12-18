@@ -3,6 +3,7 @@ package com.example.vality;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,30 +50,73 @@ public class calendarioActivity extends AppCompatActivity {
         RecyclerView recyclerView = null;
         if(dia==1) {
             System.out.println("Creamos lista del lunes");
-            recyclerView = this.findViewById(R.id.listaTareasLunes);
+                LinearLayout aux = this.findViewById(R.id.seccionLunes);
+                if(tareasDia.size()!=0) {
+                    aux.setVisibility(View.VISIBLE);
+                }else{
+                    aux.setVisibility(View.GONE);
+                }
+                recyclerView = this.findViewById(R.id.listaTareasLunes);
+
         }else{
             if(dia==2) {
                 System.out.println("Creamos lista del martes");
+                LinearLayout aux = this.findViewById(R.id.seccionMartes);
+                if(tareasDia.size()!=0) {
+                    aux.setVisibility(View.VISIBLE);
+                }else{
+                    aux.setVisibility(View.GONE);
+                }
                 recyclerView = this.findViewById(R.id.listaTareasMartes);
             }else{
                 if(dia==3) {
                     System.out.println("Creamos lista del miercoles");
+                    LinearLayout aux = this.findViewById(R.id.seccionMiercoles);
+                    if(tareasDia.size()!=0) {
+                        aux.setVisibility(View.VISIBLE);
+                    }else{
+                        aux.setVisibility(View.GONE);
+                    }
                     recyclerView = this.findViewById(R.id.listaTareasMiercoles);
                 }else{
                     if(dia==4) {
                         System.out.println("Creamos lista del Jueves");
+                        LinearLayout aux = this.findViewById(R.id.seccionJueves);
+                        if(tareasDia.size()!=0) {
+                            aux.setVisibility(View.VISIBLE);
+                        }else{
+                            aux.setVisibility(View.GONE);
+                        }
                         recyclerView = this.findViewById(R.id.listaTareasJueves);
                     }else{
                         if(dia==5) {
                             System.out.println("Creamos lista del Viernes");
+                            LinearLayout aux = this.findViewById(R.id.seccionViernes);
+                            if(tareasDia.size()!=0) {
+                                aux.setVisibility(View.VISIBLE);
+                            }else{
+                                aux.setVisibility(View.GONE);
+                            }
                             recyclerView = this.findViewById(R.id.listaTareasViernes);
                         }else{
                             if(dia==6) {
                                 System.out.println("Creamos lista del Sabado");
+                                LinearLayout aux = this.findViewById(R.id.seccionSabado);
+                                if(tareasDia.size()!=0) {
+                                    aux.setVisibility(View.VISIBLE);
+                                }else{
+                                    aux.setVisibility(View.GONE);
+                                }
                                 recyclerView = this.findViewById(R.id.listaTareasSabado);
                             }else{
                                 if(dia==7) {
                                     System.out.println("Creamos lista del Domingo");
+                                    LinearLayout aux = this.findViewById(R.id.seccionDomingo);
+                                    if(tareasDia.size()!=0) {
+                                        aux.setVisibility(View.VISIBLE);
+                                    }else{
+                                        aux.setVisibility(View.GONE);
+                                    }
                                     recyclerView = this.findViewById(R.id.listaTareasDomingo);
                                 }
                             }

@@ -12,26 +12,21 @@
         $targetFilePath = $targetDir . $fileName;
 
         $imageFileType = strtolower(pathinfo($targetFilePath,PATHINFO_EXTENSION));
-        
-        http_response_code(201)
-        echo http_response_code();
-        return;
 
-/*
         if(move_uploaded_file($_FILES["multimedia"]["tmp_name"], $targetFilePath)){
         	$multimedia = $targetFilePath;
         	echo $targetFilePath;
         	http_response_code(201);
         }
         else{
-            http_response_code(400);
+            http_response_code(500);
         }
-*/
+
     }
     else {
-    	http_response_code(400)
-        echo http_response_code();
-        return;
+    	http_response_code(400);
     }
     
+    echo http_response_code();
+    return;
 ?>

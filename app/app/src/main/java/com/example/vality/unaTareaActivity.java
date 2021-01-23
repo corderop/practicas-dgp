@@ -92,7 +92,7 @@ public class unaTareaActivity extends AppCompatActivity {
             if(tarea.getMultimedia().endsWith("mp4")){
                 cargarVideo();
             }else{
-                if(tarea.getMultimedia().endsWith("ogg")) {
+                if(tarea.getMultimedia().endsWith("ogg") || tarea.getMultimedia().endsWith("mp3")) {
                     cargarAudio();
                 }
             }

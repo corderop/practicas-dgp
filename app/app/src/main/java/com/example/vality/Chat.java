@@ -172,7 +172,23 @@ public class Chat extends AppCompatActivity {
     }
 
     public void enviarMensaje (View v) throws JSONException {
-        subirMensaje();
+        if (uriArchivo == null) {
+            subirMensaje();
+        }
+        else {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        subirArchivo();
+
+                    } catch (Exception e) {
+                        Log.e("Error", "Exception: " + e.getMessage());
+                    }
+                }
+            });
+
+        }
     }
 
     public void subirMensaje() throws JSONException {
@@ -213,7 +229,9 @@ public class Chat extends AppCompatActivity {
     }
 
     public void subirArchivo() {
-        String nombreArchivo = uriArchivo.getPath();
+        File archivo = new File(uriArchivo.getPath());
+        String nombreArchivo = archivo.getName();
+        Log.i("nombreArchivo", "Nombre del archivo: " + nombreArchivo);
 
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
@@ -256,8 +274,8 @@ public class Chat extends AppCompatActivity {
         try {
 
             // open a URL connection to the Servlet
-            //FileInputStream fileInputStream = new FileInputStream(archivo);
-            FileInputStream fileInputStream = (FileInputStream) getContentResolver().openInputStream(uriArchivo);
+            FileInputStream fileInputStream = new FileInputStream(archivo);
+            //FileInputStream fileInputStream = (FileInputStream) getContentResolver().openInputStream(uriArchivo);
             URL url = new URL("http://test.dgp.esy.es/app/subirArchivo.php");
 
             // Open a HTTP  connection to  the URL
@@ -283,6 +301,7 @@ public class Chat extends AppCompatActivity {
 
             bufferSize = Math.min(bytesAvailable, maxBufferSize);
             buffer = new byte[bufferSize];
+
 
             // read file and write it into form...
             bytesRead = fileInputStream.read(buffer, 0, bufferSize);
@@ -338,6 +357,8 @@ public class Chat extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        uriArchivo = null;
         // return respuestaServidor;
 
         // End else block
@@ -429,7 +450,7 @@ public class Chat extends AppCompatActivity {
                     view = inflater.inflate(layout_imagen, null);
                     cargarVideo(view, url);
                 }
-                else if (ruta.endsWith(".ogg")) {
+                else if (ruta.endsWith(".ogg") || ruta.endsWith(".mp3")) {
                     view = inflater.inflate(layout_audio, null);
                     cargarAudio(view, url);
                 }

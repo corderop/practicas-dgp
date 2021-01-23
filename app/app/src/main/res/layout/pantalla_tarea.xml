@@ -1,163 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".unaTareaActivity">
-
-    <LinearLayout
-        android:id="@+id/parte_superior"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tituloTarea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="parent"/>
-
-        <ImageView
-            android:id="@+id/imagenTarea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:minHeight="200dp"
-            android:visibility="gone"
-
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
-            app:layout_constraintBottom_toTopOf="@+id/descripcion"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <VideoView
-            android:id="@+id/videoTarea"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:minHeight="200dp"
-            android:maxHeight="200dp"
-            android:visibility="gone"
-
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
-            app:layout_constraintBottom_toTopOf="@+id/descripcion"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
+        android:layout_height="match_parent"
+        tools:context=".unaTareaActivity">
 
         <LinearLayout
-            android:id="@+id/audio"
+            android:id="@+id/parte_superior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            android:orientation="vertical">
 
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
-            app:layout_constraintBottom_toTopOf="@+id/descripcion"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-
-            android:visibility="gone"
-            tools:ignore="MissingConstraints">
-
-            <SeekBar
-                android:id="@+id/seekBarTime"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content" />
-
-            <RelativeLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00:00" />
-
-                <TextView
-                    android:id="@+id/tvDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="00:00" />
-
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/btnPlay"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <TextView
+                android:id="@+id/tituloTarea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/ic_play"
-                android:onClick="accionBoton" />
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imagenTarea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="200dp"
+                android:visibility="gone"
+
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+                app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <VideoView
+                android:id="@+id/videoTarea"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="200dp"
+                android:maxHeight="200dp"
+                android:visibility="gone"
+
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+                app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/audio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tituloTarea"
+                app:layout_constraintBottom_toTopOf="@+id/descripcion"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+
+                android:visibility="gone"
+                tools:ignore="MissingConstraints">
+
+                <SeekBar
+                    android:id="@+id/seekBarTime"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00" />
+
+                    <TextView
+                        android:id="@+id/tvDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="00:00" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btnPlay"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/ic_play"
+                    android:onClick="accionBoton" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/text_back"
+            android:padding="10dp"
+            android:visibility="visible"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/parte_superior"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/text_back"
-        android:padding="10dp"
-        android:visibility="visible"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/parte_superior"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botonChat"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        <Button
+            android:id="@+id/botonChat"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
 
 
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#FFEB3B"
-        android:onClick="abrir_chat"
-        android:text="Chat"
-        android:textColor="@color/black"
-        android:visibility="visible"
-        app:icon="@drawable/conversar"
-        app:iconSize="@android:dimen/app_icon_size"
-        app:iconTint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion"
-        tools:ignore="MissingConstraints" />
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#FFEB3B"
+            android:onClick="abrir_chat"
+            android:text="Chat"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            app:icon="@drawable/conversar"
+            app:iconSize="@android:dimen/app_icon_size"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descripcion"
+            tools:ignore="MissingConstraints" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

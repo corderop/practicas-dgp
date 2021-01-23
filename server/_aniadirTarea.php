@@ -101,7 +101,7 @@
                     if($g['integrantes']){
                         foreach ($g['integrantes'] as &$user){
                             if(array_search($user['cod_usuario'], $usuarios) === FALSE)
-                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $pictograma, $fechas_grupos[i], $_SESSION['cod_usuario'], $user['cod_usuario']);
+                                crearTarea($mysqli, $nombre, null, $descripcion, $multimedia, $pictograma, $fechas_grupos[$i], $_SESSION['cod_usuario'], $user['cod_usuario']);
                         }
                     }
                 }
